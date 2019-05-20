@@ -1,0 +1,31 @@
+/*Menu section*/
+
+.menu{
+	background: var(--gray-dark);
+}
+.menu-items{
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+	letter-spacing: 1px;
+	font-size: 1rem;
+	font-family: var(--font-family-fallback);
+	text-transform: uppercase;
+}
+.menu-items a{
+	color: var(--white);
+}
+
+/*Hero Section*/
+
+.hero{
+	margin: 40px auto;
+	text-align: center;
+}
+.hero-text{
+	text-transform: uppercase;
+	/*text-decoration: underline;*/
+	font-family: var(--font-family-default);
+	font-size: 3rem;
+	letter-spacing: 1px;
+}
