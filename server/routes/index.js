@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router()
-// const App = require('../../client/src/App')
+const router = express.Router();
+
 router.get('/', (err, res)=>{
-  res.status(200).render('index')
+  res.status(200).render('index');
 })
-module.exports =router;
+
+module.exports = router;
