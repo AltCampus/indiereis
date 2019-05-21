@@ -4,32 +4,47 @@ var jwtSign = "12w@3!fgrty5a7&*-+-0poAsWW)%@!`";
 var jwt = require('jsonwebtoken');
 var mailController = require('./mailController');
 
+function generate_token(length) {
+    //edit the token allowed characters
+    var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+    var b = [];  
+    for (var i=0; i<length; i++) {
+        var j = (Math.random() * (a.length-1)).toFixed(0);
+        b[i] = a[j];
+    }
+    return b.join("");
+}
+
 module.exports = {
 	loginUser: (req, res, next) => {
-		User.findOne({ email: req.body.email }, (err, user) => {
+		var data = JSON.parse(req.body);
+		User.findOne({ email: data.email }, (err, user) => {
 			if (err) return res.status(500).json({ success: false, error: "server error" });
 			if(!user) {
 				res.status(400).json({ success: false, error: "user not found" });
 			}
 			if(user){
 				var token = jwt.sign( { _id: user._id }, jwtSign );
-				mailController.mail("sajanloveu121@Gmail.com").catch(console.error);
+				// mailController.mail("sajanloveu123@Gmail.com").catch(console.error);
 				console.log("login sucess....");
 				res.status(200).json({ success: true, token });
 			}
 		})
 	},
 	registerUser: (req, res, next) => {
+		var data = JSON.parse(req.body);
 		console.log("check...");
-		User.findOne({ email:req.body.email }, ( err, user ) => {
+		User.findOne({ email: data.email }, ( err, user ) => {
 			if(err) return res.status(500).json({ success: false, error: "server error" });
 			if(user) return res.json({ success: false, error: "user already exist" });
 			if(!user) {
 				User.create(req.body, (err, user) => {
 					if(err) return res.status(500).json({success: false, error: "server error" });
 					var token = jwt.sign( { _id: user._id }, jwtSign );
-					mailController.mail("sajanloveu121@Gmail.com").catch(console.error);
-					console.log("mail sent for sucessfull registration.....")
+					user.otp = generate_token(6);
+					user.save();
+					mailController.mail("sajanloveu123@Gmail.com", user.otp ).catch(console.error);
+					console.log("mail sent for sucessfull registration.....");
 					if(user) return res.status(200).json({ user, token, success: true });
 				})
 			}
@@ -52,4 +67,9 @@ module.exports = {
 		req.session.distroy();
 		res.status(200).json({ success: true, msg: "logout sucessfull" });
 	},
+
+	verifyUser: (req, res, next) => {
+		// user.findOne({token: })
+		console.log(req.params.token, "user otp token....");
+	}
 }
