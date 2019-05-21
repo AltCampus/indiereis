@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom'
 
 class Menu extends React.Component {
 	render() {
@@ -6,12 +7,12 @@ class Menu extends React.Component {
 			<React.Fragment>
 				<div className="menu">
 					<div className="menu-items">
-						<a href="">Logo</a>
-						<a href="">Map</a>
-						<a href="">Contribute</a>
-						<a href="">Login</a>
-						<a href="">SignUp</a>
-						<a href="">About</a>
+						<Link to="/">Logo</Link>
+						<Link to="/map">Map</Link>
+						<Link to="/contribute">Contribute</Link>
+						<Link to="/login">SignIn</Link>
+						<Link to="/signup">SignUp</Link>
+						<Link to="/about">About</Link>
 					</div>
 				</div>
 			</React.Fragment>
