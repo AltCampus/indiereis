@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import {register} from '../actions/User';
+// import {register} from '../actions/User';
 import {connect} from 'react-redux';
+import Header from './Header';
+import Footer from './Footer';
+
 const URL = "http://localhost:8000/api";
 
 class SignUp extends Component {
@@ -19,30 +22,37 @@ class SignUp extends Component {
   handleSignup = (e) => {
     e.preventDefault()
     if(this.state.password === this.state.confirmpassword) {
-      fetch(URL + "/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.state.user)
-      }).then((response) => response.json())
-        .then((user) => {
-          console.log(this.props)
-          this.props.dispatch(
-          {
-            type: "REGISTER",
-            user: user
-          })
+    fetch(URL + "/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.user)
+    }).then((response) => response.json())
+      .then((user) => {
+        if(user.token){
+          let jwt = user.token
+          localStorage.setItem('jwt', jwt);
         }
-      ) this.setState({
-          user: {
+        console.log(this.props)
+        this.props.dispatch(
+        {
+          type: "REGISTER",
+          user: user
+        })
+        this.setState({
+          user:{
             name: "",
             email: "",
             password: "",
+            confirmpassword: "",
           }
-        })  
-    }
+        })
+        this.props.history.push('/login')
+      }
+    ) 
   }
+}
 
   handleChange = (e) => {
     const {name, value} = e.target
@@ -56,13 +66,20 @@ class SignUp extends Component {
 
   render() {
     return (
-      <form onSubmit= {this.handleSignup} >
-      	<input type="text" name="name" placeholder="Username" value={this.state.name} onChange= {this.handleChange} required />
-      	<input type="email" name="email" placeholder="Email address" value={this.state.email} onChange= {this.handleChange} required />
-      	<input type="password" name="password" placeholder="Password" value={this.state.password} onChange= {this.handleChange} required />
-        <input type="password" name="confirmpassword" placeholder="Confirm password" value={this.state.confirmpassword} onChange= {this.handleChange} required />
-      	<input type="submit" value="Register" />
-      </form>
+      <div>
+        <Header />
+        <div className="signup">
+          <p>Sign Up for a user account</p>
+          <form onSubmit= {this.handleSignup} className="signup-form" >
+          	<input type="text" name="name" placeholder="Username" value={this.state.user.name} onChange= {this.handleChange} required />
+          	<input type="email" name="email" placeholder="Email address" value={this.state.user.email} onChange= {this.handleChange} required />
+          	<input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange= {this.handleChange} required />
+            <input type="password" name="confirmpassword" placeholder="Confirm password" value={this.state.user.confirmpassword} onChange= {this.handleChange} required />
+          	<button type="submit" className="btn-standard">Register</button>
+          </form>
+        </div>
+        <Footer />
+      </div>
     );
   }
 }
