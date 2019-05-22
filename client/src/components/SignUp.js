@@ -23,7 +23,7 @@ class SignUp extends Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(this.state.user)
     }).then((response) => response.json())
       .then((user) => {
         console.log(this.props)
@@ -31,6 +31,14 @@ class SignUp extends Component {
         {
           type: "REGISTER",
           user: user
+        })
+        this.setState({
+          user:{
+            name: "",
+            email: "",
+            password: "",
+            confirmpassword: "",
+          }
         })
       }
     ) 
@@ -49,10 +57,10 @@ class SignUp extends Component {
   render() {
     return (
       <form onSubmit= {this.handleSignup} >
-      	<input type="text" name="name" placeholder="Username" value={this.state.name} onChange= {this.handleChange} required />
-      	<input type="email" name="email" placeholder="Email address" value={this.state.email} onChange= {this.handleChange} required />
-      	<input type="password" name="password" placeholder="Password" value={this.state.password} onChange= {this.handleChange} required />
-        <input type="password" name="confirmpassword" placeholder="Confirm password" value={this.state.confirmpassword} onChange= {this.handleChange} required />
+      	<input type="text" name="name" placeholder="Username" value={this.state.user.name} onChange= {this.handleChange} required />
+      	<input type="email" name="email" placeholder="Email address" value={this.state.user.email} onChange= {this.handleChange} required />
+      	<input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange= {this.handleChange} required />
+        <input type="password" name="confirmpassword" placeholder="Confirm password" value={this.state.user.confirmpassword} onChange= {this.handleChange} required />
       	<input type="submit" value="Register" />
       </form>
     );
