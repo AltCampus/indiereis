@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const session = require("express-session");
 const app = express();
@@ -6,7 +7,12 @@ const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+var passport = require('passport');
+
 const port = 8000;
+
+require('./server/module/passport');
+require('./server/models/User');
 
 mongoose.connect(
  "mongodb://localhost/travelInfo",
@@ -52,6 +58,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(cors());
 
 app.use("/api", require("./server/routes/api"));
+app.use("/auth", require("./server/routes/auth"));
 app.use('/', require("./server/routes/index"));
 
 app.listen(port, () => {

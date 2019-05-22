@@ -25,11 +25,19 @@ var userSchema = new Schema({
 	photo: {
 		type: String,
 		default: ""
+	},
+	verified: {
+		type: Boolean,
+		default: false,
+	},
+	token: {
+		type: String,
+		default: ""
 	}
 }, {timestamps: true});
 
 userSchema.pre('save', function (next) {
-  if (this.password) {
+  if (this.password && this.isModified('password')) {
      this.password = bcrypt.hashSync(this.password, salt)
   }
   next()
