@@ -1,8 +1,9 @@
 var User = require('../models/User');
 var bcrypt = require('bcrypt');
-var jwtSign = "12w@3!fgrty5a7&*-+-0poAsWW)%@!`";
 var jwt = require('jsonwebtoken');
+var jwtSign = "12w@3!fgrty5a7&*-+-0poAsWW)%@!`";
 var mailController = require('./mailController');
+var bcrypt = require('bcrypt');
 
 function generate_token(length) {
   var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
@@ -15,26 +16,40 @@ function generate_token(length) {
 }
 
 module.exports = {
-	loginUser: (req, res, next) => {
-		var data = req.body;
-		User.findOne({ email: data.email }, (err, user) => {
-			if (err) return res.status(500).json({ success: false, error: "server error" });
-			if(!user) {
-				res.status(400).json({ success: false, error: "user not found" });
-			}
-			if(user){
-				var token = jwt.sign( { _id: user._id }, jwtSign );
-				var result = user.validatePassword(data.password);
-				console.log(result,"result...............");
-				if(!result){
-					res.status(400).json({ success: false , error: "incorrect password" });
-				}
-				if(result){
-					console.log("login successfull...");
-					res.status(200).json({ success: true , user, token });
-				}
-			}
+	allUsers: (req,res,next) => {
+		User.find({}, (err, user) => {
+			if(err) return res.status(400).json({err: "server error"});
+			res.json({user, msg: "user found..."})
 		})
+	},
+	loginUser: (req, res, next) => {
+		const data = req.body;
+		console.log(data, "data.............");
+		let authToken = req.headers.authorization;
+		// let decoded = jwt.verify(authToken, jwtSign);
+		jwt.verify(authToken, jwtSign, (err, decoded) => {
+			if(err) return res.status(400).json({ success: false, error: " invalid token " })
+		  console.log(decoded, "dec....");
+			User.findOne({ _id: decoded._id }, (err, user) => {
+				if (err) return res.status(500).json({ success: false, error: "server error" });
+				if(user){		
+					// var result = user.validatePassword(data.password);
+					console.log(user, data, "user, data.....")
+					var result = bcrypt.compareSync(data.password, user.password);
+					var token = jwt.sign( { _id: user._id }, jwtSign );
+					if(!result){
+						res.status(400).json({ success: false , error: "incorrect password" });
+					}
+					if(result){
+						console.log("login successfull...");
+						res.status(200).json({ success: true , user, token });
+					}
+				}
+				if(!user) {
+					res.status(400).json({ success: false, error: "user not found" });
+				}
+			})
+		});	
 	},
 	registerUser: (req, res, next) => {
 		var data = req.body;

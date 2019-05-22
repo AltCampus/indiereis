@@ -48,6 +48,9 @@ module.exports = {
     path: __dirname + '/dist/bundle/',
     publicPath: '/static/'
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
