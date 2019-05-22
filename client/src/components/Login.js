@@ -23,13 +23,14 @@ class Login extends Component {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": jwt
+        "authorization": jwt
       },
       body: JSON.stringify(this.state.user)
-    }).then(res => res.json()).then(user => {
+    }).then(res => res.json()).then(data => {
+      if(data.token && data.user) {
         this.props.dispatch(
           { type: 'LOGIN', 
-            payload: user
+            user: data
           }
         );
         this.setState({
@@ -38,7 +39,10 @@ class Login extends Component {
             password: "",
           }
         })
-      this.props.history.push('/')
+      this.props.history.push('/') 
+      } else if(!data.user) {
+        this.props.history.push('/')
+      }
     })
   }
 
@@ -71,7 +75,6 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     loggeduser: state.User
   }

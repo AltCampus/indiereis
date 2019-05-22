@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import {register} from '../actions/User';
 import {connect} from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
@@ -26,30 +25,32 @@ class SignUp extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
-        "authorization": `Token ${jwt}`
       },
       body: JSON.stringify(this.state.user)
     }).then((res) => res.json())
-      .then((user) => {
-        if(user.token){
-          let jwt = user.token
+      .then((data) => {
+        // console.log(data)
+        if(data.token && data.user){
+          let jwt = data.token
           localStorage.setItem('jwt', jwt);
+          this.props.dispatch(
+          {
+            type: "REGISTER",
+            user: data
+          }); 
+          this.setState({
+            user:{
+              name: "",
+              email: "",
+              password: "",
+              confirmpassword: "",
+            }
+          })
+        this.props.history.push('/login')  
         }
-        // console.log(this.props)
-        this.props.dispatch(
-        {
-          type: "REGISTER",
-          user: user
-        })
-        this.setState({
-          user:{
-            name: "",
-            email: "",
-            password: "",
-            confirmpassword: "",
+          else if(!data.user) {
+            this.props.history.push('/signup')
           }
-        })
-        this.props.history.push('/login')
       }
     ) 
   }
@@ -86,7 +87,6 @@ class SignUp extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     newuser: state.User
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Iframe from 'react-iframe'
+import Iframe from 'react-iframe';
 import Header from './Header';
 import Footer from './Footer';
 
