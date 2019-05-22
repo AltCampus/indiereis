@@ -18,22 +18,30 @@ class SignUp extends Component {
 
   handleSignup = (e) => {
     e.preventDefault()
-    fetch(URL + "/users/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(this.state)
-    }).then((response) => response.json())
-      .then((user) => {
-        console.log(this.props)
-        this.props.dispatch(
-        {
-          type: "REGISTER",
-          user: user
-        })
-      }
-    ) 
+    if(this.state.password === this.state.confirmpassword) {
+      fetch(URL + "/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state.user)
+      }).then((response) => response.json())
+        .then((user) => {
+          console.log(this.props)
+          this.props.dispatch(
+          {
+            type: "REGISTER",
+            user: user
+          })
+        }
+      ) this.setState({
+          user: {
+            name: "",
+            email: "",
+            password: "",
+          }
+        })  
+    }
   }
 
   handleChange = (e) => {
@@ -62,7 +70,7 @@ class SignUp extends Component {
 function mapStateToProps(state) {
   console.log(state)
   return {
-    state
+    newuser: state.User
   }
 }
 
