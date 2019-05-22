@@ -2,7 +2,7 @@
  "name": "writer",
  "version": "1.0.0",
  "description": "",
- "main": "index.js",
+ "main": "app.js",
  "scripts": {
   "test": "echo \"Error: no test specified\" && exit 1",
   "start": "NODE_ENV=development nodemon app.js"
@@ -10,6 +10,7 @@
  "author": "",
  "license": "ISC",
  "dependencies": {
+  "axios": "^0.18.0",
   "bcrypt": "^3.0.6",
   "connect-mongo": "^2.0.3",
   "cors": "^2.8.5",
@@ -26,7 +27,7 @@
   "react": "^16.8.6",
   "react-dom": "^16.8.6",
   "react-redux": "^6.0.1",
-  "react-router-dom": "^4.3.1",
+  "react-router-dom": "^5.0.0",
   "react-scripts": "2.1.1",
   "redux": "^4.0.1",
   "redux-thunk": "^2.3.0",

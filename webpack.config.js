@@ -17,7 +17,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/react']
+            presets: ['@babel/react', {
+                     'plugins': ['@babel/plugin-proposal-class-properties']}]
           }
         },
       },
@@ -56,6 +57,7 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: "bundle.css",
-    })
+    }),
+
   ]
 }

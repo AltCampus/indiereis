@@ -46,9 +46,9 @@ module.exports = {
 					if(err) return res.status(500).json({success: false, error: "server error" });
 					var token = jwt.sign( { _id: user._id }, jwtSign );
 					user.otp = generate_token(6);
-					user.save();
 					mailController.mail(user.email, user.otp ).catch(console.error);
-					console.log("mail sent for sucessfull registration.....");
+					console.log("mail sent for sucessfull registration.....")
+					user.save();
 					if(user) return res.status(200).json({ user, token, success: true });
 				})
 			}
@@ -68,7 +68,7 @@ module.exports = {
 		console.log("fired");
 	},
 	logout: (req, res, next) => {
-		req.session.distroy();
+		req.session.destroy();
 		res.status(200).json({ success: true, msg: "logout sucessfull" });
 	},
 
