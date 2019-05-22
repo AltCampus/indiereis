@@ -17,7 +17,7 @@ router.post('/users/register', userController.registerUser);
 router.post('/users/update', userController.updateUser);
 router.post('/users/delete', userController.deleteUser);
 // router.post('/users/logout', userController.registerUser);
-router.get('api/users/profiles/:username', userController.userProfile);
-router.get('/users/verify/?token', userController.verifyUser);
+router.get('/users/profiles/:username', userController.userProfile);
+router.get('/users/verify/:token', userController.verifyUser);
 
 module.exports = router;

@@ -65,7 +65,7 @@ module.exports = {
 			if(err) return res.status(500).json({ success: false, error: "server side error" });
 			if(user) return res.status(200).json({ success: true, msg: "user sucessfully deleted" });
 		})
-		console.log("fired")
+		console.log("fired");
 	},
 	logout: (req, res, next) => {
 		req.session.distroy();
@@ -78,7 +78,7 @@ module.exports = {
 	},
 	userProfile: (req,res,next) => {
 		var username = req.params.username;
-		console.log(username, "username......................")
+		console.log(username, "username......................");
 		User.findOne({name: username}, (err,user) => {
 			if(err) return res.status(500).json({ success: false, error: "server side error" });
 			res.status(200).json({ success: true, user });
