@@ -10,6 +10,11 @@ export default function User(state = [], action) {
 			...state,
 			user: action.user
 		};
+		case 'LOGOUT':
+		return {
+			...state,
+			user: null
+		}
 			default: {
 				return state
 			}

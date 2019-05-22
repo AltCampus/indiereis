@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 class CountryInput extends React.Component {
 	render() {
@@ -8,7 +8,7 @@ class CountryInput extends React.Component {
 					<input type="text" placeholder="Where do you want to go today?" name="countryinput"/>
 				</div>
 			</div>
-		)
+	 	)
 	}
 }
 

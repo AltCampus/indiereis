@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import {connect} from 'react-redux';
 
 class Menu extends React.Component {
@@ -12,7 +12,10 @@ class Menu extends React.Component {
 
 	handleLogout = (e) => {
 		console.log('cleared localStorage')
-		this.props.history.push('/')
+		this.props.dispatch({
+			type:"LOGOUT"
+		})
+		this.props.history.push('/map')
 		window.localStorage.clear()
 	}
 
@@ -53,4 +56,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(Menu);
+export default withRouter(connect(mapStateToProps)(Menu))	;

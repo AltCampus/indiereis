@@ -25,7 +25,7 @@ module.exports = {
 	loginUser: (req, res, next) => {
 		const data = req.body;
 		console.log(data, "data.............");
-		let authToken = req.headers.authorization;
+		// let authToken = req.headers.authorization;
 		// let decoded = jwt.verify(authToken, jwtSign);
 		jwt.verify(authToken, jwtSign, (err, decoded) => {
 			if(err) return res.status(400).json({ success: false, error: " invalid token " })
