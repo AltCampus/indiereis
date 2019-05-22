@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
+import Map from './components/Map';
 import { store } from './store';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/signup' component={SignUp} />
+            <Route path='/map' component={Map} />
             <Route exact path='/login' component={Login} />
           </Switch>
         </Router>
