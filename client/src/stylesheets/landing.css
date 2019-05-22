@@ -23,6 +23,8 @@
 	text-align: center;
 	width: 800px;
 	/*background: var(--steelblue); */
+	/*background-image: url('http://tiny.cc/travel21');*/
+	background-position: 50% 70%;
 	font-family: var(--font-family-default);
 	display: flex;
 	flex-direction: column;
@@ -72,4 +74,11 @@ small a{
 }
 .footer-items a{
 	color: var(--white);
+}
+
+/* embed-map */
+Iframe{
+	margin: 6rem auto;
+	width: 800px;
+	border: 1px solid gray;
 }
