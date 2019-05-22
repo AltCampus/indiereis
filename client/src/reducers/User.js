@@ -5,6 +5,11 @@ export default function User(state = [], action) {
 				...state,
 				user: action.user
 			};
+		case 'LOGIN':
+		return {
+			...state,
+			user: action.user
+		}
 			default: {
 				return state
 			}

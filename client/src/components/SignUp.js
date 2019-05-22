@@ -26,15 +26,16 @@ class SignUp extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
+        "authorization": `Token ${jwt}`
       },
       body: JSON.stringify(this.state.user)
-    }).then((response) => response.json())
+    }).then((res) => res.json())
       .then((user) => {
         if(user.token){
           let jwt = user.token
           localStorage.setItem('jwt', jwt);
         }
-        console.log(this.props)
+        // console.log(this.props)
         this.props.dispatch(
         {
           type: "REGISTER",
