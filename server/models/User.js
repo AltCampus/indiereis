@@ -9,6 +9,7 @@ var userSchema = new Schema({
 		type: String,
 		min: 3,
 		max: 16,
+		unique: true,
 		required: true,
 	},
 	email: {
@@ -18,7 +19,7 @@ var userSchema = new Schema({
 	},
 	password: {
 		type: String,
-		min: 8,
+		min: 6,
 		max: 20,
 		required: true,
 	},

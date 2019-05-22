@@ -7,6 +7,6 @@ router.post('/register', userController.registerUser);
 router.post('/update', userController.updateUser);
 router.post('/delete', userController.deleteUser);
 router.get('/logout', userController.logout);
-// router.get('/profile/?username', userController.profile);
+router.get('/profile/?username', userController.userProfile);
 
 module.exports = router;
