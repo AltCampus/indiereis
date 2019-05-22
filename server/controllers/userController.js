@@ -17,9 +17,9 @@ function generate_token(length) {
 
 module.exports = {
 	allUsers: (req,res,next) => {
-		User.find({}, (err, user) => {
-			if(err) return res.status(400).json({err: "server error"});
-			res.json({user, msg: "user found..."})
+		User.find({}, { _id: 0, password: 0 }, (err, user) => {
+			if(err) return res.status(400).json({ error: "server error" });
+			res.json({ user, massage: "user found..." })
 		})
 	},
 	loginUser: (req, res, next) => {
@@ -28,9 +28,9 @@ module.exports = {
 		let authToken = req.headers.authorization;
 		// let decoded = jwt.verify(authToken, jwtSign);
 		jwt.verify(authToken, jwtSign, (err, decoded) => {
-			if(err) return res.status(400).json({ success: false, error: " invalid token " })
+			if(err) return res.status(400).json({ success: false, error: "invalid token" })
 		  console.log(decoded, "dec....");
-			User.findOne({ _id: decoded._id }, (err, user) => {
+			User.findOne({ _id: decoded._id}, (err, user) => {
 				if (err) return res.status(500).json({ success: false, error: "server error" });
 				if(user){		
 					// var result = user.validatePassword(data.password);
@@ -42,6 +42,7 @@ module.exports = {
 					}
 					if(result){
 						console.log("login successfull...");
+						req.session.user = user._id;
 						res.status(200).json({ success: true , user, token });
 					}
 				}

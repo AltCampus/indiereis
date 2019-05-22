@@ -27,6 +27,7 @@ class Login extends Component {
       },
       body: JSON.stringify(this.state.user)
     }).then(res => res.json()).then(user => {
+      console.log(user, "user fetch")
         this.props.dispatch(
           { type: 'LOGIN', 
             payload: user
@@ -71,7 +72,6 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     loggeduser: state.User
   }

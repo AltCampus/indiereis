@@ -26,11 +26,11 @@ class SignUp extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
-        "authorization": `Token ${jwt}`
       },
       body: JSON.stringify(this.state.user)
     }).then((res) => res.json())
       .then((user) => {
+
         if(user.token){
           let jwt = user.token
           localStorage.setItem('jwt', jwt);
@@ -86,7 +86,7 @@ class SignUp extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
+  console.log(state, "signup state...")
   return {
     newuser: state.User
   }
