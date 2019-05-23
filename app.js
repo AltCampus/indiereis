@@ -10,7 +10,7 @@ const path = require("path");
 var passport = require('passport');
 
 const port = 8000;
-
+// var authRouter = require('./server/controllers/authController');
 require('./server/module/passport');
 require('./server/models/User');
 
@@ -56,9 +56,10 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(cors());
-
+// app.use(authRouter.isUserLoggedIn);
 app.use("/api", require("./server/routes/api"));
 app.use("/auth", require("./server/routes/auth"));
+app.use("/admin", require("./server/routes/admin"));
 app.use('/*', require("./server/routes/index"));
 
 app.listen(port, () => {

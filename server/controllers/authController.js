@@ -9,10 +9,8 @@ exports.isUserLoggedIn = (req,res,next) => {
 
     jwt.verify(authToken, jwtSign, (err, decoded) => {
       if(err) return res.status(400).json({ success: false, error: "invalid token" })
-      console.log(decoded._id, "dec....");
       User.findOne({ _id: decoded._id }, (err, user) => {
         if(err) return res.status(500).json({ success: false, error: 'server error' });
-        console.log(user, "user......");
         if(user){
           var user = {
             name: user.name,
@@ -20,13 +18,15 @@ exports.isUserLoggedIn = (req,res,next) => {
             createdAt: user.createdAt,
             updatedAt: user.updatedAt
           }
-          res.json({ success: true, user })
+					console.log("isLogged in...");
+          res.status(200).json({ success: true, user });
         }else{
           next()
         }
       })
-    })	
+    })
   }else {
+		console.log("not logged in...");
   	next();
   }
 }
@@ -34,7 +34,7 @@ exports.isUserLoggedIn = (req,res,next) => {
 exports.isUserAdmin = (req,res,next) => {
 	User.findOne({ email: req.body.email }, (err, user) => {
     if(err) return res.status(500).json({ success: false, error: 'server error' });
-    
+
     if(user.isAdmin){
       var user = {
         name: user.name,

@@ -12,17 +12,18 @@ exports.mail = async function ( email, token ) {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
+    service: 'gmail',
     secure: false, // true for 465, false for other ports
     auth: {
       user: process.env.email, // generated ethereal user
       pass: process.env.password // generated ethereal password
     }
   });
-  var html = 
+  var html =
   `<h2> welcome to travel info</h2>
    <p> please click on the link below to varify your account<p>
    <a href='https://localhost:8000/api/users/verify/${ token }' > Click to Varify </a>
-    `
+    `;
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: `travel Info 👻 <${process.env.email}>`, // sender address
@@ -38,4 +39,4 @@ exports.mail = async function ( email, token ) {
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-}
+};
