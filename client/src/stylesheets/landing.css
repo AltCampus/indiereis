@@ -9,7 +9,7 @@
 	padding: 10px;
 	letter-spacing: 1px;
 	font-size: 1rem;
-	font-family: var(--font-family-default);
+	font-family: var(--font-family-tertiary);
 	/*text-transform: uppercase;*/
 }
 .menu-items a{
@@ -25,7 +25,7 @@
 	/*background: var(--steelblue); */
 	/*background-image: url('http://tiny.cc/travel21');*/
 	background-position: 50% 70%;
-	font-family: var(--font-family-default);
+	font-family: var(--font-family-tertiary);
 	display: flex;
 	flex-direction: column;
 }

@@ -11,6 +11,27 @@ import Home from './components/Home';
 import Map from './components/Map';
 import { store } from './store';
 
+const URL = "http://localhost:8000/api";
+
+console.log(store);
+
+if(localStorage.jwt){
+const {jwt} = localStorage;
+fetch(URL + "/users/login",{
+    headers: {
+      "Content-Type": "application/json",
+      "authorization": jwt
+    }}).then(res => res.json()).then(data => {
+      store.dispatch({
+				type: 'LOGIN', 
+				user: data
+			});
+    });
+} else 
+{
+//	store.history.push('/login');
+}
+
 class App extends Component {
   render() {
     return (
@@ -26,7 +47,13 @@ class App extends Component {
   }
 }
 
+function mapStateToProps(state){
+	return {
+		loggeduser: state.User
+	};
+}
+
 
 // ReactDOM.render(<App />,document.getElementById('root'))
 
-export default withRouter(connect()(App));
+export default withRouter(connect(mapStateToProps)(App));
