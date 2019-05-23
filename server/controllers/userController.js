@@ -17,42 +17,40 @@ function generate_token(length) {
 
 module.exports = {
 	allUsers: (req,res,next) => {
-		User.find({}, (err, user) => {
-			if(err) return res.status(400).json({err: "server error"});
-			res.json({user, msg: "user found..."})
+		User.find({}, { _id: 0, password: 0 }, (err, user) => {
+			if(err) return res.status(400).json({ error: "server error" });
+			res.json({ user, massage: "user found..." })
 		})
 	},
 	loginUser: (req, res, next) => {
 		const data = req.body;
-		console.log(data, "data.............");
-		// let authToken = req.headers.authorization;
-		// let decoded = jwt.verify(authToken, jwtSign);
-		jwt.verify(authToken, jwtSign, (err, decoded) => {
-			if(err) return res.status(400).json({ success: false, error: " invalid token " })
-		  console.log(decoded, "dec....");
-			User.findOne({ _id: decoded._id }, (err, user) => {
-				if (err) return res.status(500).json({ success: false, error: "server error" });
-				if(user){		
-					// var result = user.validatePassword(data.password);
-					console.log(user, data, "user, data.....")
-					var result = bcrypt.compareSync(data.password, user.password);
-					var token = jwt.sign( { _id: user._id }, jwtSign );
-					if(!result){
-						res.status(400).json({ success: false , error: "incorrect password" });
-					}
-					if(result){
-						console.log("login successfull...");
-						res.status(200).json({ success: true , user, token });
-					}
+		User.findOne({ email: data.email }, (err, user) => {
+			if (err) return res.status(500).json({ success: false, error: "server error" });
+			if(!user) {
+				res.status(400).json({ success: false, error: "user not found" });
+			}
+			if(user){		
+				var result = user.validatePassword(data.password);
+				var token = jwt.sign( { _id: user._id }, jwtSign );
+				if(!result){
+					res.status(400).json({ success: false , error: "incorrect password" });
 				}
-				if(!user) {
-					res.status(400).json({ success: false, error: "user not found" });
+				if(result){
+					var user = {
+						name: user.name,
+						email: user.email,
+						createdAt: user.createdAt,
+						updatedAt: user.updatedAt
+					}
+					console.log("login successfull...");
+					res.status(200).json({ success: true , user, token });
 				}
-			})
-		});	
+			}
+		})
 	},
 	registerUser: (req, res, next) => {
 		var data = req.body;
+		console.log(data, "inside register user...")
 		User.findOne({ email: data.email }, ( err, user ) => {
 			if(err) return res.status(500).json({ success: false, error: "server error" });
 			if(user) return res.json({ success: false, error: "user already exist" });
