@@ -24,6 +24,7 @@
 	--font-family-default-heading: Helvetica, sans-serif;
 	--font-family-secondary: "Lucida Console", Courier, monospace;
 	--font-family-fallback: "Gill Sans", sans-serif;
+	--font-family-tertiary: source-sans-pro, sans-serif;
 	--font-family-text-body: Garamond "Baskerville Old Face";
 }
 body {
