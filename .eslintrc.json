@@ -4,7 +4,10 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+			'plugin:react/recommended',
+			"eslint:recommended"
+			]
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -20,6 +23,7 @@
         "react"
     ],
     "rules": {
-		"semi": ["error", "always"]
+			"react/jsx-uses-react": "error",   
+     	"react/jsx-uses-vars": "error" 
     }
 }

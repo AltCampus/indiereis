@@ -1,0 +1,9 @@
+.user-dash {
+  margin: auto;
+}
+.user-info {
+  padding: 20px;
+  text-align: right;
+  font-weight: bold;
+  color: blue;
+}
