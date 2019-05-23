@@ -3,6 +3,32 @@ var jwt = require('jsonwebtoken');
 var jwtSign = "12w@3!fgrty5a7&*-+-0poAsWW)%@!`";
 var mailController = require('./mailController');
 
+
+// cloudinary.config({
+// 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+// 	api_key: process.env.CLOUDINARY_API_KEY,
+// 	api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
+
+// const storage = cloudinaryStorage({
+// 	cloudinary: cloudinary,
+// 	folder: "demo",
+// 	allowedFormats: ["jpg", "png"],
+// 	// transformation: [{ width: 500, height: 500, crop: "limit" }]
+// });
+// const parser = multer({ storage: storage });
+
+
+// var storage = cloudinaryStorage({
+//   cloudinary: cloudinary,
+//   folder: 'public',
+//   allowedFormats: ['jpg', 'png'],
+//   filename: function (req, file, cb) {
+//     cb(undefined, 'my-file-name');
+//   }
+// });
+ 
+// var parser = multer({ storage: storage });
 function generate_token(length) {
   var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
   var b = [];
@@ -34,20 +60,21 @@ module.exports = {
 					res.status(400).json({ success: false , error: "incorrect password" });
 				}
 				if(result){
-					var user = {
+					var newUser = {
 						name: user.name,
 						email: user.email,
 						createdAt: user.createdAt,
 						updatedAt: user.updatedAt
 					};
 					console.log("login successfull...");
-					res.status(200).json({ success: true , user, token });
+					res.status(200).json({ success: true , user: newUser, token });
 				}
 			}
 		});
 	},
 	registerUser: (req, res, next) => {
 		var data = req.body;
+		// console.log(req.body.file, "file......");
 		console.log(data, "inside register user...");
 		User.findOne({ email: data.email }, ( err, user ) => {
 			if(err) return res.status(500).json({ success: false, error: "server error" });
