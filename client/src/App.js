@@ -12,10 +12,13 @@ import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import Map from "./components/Map";
 import Dashboard from "./components/Dashboard";
+import About from "./components/About";
 
 import { store } from "./store";
 
 const URL = "http://localhost:8000/api";
+
+//Keeping user logged in
 
 if (localStorage.jwt) {
   //	console.log('inside login...')
@@ -49,6 +52,7 @@ class App extends Component {
           <Route path="/signup" component={SignUp} />{" "}
           <Route path="/map" component={Map} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route path="/about" component={About} />
           <Route exact path="/login" component={Login} />{" "}
         </Switch>{" "}
       </div>
