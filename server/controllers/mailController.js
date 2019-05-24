@@ -15,10 +15,12 @@ exports.mail = async function ( email, token ) {
     service: 'gmail',
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.email, // generated ethereal user
-      pass: process.env.password // generated ethereal password
+      user: process.env.EMAIL, // generated ethereal user
+      pass: process.env.PASSWORD // generated ethereal password
     }
   });
+
+  console.log("inside mail function....",process.env.EMAIL, 'process.env.EMAIL',process.env.PASSWORD, "process.env.PASSWORD" )
   var html =
   `<h2> welcome to travel info</h2>
    <p> please click on the link below to varify your account<p>
@@ -26,7 +28,7 @@ exports.mail = async function ( email, token ) {
     `;
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: `travel Info 👻 <${process.env.email}>`, // sender address
+    from: `travel Info 👻 <${ process.env.EMAIL }>`, // sender address
     to: `${ email }`, // list of receivers
     subject: "travel info", // Subject line
     text: "welcome to travel Info", // plain text body
