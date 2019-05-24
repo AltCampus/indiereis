@@ -4,6 +4,7 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var User = require('../models/User');
+var jwtAuth = require('../config/jwtAuth');
 
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
@@ -30,7 +31,7 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-router.get('/google', passport.authenticate('google'));
+router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
 router.get('/google/callback', function(req, res, next) {
   passport.authenticate('google', function(err, user) {
@@ -38,7 +39,7 @@ router.get('/google/callback', function(req, res, next) {
       return res.send({ message: 'Something went wrong with github auth' });
     }
     // generate token
-    var token = authUtil.signToken({ _id: user._id });
+    var token = jwtAuth.signToken({ _id: user._id });
     // send the response it back to client.
     res.redirect('/?t='+token);
   })(req, res, next);
