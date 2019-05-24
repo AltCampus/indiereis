@@ -23,14 +23,14 @@ class Menu extends React.Component {
       <React.Fragment>
         {this.props.loggeduser ? (
           <nav className="navbar is-info">
-              <Link to="/">Logo</Link>
-              <Link to="/map">Map</Link>
-              <Link to="/contribute">Contribute</Link>
-              <Link to="/dashboard">Dashboard</Link>
-              <button type="submit" onClick={this.handleLogout}>
-                {" "}
-                Logout
-              </button>
+            <Link to="/">Logo</Link>
+            <Link to="/map">Map</Link>
+            <Link to="/contribute">Contribute</Link>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link type="submit" onClick={this.handleLogout} className = "button is-light">
+              {" "}
+              Logout
+            </Link>
           </nav>
         ) : (
           <nav className="navbar is-info">

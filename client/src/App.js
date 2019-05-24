@@ -16,14 +16,14 @@ import About from "./components/About";
 import Contribute from "./components/Contribute";
 import { store } from "./store";
 
-const URL = "http://localhost:8000/api";
+const URL = "http://localhost:8000/api/v1";
 
 //Keeping user logged in
 
 if (localStorage.jwt) {
   //	console.log('inside login...')
   const { jwt } = localStorage;
-  fetch(URL + "/users/login", {
+  fetch(`${URL}/users/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

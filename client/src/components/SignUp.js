@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
 
-const URL = "http://localhost:8000/api";
+const URL = "http://localhost:8000/api/v1";
 
 class SignUp extends Component {
   constructor(props){
@@ -51,7 +51,7 @@ class SignUp extends Component {
               // photo: ""
             }
           })
-        this.props.history.push('/login');
+        this.props.history.push('/');
         }else if(!data.user) {
            this.setState({
             user:{

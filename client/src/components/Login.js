@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const URL = "http://localhost:8000/api";
+const URL = "http://localhost:8000/api/v1";
 
 class Login extends Component {
   constructor() {
@@ -18,7 +18,7 @@ class Login extends Component {
 
   handleLogin = e => {
     e.preventDefault();
-    fetch(URL + "/users/login", {
+    fetch(`${URL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
