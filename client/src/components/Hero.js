@@ -1,4 +1,6 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
+
 
 const Hero = () => {
   return (
@@ -20,7 +22,7 @@ const Hero = () => {
             the requirements of an average Indian traveler visiting a foreign
             country. Want to know more?{" "}
             <small>
-              <a href="/">Read here</a>
+              <Link to="/about">Read here</Link>
             </small>
           </p>
         </div>
