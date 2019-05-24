@@ -24,7 +24,6 @@ class NavBar extends React.Component {
 					<div id = "navbarBasicExample"className = "navbar-menu">
 						<div className = "navbar-start">
 							<Link to = "/" className = "navbar-item">Home </Link>
-							<Link to = "#" className = "navbar-item">Documentation </Link>
 							<div className = "navbar-item has-dropdown is-hoverable">
 								<Link to = "#" className = "navbar-link">More </Link>
 								<div className = "navbar-dropdown">
