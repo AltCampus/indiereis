@@ -41,16 +41,29 @@ var userSchema = new Schema({
 	}
 }, {timestamps: true});
 
+// userSchema.pre('save', function (next) {
+// 	console.log(process.env.email, process.env.admin1, "check1...")
+//   if(this.email == ( process.env.email || process.env.admin1 )){
+// 		this.isAdmin = true
+// 		console.log('check3...')
+// 	}
+// 	next();
+// });
+
 userSchema.pre('save', function (next) {
-  if (this.password && this.isModified('password')) {
-     this.password = bcrypt.hashSync(this.password, salt)
+  if(this.password && this.isModified('password')) {
+    this.password = bcrypt.hashSync(this.password, salt);
   }
-  next()
-})
+  if(this.email === process.env.EMAIL || process.env.ADMIN ){
+		console.log('check3...');
+		this.isAdmin = true
+	} 
+  next();
+});
 
 userSchema.methods.validatePassword = function (password) {
   return bcrypt.compareSync( password, this.password );
-}
+};
 
 
 var User = mongoose.model("User", userSchema);

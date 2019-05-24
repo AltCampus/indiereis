@@ -12,20 +12,23 @@ exports.mail = async function ( email, token ) {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
+    service: 'gmail',
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.email, // generated ethereal user
-      pass: process.env.password // generated ethereal password
+      user: process.env.EMAIL, // generated ethereal user
+      pass: process.env.PASSWORD // generated ethereal password
     }
   });
-  var html = 
+
+  console.log("inside mail function....",process.env.EMAIL, 'process.env.EMAIL',process.env.PASSWORD, "process.env.PASSWORD" )
+  var html =
   `<h2> welcome to travel info</h2>
    <p> please click on the link below to varify your account<p>
    <a href='https://localhost:8000/api/users/verify/${ token }' > Click to Varify </a>
-    `
+    `;
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: `travel Info 👻 <${process.env.email}>`, // sender address
+    from: `travel Info 👻 <${ process.env.EMAIL }>`, // sender address
     to: `${ email }`, // list of receivers
     subject: "travel info", // Subject line
     text: "welcome to travel Info", // plain text body
@@ -38,4 +41,4 @@ exports.mail = async function ( email, token ) {
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-}
+};

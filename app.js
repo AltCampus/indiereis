@@ -10,8 +10,6 @@ const path = require("path");
 var passport = require('passport');
 
 const port = 8000;
-
-require('./server/module/passport');
 require('./server/models/User');
 
 mongoose.connect(
@@ -22,10 +20,10 @@ mongoose.connect(
   else console.log("connected to mongodb");
  }
 )
-
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.set("views", path.join(__dirname, "./server/views"));
@@ -56,11 +54,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(cors());
-
-app.use("/api", require("./server/routes/api"));
+app.use("/api/v1", require("./server/routes/api"));
 app.use("/auth", require("./server/routes/auth"));
+app.use("/admin", require("./server/routes/admin"));
 app.use('/*', require("./server/routes/index"));
 
 app.listen(port, () => {
- console.log(`server is running on http://localhost:${port}`);
+ console.log(`Server is running on http://localhost:${port}`);
 });

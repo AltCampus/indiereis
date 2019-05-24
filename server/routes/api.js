@@ -5,7 +5,7 @@ const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 var User = require("../models/User");
 
-router.post('/users/login', authController.isUserLoggedIn, userController.loginUser);
+router.post('/users/login', userController.loginUser);
 router.post('/users/register', userController.registerUser);
 router.post('/users/update', userController.updateUser);
 router.post('/users/delete', userController.deleteUser);
