@@ -22,9 +22,7 @@ class Menu extends React.Component {
     return (
       <React.Fragment>
         {this.props.loggeduser ? (
-          <div className="menu">
-            <FontAwesome className="fas fa-map-marker-alt" />
-            <div className="menu-items">
+          <nav className="navbar is-info">
               <Link to="/">Logo</Link>
               <Link to="/map">Map</Link>
               <Link to="/contribute">Contribute</Link>
@@ -33,19 +31,16 @@ class Menu extends React.Component {
                 {" "}
                 Logout
               </button>
-            </div>
-          </div>
+          </nav>
         ) : (
-          <div className="menu">
-            <div className="menu-items">
+          <nav className="navbar is-info">
               <Link to="/">Logo</Link>
               <Link to="/map">Map</Link>
               <Link to="/contribute">Contribute</Link>
               <Link to="/login">SignIn</Link>
               <Link to="/signup">SignUp</Link>
               <Link to="/about">About</Link>
-            </div>
-          </div>
+          </nav>
         )}
       </React.Fragment>
     );
