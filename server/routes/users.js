@@ -19,10 +19,12 @@ const storage = cloudinaryStorage({
 });
 const parser = multer({ storage: storage });
 
+router.get('/', userController.allUsers);
 router.post('/login', userController.loginUser);
-router.post('/register', parser.single("photo"), userController.registerUser);
+router.post('/register', userController.registerUser);
 router.post('/update', userController.updateUser);
 router.post('/delete', userController.deleteUser);
-router.get('/profile/?username', userController.userProfile);
+router.get('/profiles/:username', userController.userProfile);
+router.get('/verify/:token', userController.verifyUser);
 
 module.exports = router;

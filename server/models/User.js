@@ -9,7 +9,6 @@ var userSchema = new Schema({
 		type: String,
 		min: 3,
 		max: 16,
-		unique: true,
 		required: true,
 	},
 	email: {

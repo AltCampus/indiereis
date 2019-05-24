@@ -11,8 +11,8 @@ const Hero = () => {
           <hr />
         </div>
         <div className="hero-sub-text">
-          <button className="btn-standard">Discover</button>
-          <button className="btn-standard">Contribute</button>
+          <Link to="/" className="btn-standard">Discover</Link>
+          <Link to= "/contribute" className="btn-standard">Contribute</Link>
         </div>
         <div className="hero-info">
           <p>
