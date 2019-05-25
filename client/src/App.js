@@ -14,6 +14,12 @@ import Map from "./components/Map";
 import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import Contribute from "./components/Contribute";
+import FormPage1 from "./components/FormPage1";
+import FormPage2 from "./components/FormPage2";
+import FormPage3 from "./components/FormPage3";
+import FormPage4 from "./components/FormPage4";
+import FormPage5 from "./components/FormPage5";
+import FormPage6 from "./components/FormPage6";
 import { store } from "./store";
 
 const URL = "http://localhost:8000/api/v1";
@@ -53,6 +59,13 @@ class App extends Component {
           <Route path="/map" component={Map} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/contribute" component={Contribute} />
+          <Route path="/form/page1" component={FormPage1} />
+          <Route path="/form/page2" component={FormPage2} />
+          <Route path="/form/page3" component={FormPage3} />
+          <Route path="/form/page4" component={FormPage4} />
+          <Route path="/form/page5" component={FormPage5} />
+          <Route path="/form/page6" component={FormPage6} />
+          <Route path="/submit" component={Home} />
           <Route path="/about" component={About} />
           <Route exact path="/login" component={Login} />{" "}
         </Switch>{" "}

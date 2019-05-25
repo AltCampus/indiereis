@@ -60,10 +60,11 @@ module.exports = {
 				}
 				if(result){
 					const newUser = {
+						id: user._id,
 						name: user.name,
 						email: user.email,
 						createdAt: user.createdAt,
-						updatedAt: user.updatedAt
+						updatedAt: user.updatedAt,
 					};
 					console.log("login successfull...");
 					res.status(200).json({ success: true , user: newUser, token });
@@ -81,6 +82,7 @@ module.exports = {
 				User.create(req.body, (err, user) => {
 					if(err) return res.status(500).json({success: false, error: "server error" });
 					const newUser = {
+						id: user._id,
 						name: user.name,
 						email: user.email,
 						createdAt: user.createdAt,
