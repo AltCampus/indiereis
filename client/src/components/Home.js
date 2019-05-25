@@ -1,20 +1,20 @@
-import React from 'react';
-import Header from './Header';
-import Hero from './Hero';
-import Footer from './Footer';
-import CountryInput from './CountryInput';
+import React from "react";
+import Header from "./Header";
+import Hero from "./Hero";
+import Footer from "./Footer";
+import ListCountry from "./ListCountry";
 
-class Home extends React.Component{
-	render(){
-		return(
-			<React.Fragment>
-				<Header />
+class Home extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Header />
         <Hero />
-        <CountryInput />
+        <ListCountry />
         <Footer />
-			</React.Fragment>
-		)
-	}
+      </React.Fragment>
+    );
+  }
 }
 
 export default Home;

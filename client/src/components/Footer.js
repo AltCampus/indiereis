@@ -1,15 +1,16 @@
-import React from 'react';
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
 
 const Footer = () => {
-	return (
-		<div className="footer">
-			<div className="menu-items">
-				<a href="">Contact</a>
-				<a href="">Github</a>
-				<a href="">Sitemap</a>
-			</div>
-		</div>
-		)
-}
+  return (
+    <div className="foot">
+      <nav className="navbar footer-items">
+        <Link to="/">Contact</Link>
+        <Link to="#">Github</Link>
+        <Link to="#">Sitemap</Link>
+      </nav>
+    </div>	
+  );
+};
 
 export default Footer;

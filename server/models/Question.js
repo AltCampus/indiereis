@@ -3,14 +3,26 @@ var Schema = mongoose.Schema;
 const timestamp = require('time-stamp');
 
 var questionSchema = new Schema({
+	qset1: [{
+		type: String,
+		default: null
+	}],
+	qset2: [{
+		type: String,
+		default: null
+	}],
+	qset3: [{
+		type: String,
+		default: null
+	}],
+	qset4: [{
+		type: String,
+		default: null
+	}],
 	// userData : [{
 	// 	type: Object,
 	// 	default: ""
 	// }],
-	questions: [{
-		type: String,
-		default: null
-	}],
 	// answers: {
 	// 	type: String,
 	// 	default: ""

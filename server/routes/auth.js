@@ -11,10 +11,12 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL
   },
-  function(accessToken, refreshToken, profile, done) {    
+  function(accessToken, refreshToken, profile, done) { 
+    console.log(profile, "user profile......");  
     User.findOne({ email: profile.emails[0].value }, (err, user) => {
       if(err) return done(null, null);
       if(user){
+        console.log(user)
         return done(null, user);
       }
 			if(!user) {
@@ -23,6 +25,7 @@ passport.use(new GoogleStrategy({
 					email: profile.emails[0].value,
 					photo: profile.photos[0].value,
 				},(err, user) => {
+          console.log(user, "google user.......");
 					if(err) return done(err, null);
 					done(null, user);
 			});
@@ -35,8 +38,9 @@ router.get('/google', passport.authenticate('google', {scope: ['profile', 'email
 
 router.get('/google/callback', function(req, res, next) {
   passport.authenticate('google', function(err, user) {
+    console.log(user, "google user........")
     if(err) {
-      return res.send({ message: 'Something went wrong with github auth' });
+      return res.send({ message: 'Something went wrong with google auth' });
     }
     // generate token
     var token = jwtAuth.signToken({ _id: user._id });
