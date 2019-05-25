@@ -34,6 +34,10 @@ var userSchema = new Schema({
 		type: Boolean,
 		default: false,
 	},
+	userData: [{
+		type: Schema.Types.ObjectId,
+		ref: "UserData",
+	}],
 	token: {
 		type: String,
 		default: ""

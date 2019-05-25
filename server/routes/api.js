@@ -3,6 +3,7 @@ const router = express.Router();
 
 var userApi = require('./users');
 var questionApi = require('./questions');
+var publicDataApi = require('./publicData');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 var User = require("../models/User");
@@ -16,5 +17,5 @@ router.use('/users/profiles/:username', userApi);
 router.use('/users/verify/:token', userApi);
 
 router.use('/questions', questionApi);
-
+router.use('/public-data', publicDataApi);
 module.exports = router;

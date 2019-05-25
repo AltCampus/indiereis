@@ -19,6 +19,9 @@ var questionSchema = new Schema({
 		type: Object,
 		default: null
 	},
+	options: [{
+		type: String,
+	}],
 	// userData : [{
 	// 	type: Object,
 	// 	default: ""
