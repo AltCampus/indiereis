@@ -5,36 +5,17 @@ import NavBar from './NavBar';
 
 const URL = "http://localhost:8000/api/v1";
 
-// var options = {
-// 	bg: '#fc3bec',
-// 	target: document.getElementById('myDivId'),
-// 	id: 'progressbar'
-// }
-// var nanobar = new Nanobar( options );
-
-// <div id="progressbar">{nanobar.go(20)}</div>
-
 class FormPage5 extends React.Component{
-	constructor(){
-		super();
-		this.state = {
-			questions: '',
-		}
-	}
-
-	componentDidMount = () => {
-		fetch(`${URL}/questions`).then(res => res.json()).then(d => this.setState({
-			questions: d.data[0]
-		}));
-	}
 
 	render(){
+		const questions = this.props.questions ? this.props.questions.Questions : null;
+
 		return(
 			<React.Fragment>
 				<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="95" max="100">95%</progress>
-					{this.state.questions ? this.state.questions.qset1.map((q,i) => 
+					{questions.data && questions.country ? questions.data.qset1.map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">{q}</label>
 						  <div className="control">
@@ -49,5 +30,10 @@ class FormPage5 extends React.Component{
 	}
 }
 
+function mapStateToProps(state){
+	return {
+		questions: state
+	}
+}
 
-export default FormPage5;																														
+export default connect(mapStateToProps)(FormPage5);																														

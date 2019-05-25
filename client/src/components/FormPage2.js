@@ -1,31 +1,23 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
 import NavBar from './NavBar';
+import {connect} from 'react-redux';
 
 const URL = "http://localhost:8000/api/v1";
 var num = [1,2,3,4,5,6,7,8,9,10];
 
 class FormPage2 extends React.Component{
-	constructor(){
-		super();
-		this.state = {
-			questions: '',
-		}
-	}
-
-	componentDidMount = () => {
-		fetch(`${URL}/questions`).then(res => res.json()).then(d => this.setState({
-			questions: d.data[0]
-		}));
-	}
 
 	render(){
+		const questions = this.props.questions ? this.props.questions.Questions : null;
+		console.log(this.props, 'props form2')
+
 		return(
 			<React.Fragment>
 			<NavBar />
 				<div className= "form-wrapper">
-					<progress className="progress is-primary" value="35" max="100">35%</progress>
-					{this.state.questions ? this.state.questions.qset2.slice(0,5).map((q,i) => 
+					<progress className="progress is-primary" value="30" max="100">30%</progress>
+					{questions.data && questions.country ? questions.data.qset2.slice(0,5).map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">{q}</label>
 						  <div className="control">
@@ -44,6 +36,10 @@ class FormPage2 extends React.Component{
 			)
 	}
 }
+function mapStateToProps(state){
+	return {
+		questions: state
+	}
+}
 
-
-export default FormPage2;																														
+export default connect(mapStateToProps)(FormPage2);																														
