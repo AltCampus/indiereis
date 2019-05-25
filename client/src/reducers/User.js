@@ -1,19 +1,33 @@
-export default function User(state = [], action) {
+const initialState = {
+  user: null,
+  token: localStorage.getItem('authToken') || '',
+  isAuthenticated: false,
+  isAuthInProgress: true
+}
+
+export default function User(state = initialState, action) {
 	switch (action.type) {
 		case "REGISTER":
 		return {
 			...state,
-			user: action.user
+			user: action.user,
+			isAuthenticated: true,
+      isAuthInProgress: false
 		};
 		case 'LOGIN':
 		return {
 			...state,
-			user: action.user
+			user: action.user,
+			isAuthenticated: true,
+      isAuthInProgress: false
 		};
 		case 'LOGOUT':
 		return {
 			...state,
-			user: null
+			user: null,
+			isAuthInProgress: false,
+      token: '',
+      isAuthenticated: false
 		}
 			default: {
 				return state
