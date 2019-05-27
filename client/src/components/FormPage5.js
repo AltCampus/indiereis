@@ -15,7 +15,7 @@ class FormPage5 extends React.Component{
 	handleSubmit = () => {
 		if(this.state){
 			this.props.dispatch({
-	      type:"ADD_USER_DATA",
+	      type:"ADD_FORM5",
 	      data: this.state
 	    })
 	    this.setState({});
@@ -30,7 +30,7 @@ class FormPage5 extends React.Component{
 				<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="95" max="100">95%</progress>
-					{questions.data && questions[0].country && questions[0].kindOfTrip ? questions.data.qset1.questions.map((q,i) => 
+					{questions.data ? questions.data.qset1.questions.map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">{q}</label>
 						  <div className="control">
@@ -46,6 +46,7 @@ class FormPage5 extends React.Component{
 }
 
 function mapStateToProps(state){
+	console.log(state, "inside form 5")
 	return {
 		questions: state
 	}

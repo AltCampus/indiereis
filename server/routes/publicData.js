@@ -23,7 +23,7 @@ router.post('/', (req,res,next) => {
 			User.findOneAndUpdate({ _id: data.userId },{ $push: { userData: data.userId } }, (err, user) => {
 			if(err) return next(err);
 				console.log(user, "user updated with his info...");
-				res.status(200).json({ success: true, data });
+				res.status(200).json({ success: true, message: "data is saved" });
 			}
 		)}
 	})

@@ -19,29 +19,6 @@ var questionSchema = new Schema({
 		type: Object,
 		default: null
 	},
-	options: [{
-		type: String,
-	}],
-	// userData : [{
-	// 	type: Object,
-	// 	default: ""
-	// }],
-	// answers: {
-	// 	type: String,
-	// 	default: ""
-	// },
-	// options: {
-	// 	type: String,
-	// 	default: ""
-	// },
-	// comments: {
-	// 	type: Schema.Types.ObjectId,
-	// 	ref: "Comment"
-	// },
-	// filterOptions: {
-	// 	type: String,
-	// 	default: ""
-	// },
 }, {timestamps: true});
 
 

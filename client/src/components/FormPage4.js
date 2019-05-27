@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
 import NavBar from './NavBar';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 const URL = "http://localhost:8000/api/v1";
 var num = [1,2,3,4,5,6,7,8,9,10];
 
 class FormPage4 extends React.Component{
 
-		handleChange = (e) => {
+	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
 	};
@@ -16,7 +16,7 @@ class FormPage4 extends React.Component{
 	handleSubmit = () => {
 		if(this.state){
 			this.props.dispatch({
-	      type:"ADD_USER_DATA",
+	      type:"ADD_FORM4",
 	      data: this.state
 	    })
 	    this.setState({});
@@ -25,18 +25,18 @@ class FormPage4 extends React.Component{
 	
 	render(){
 		const questions = this.props.questions ? this.props.questions.Questions : null;
-
+		console.log(this.state, "form4 state...");
 		return(
 			<React.Fragment>
 			<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="80" max="100">80%</progress>
-					{questions.data && questions[0].country && questions[0].kindOfTrip ? questions.data.qset2.questions.slice(10,15).map((q,i) => 
+					{questions.data ? questions.data.qset2.questions.slice(10,15).map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">{q}</label>
 						  <div className="control">
 						    <div className="select">
-						      <select onChange={this.handleChange} name={questions.data.qset2.questions.slice(10, 15)[i]}>
+						      <select onChange={this.handleChange} name={questions.data.qset2.name.slice(10, 15)[i]}>
 						        <option>Ratings</option>
 						          {num.map((i,j) => <option key={j}>{i}</option>)}
 						      </select>

@@ -16,7 +16,7 @@ class FormPage2 extends React.Component{
 	handleSubmit = () => {
 		if(this.state){
 			this.props.dispatch({
-	      type:"ADD_USER_DATA",
+	      type:"ADD_FORM2",
 	      data: this.state
 	    })
 	    this.setState({});
@@ -32,12 +32,12 @@ class FormPage2 extends React.Component{
 			<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="30" max="100">30%</progress>
-					{questions.data && questions[0].country && questions[0].kindOfTrip ? questions.data.qset2.questions.slice(0,5).map((q,i) => 
+					{questions.data ? questions.data.qset2.questions.slice(0,5).map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">{q}</label>
 						  <div className="control">
 						    <div className="select">
-						      <select onChange={this.handleChange} name={ questions.data.qset2.questions.slice(0,5)[i] } >
+						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(0,5)[i] } >
 						        <option>Ratings</option>
 						          {num.map(i => <option>{i}</option>)}
 						      </select>
@@ -53,7 +53,6 @@ class FormPage2 extends React.Component{
 }
 function mapStateToProps(state){
 	console.log(state, 'inside map form2.....')
-
 	return {
 		questions: state
 	}

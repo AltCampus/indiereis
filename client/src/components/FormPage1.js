@@ -11,13 +11,13 @@ const idealHoliday= ['City Hopping', 'Beach Bumming', 'Adventure', 'Leisure', 'R
 
 class FormPage1 extends React.Component{
 	
-	componentDidMount = () => {
+	componentDidMount(){
 		fetch(`${URL}/questions`).then(res => res.json()).then(d => {
-			// console.log(d.data, 'inside cdm')
+			console.log(d, 'inside cdm.....')
 			this.props.dispatch({
 				type: 'ADD_QUESTIONS',
 				data: d.data[0]
-		});
+			});
 		})
 	}
 
@@ -29,8 +29,8 @@ class FormPage1 extends React.Component{
 	handleSubmit = () => {
 		if(this.state){
 			this.props.dispatch({
-	      type:"ADD_USER_DATA",
-	      data1: this.state
+	      type:"ADD_FORM1",
+	      data: this.state
 	    })
 	    this.setState({});
 		}else {console.log("state is empty")}
@@ -38,40 +38,41 @@ class FormPage1 extends React.Component{
 
 	render(){
 		const questions = this.props.questions ? this.props.questions.Questions : null;
-		// console.log(this.props, 'props')
-		// console.log(questions, 'questions in page1', questions.data)
+		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
+		// console.log(this.props, 'props.....f1')
+		console.log(userFormData, questions.data, "questions in page1......");
 
 		return(
 			<React.Fragment>
 			<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="10" max="100">10%</progress>
-					{questions.data && questions[0].country && questions[0].kindOfTrip  ? (
+					{questions.data && userFormData ? (
 						<div>
 							<div className="field">
-							  <label className="label">{ questions.data.qset3.questions[2] }</label>
+							  <label className="label">{ questions.data.qset3.questions[0].includes("COUNTRYNAME") ? questions.data.qset3.questions[0].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[0] }</label>
 							  <div className="control">
-							    <input className="input" onChange={this.handleChange} placeholder="No. of days" type="text" name={ questions.data.qset3.name[2] }/>
+							    <input className="input" onChange={this.handleChange} placeholder="No. of days" type="text" name={ questions.data.qset3.name[0] }/>
 							  </div>
 							</div>
 
 							<div className="field">
-								<label className="label">{questions.data.qset3.questions[3]}</label>
+								<label className="label">{ questions.data.qset3.questions[2].includes("COUNTRYNAME") ? questions.data.qset3.questions[2].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[2] }</label>
 							  <div className="control">
 							    <div className="select">
-							      <select name={ questions.data.qset3.name[3] } onChange={this.handleChange}>
+							      <select name={ questions.data.qset3.name[2] } onChange={this.handleChange}>
 							        <option>Choice of Trip</option>
 							        {suitedTrip.map((el, i) => <option key={i}>{el}</option>)}
 							      </select>
 							   	</div>
 								</div>
 							</div>
-
+							
 							<div className="field">
-								<label className="label">{questions.data.qset3.questions[4]}</label>
+								<label className="label">{ questions.data.qset3.questions[1].includes("COUNTRYNAME") ? questions.data.qset3.questions[1].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[1] }</label>
 							  <div className="control">
 							    <div className="select">
-							      <select name={ questions.data.qset3.name[4] } onChange={this.handleChange} >
+							      <select name={ questions.data.qset3.name[1] } onChange={this.handleChange} >
 							        <option>Ideal Holiday</option>
 							        {idealHoliday.map((el, i) => <option key={i}>{el}</option>)}
 							      </select>

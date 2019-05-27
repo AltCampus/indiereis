@@ -7,106 +7,99 @@ var userDataSchema = new Schema({
 		type: String,
 		default: null
 	},
-	tripInfo: {
+	kindOfTrip: {
 		type: String,
 		default: null
 	},
-	visaTime:{
+	tripinfo: {
 		type: String,
 		default: null
 	},
-	bestTripFor: {
+	visacost: {
 		type: String,
 		default: null
 	},
-	holidayType: {
+	numberofDays: {
 		type: String,
 		default: null
 	},
-	vegetarianFoodRatings: {
-		type: Number,
-		default: 0
+	kindOfTrip: {
+		type: String,
+		default: null
 	},
-	indianFoodAvailibility: {
-		type: Number,
-		default: 0
+	vegAvailability: {
+		type: String,
+		default: null
 	},
-	streetFoodAvailibility: {
-		type: Number,
-		default: 0
+	indianFoodOption: {
+		type: String,
+		default: null
 	},
-	visaProcessRatings: {
-		type: Number,
-		default: 0
+	streetFood: {
+		type: String,
+		default: null
 	},
-	peopleFriendlyRatings: {
-		type: Number,
-		default: 0
+	visaProcess: {
+		type: String,
+		default: null
 	},
-	obtainingInformationRatings: {
-		type: Number,
-		default: 0
+	travelInfo: {
+		type: String,
+		default: null
 	},
-	plentyToDoRatings: {
-		type: Number,
-		default: 0
+	todoCountry: {
+		type: String,
+		default: null
 	},
-	varietyOfActivitiesRatings: {
-		type: Number,
-		default: 0
+	peopleFriendly: {
+		type: String,
+		default: null
 	},
-	nighttimeActivitiesRatings: {
-		type: Number,
-		default: 0
+	actvities: {
+		type: String,
+		default: null
 	},
-	safetyRatings: {
-		type: Number,
-		default: 0
+	nightLife: {
+		type: String,
+		default: null
 	},
-	womenSaftyRatings:{
-		type: Number,
-		default: 0
+	safeTotravel: {
+		type: String,
+		default: null
 	},
-	infrastructureRatings: {
-		type: Number,
-		default: 0
+	Infra: {
+		type: String,
+		default: null
 	},
-	englishCommunicationRatings:{
-		type: Number,
-		default: 0
+	language: {
+		type: String,
+		default: null
 	},
-	wifiRatings:{
-		type: Number,
-		default: 0
+	wifi: {
+		type: String,
+		default: null
 	},
-	"24/7serviseRatings":{
-		type: Number,
-		default: 0
+	dayNight: {
+		type: String,
+		default: null
 	},
-	tripDuration: {
-		type: Number,
-		default: 0
+	
+	visaDays: {
+		type: String,
+		default: null
 	},
-	tripCost:{
-		type: Number,
-		default: 0
+	suitedFor: {
+		type: String,
+		default: null
 	},
-	visaCost:{
-		type: Number,
-		default: 0
+	typeOfHoliday: {
+		type: String,
+		default: null
 	},
 	tripExperience: {
 		type: String,
-		default: ""
-	},
-	userId: {
-		type: String,
 		default: null
 	},
-	photos: {
-		type: String,
-		default: null
-	}
 }, {timestamps: true});
 
 
