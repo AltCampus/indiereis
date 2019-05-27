@@ -24,6 +24,7 @@ class FormPage5 extends React.Component{
 
 	render(){
 		const questions = this.props.questions ? this.props.questions.Questions : null;
+		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 
 		return(
 			<React.Fragment>
@@ -32,7 +33,15 @@ class FormPage5 extends React.Component{
 					<progress className="progress is-primary" value="95" max="100">95%</progress>
 					{questions.data ? questions.data.qset1.questions.map((q,i) => 
 						<div key={i} className="field">
-						  <label className="label">{q}</label>
+						  <label className="label">
+						  {
+						  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
+						  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
+						  	q.replace("{I/WE}", "I") :
+						  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
+						    q.replace("{I/WE}", "We"): q
+						  }
+						  </label>
 						  <div className="control">
 						    <input className="input" type="text" onChange={this.handleChange} name={ questions.data.qset1.name[i] } required/>
 						  </div>

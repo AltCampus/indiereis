@@ -25,6 +25,7 @@ class FormPage3 extends React.Component{
 	
 	render(){
 		const questions = this.props.questions ? this.props.questions.Questions : null;
+		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 
 		return(
 			<React.Fragment>
@@ -33,10 +34,18 @@ class FormPage3 extends React.Component{
 					<progress className="progress is-primary" value="50" max="100">50%</progress>
 					{questions.data ? questions.data.qset2.questions.slice(5,10).map((q,i) => 
 						<div key={i} className="field">
-						  <label className="label">{q}</label>
-						  <div className="control">
+						  <label className="label">
+							  {
+							  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
+							  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
+							  	q.replace("{I/WE}", "I") :
+							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
+							    q.replace("{I/WE}", "We"): q
+							  }
+						  </label>
+						  <div className="control" key={i}>
 						    <div className="select">
-						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(5,10)[i]} >
+						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(5,10)[i]} required >
 						        <option>Ratings</option>
 						          {num.map(i => <option>{i}</option>)}
 						      </select>

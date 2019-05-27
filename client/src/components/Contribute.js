@@ -11,14 +11,11 @@ const countries = ['Thailand','Japan','Singapore','Malaysia','Indonesia','Bhutan
 const kindOfTrip = ['Solo', 'Couple', 'Family', 'Group', 'Company Trip'];
 
 class Contribute extends React.Component{
-	constructor() {
-		super()
-		// this.state = {
-		// 	"country": "",
-		// 	"kindOfTrip": ""
-		// }
-	};
-
+	state = {
+		country: "",
+		kindOfTrip: "",
+		userId: ""
+	}
 	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -57,7 +54,7 @@ class Contribute extends React.Component{
 									  <label className="label">Which country did you travel to?</label>
 									  <div className="control">
 									    <div className="select">
-									      <select name="country" onChange={this.handleChange}>
+									      <select name="country" onChange={this.handleChange} required >
 									        <option>Pick Country</option>
 									        {countries.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -69,7 +66,7 @@ class Contribute extends React.Component{
 									  <label className="label">What kind of trip did you take?</label>
 									  <div className="control">
 									    <div className="select">
-									      <select name="kindOfTrip" onChange={this.handleChange}>
+									      <select name="kindOfTrip" onChange={this.handleChange} required >
 									        <option>Kind of Trip</option>
 									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -77,16 +74,15 @@ class Contribute extends React.Component{
 									  </div>
 									</div>
 								</div>
-									  {/*<div className="control">
-									    <label className="checkbox parallel" >
-									      <input type="checkbox" className="terms" />
-									      <div className="terms">I agree to the <Link to="#">terms and conditions</Link></div>
-									    </label>
-									  </div>*/}
-									</div>
+								<div className="control">
+							    <label className="checkbox parallel" >
+							      <input type="checkbox" className="terms" required />
+							      <div className="terms">I agree to the <Link to="#">terms and conditions</Link></div>
+							    </label>
+								</div>
+								</div>
 								<Link to="/form/page1" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
 							</div>)
-						
 						: null
 				}
 				<Footer />
@@ -96,7 +92,7 @@ class Contribute extends React.Component{
 }
 
 function mapStateToProps(state){
-	// console.log(state, 'inside contribute')
+	console.log(state, 'inside contribute')
 	return {
 		loggeduser: state.User
 	}

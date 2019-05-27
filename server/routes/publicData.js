@@ -16,21 +16,30 @@ router.get('/', (req,res,next) => {
 });
 
 router.post('/', (req,res,next) => {
-	console.log("inside userData post...");
-	UserData.create(req.body, (err, data) => {
+	console.log(req.body, "inside userData post...");
+	console.log(req.user, "jwt user data");
+	// var data = Object.assign({}, req.body.countaryAndTrip, req.body.form1, req.body.form2, req.body.form3, req.body.form4, req.body.form5, req.body.form6);
+	var data = req.body
+	data.userId = req.user._id;
+
+	console.log(data, "concat obj data....")
+	UserData.create(data, (err, data) => {
 		if(err) return res.status(500).json({ success: false, message: "server side error"});
 		if(data) {
-			User.findOneAndUpdate({ _id: data.userId },{ $push: { userData: data.userId } }, (err, user) => {
+			User.findByIdAndUpdate( data.userId ,{ $push: { userData: data._id } }, (err, user) => {
 			if(err) return next(err);
-				console.log(user, "user updated with his info...");
-				res.status(200).json({ success: true, message: "data is saved" });
+			console.log(user, "user updated with his datainfo...");
+			res.status(200).json({ success: true, message: "data is saved" });
 			}
 		)}
 	})
 })
 
 router.get('/:id', (req,res,next) => {
-	var id = req.params.id;
+	var dataId = req.params.id;
+	// var userId = 
+	console.log(req.query, "query req....");
+	// User.findOneAndUpdate({ user: id });
 	console.log("inside userData get...");
 	UserData.findOneAndDelete({ _id: id }, ( err, data ) => {
 		if(err) return res.status(500).json({ success: false, message: "server side error"});

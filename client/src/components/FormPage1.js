@@ -50,17 +50,25 @@ class FormPage1 extends React.Component{
 					{questions.data && userFormData ? (
 						<div>
 							<div className="field">
-							  <label className="label">{ questions.data.qset3.questions[0].includes("COUNTRYNAME") ? questions.data.qset3.questions[0].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[0] }</label>
+							  <label className="label">
+								  { 
+								  	questions.data.qset3.questions[0].includes("COUNTRYNAME") ? questions.data.qset3.questions[0].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[0] 
+									}
+							  </label>
 							  <div className="control">
-							    <input className="input" onChange={this.handleChange} placeholder="No. of days" type="text" name={ questions.data.qset3.name[0] }/>
+							    <input className="input" onChange={this.handleChange} placeholder="No. of days" type="text" name={ questions.data.qset3.name[0] } required/>
 							  </div>
 							</div>
 
 							<div className="field">
-								<label className="label">{ questions.data.qset3.questions[2].includes("COUNTRYNAME") ? questions.data.qset3.questions[2].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[2] }</label>
+								<label className="label">
+									{
+										questions.data.qset3.questions[2].includes("COUNTRYNAME") ? questions.data.qset3.questions[2].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[2]
+									}
+								</label>
 							  <div className="control">
 							    <div className="select">
-							      <select name={ questions.data.qset3.name[2] } onChange={this.handleChange}>
+							      <select name={ questions.data.qset3.name[2] } onChange={this.handleChange} required >
 							        <option>Choice of Trip</option>
 							        {suitedTrip.map((el, i) => <option key={i}>{el}</option>)}
 							      </select>
@@ -69,10 +77,14 @@ class FormPage1 extends React.Component{
 							</div>
 							
 							<div className="field">
-								<label className="label">{ questions.data.qset3.questions[1].includes("COUNTRYNAME") ? questions.data.qset3.questions[1].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[1] }</label>
+								<label className="label">
+									{
+										questions.data.qset3.questions[1].includes("COUNTRYNAME") ? questions.data.qset3.questions[1].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[1] 
+									}
+								</label>
 							  <div className="control">
 							    <div className="select">
-							      <select name={ questions.data.qset3.name[1] } onChange={this.handleChange} >
+							      <select name={ questions.data.qset3.name[1] } onChange={this.handleChange} required >
 							        <option>Ideal Holiday</option>
 							        {idealHoliday.map((el, i) => <option key={i}>{el}</option>)}
 							      </select>
