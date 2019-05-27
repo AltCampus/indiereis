@@ -27,7 +27,7 @@ class Contribute extends React.Component{
 	handleSubmit = () => {
 		if(this.state){
 			this.props.dispatch({
-	      type:"ADD_USER_DATA",
+	      type:"ADD_COUNTRY",
 	      data: this.state
 	    })
 	    this.setState({});
