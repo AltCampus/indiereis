@@ -8,6 +8,21 @@ var num = [1,2,3,4,5,6,7,8,9,10];
 
 class FormPage3 extends React.Component{
 
+	handleChange = (e) => {
+		const { name, value } = e.target;
+    this.setState({ [name]: value });
+	};
+
+	handleSubmit = () => {
+		if(this.state){
+			this.props.dispatch({
+	      type:"ADD_USER_DATA",
+	      data: this.state
+	    })
+	    this.setState({});
+		}else {console.log("state is empty")}
+	}
+	
 	render(){
 		const questions = this.props.questions ? this.props.questions.Questions : null;
 
@@ -16,12 +31,12 @@ class FormPage3 extends React.Component{
 			<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="50" max="100">50%</progress>
-					{questions.data && questions.country ? questions.data.qset2.slice(5,10).map((q,i) => 
+					{questions.data && questions[0].country && questions[0].kindOfTrip ? questions.data.qset2.questions.slice(5,10).map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">{q}</label>
 						  <div className="control">
 						    <div className="select">
-						      <select>
+						      <select onChange={this.handleChange} name={ questions.data.qset2.questions.slice(5,10)} >
 						        <option>Ratings</option>
 						          {num.map(i => <option>{i}</option>)}
 						      </select>
@@ -29,7 +44,7 @@ class FormPage3 extends React.Component{
 						  </div>
 						</div>
 						): ''}
-					<Link to="/form/page4" className="button is-primary">Next</Link>
+					<Link to="/form/page4" className="button is-primary" onClick={this.handleSubmit}>Next</Link>
 				</div>
 			</React.Fragment>
 			)
@@ -37,6 +52,7 @@ class FormPage3 extends React.Component{
 }
 
 function mapStateToProps(state){
+	console.log(state, 'inside map form3.....')
 	return {
 		questions: state
 	}

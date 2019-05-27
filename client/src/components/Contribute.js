@@ -5,22 +5,35 @@ import NavBar from './NavBar';
 import { Link, withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 import {User} from '../reducers/User';
+// import {handleSubmit} from '../container/methods';
 
 const countries = ['Thailand','Japan','Singapore','Malaysia','Indonesia','Bhutan','China','Vietnam','Nepal', 'Australia', 'Myanmar', 'HongKong','Cambodia'];
-
+const kindOfTrip = ['Solo', 'Couple', 'Family', 'Group', 'Company Trip'];
 
 class Contribute extends React.Component{
 	constructor() {
 		super()
+		// this.state = {
+		// 	"country": "",
+		// 	"kindOfTrip": ""
+		// }
+	};
+
+	handleChange = (e) => {
+		const { name, value } = e.target;
+    this.setState({ [name]: value });
+	};
+
+	handleSubmit = () => {
+		if(this.state){
+			this.props.dispatch({
+	      type:"ADD_USER_DATA",
+	      data: this.state
+	    })
+	    this.setState({});
+		}else {console.log("state is empty")}
 	}
 
-	setCountry = (e) => {
-		// console.log(e.target.value)
-		this.props.dispatch({
-			type: 'SET_COUNTRY',
-			data: e.target.value
-		})
-	}
 	
 	render(){
 		const {loggeduser} = this.props;
@@ -44,9 +57,21 @@ class Contribute extends React.Component{
 									  <label className="label">Which country did you travel to?</label>
 									  <div className="control">
 									    <div className="select">
-									      <select onChange={this.setCountry}>
+									      <select name="country" onChange={this.handleChange}>
 									        <option>Pick Country</option>
 									        {countries.map((el, i) => <option key={i}>{el}</option>)}
+									      </select>
+									    </div>
+									  </div>
+									</div>
+
+									<div className="field">
+									  <label className="label">What kind of trip did you take?</label>
+									  <div className="control">
+									    <div className="select">
+									      <select name="kindOfTrip" onChange={this.handleChange}>
+									        <option>Kind of Trip</option>
+									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
 									    </div>
 									  </div>
@@ -59,7 +84,7 @@ class Contribute extends React.Component{
 									    </label>
 									  </div>*/}
 									</div>
-								<Link to="/form/page1" className="button is-primary">Continue</Link>
+								<Link to="/form/page1" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
 							</div>)
 						
 						: null
