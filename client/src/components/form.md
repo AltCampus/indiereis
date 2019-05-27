@@ -14,7 +14,7 @@
 
 "qset2": {
 "Questions": [
-"It was easy to find vegetarian food wherever I/we went",
+"It was easy to find vegetarian food wherever {I/we} went",
 "There were Indian food options almost everywhere {I/we} went",
 "There were plenty of (delicious) street food options to choose from",
 "Overall, the visa application process was quite smooth",
@@ -55,7 +55,7 @@
 },
 "qset3": {
 "questions": [
-"Could you also recall how long the visa application process took (no:of days)?",
+"Could you also recall how long the visa application process took?",
 "In general, COUNTRYNAME is best suited for",
 "What type of holiday is COUNTRYNAME ideal for?"
 ],
