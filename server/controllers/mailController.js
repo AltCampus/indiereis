@@ -24,7 +24,7 @@ exports.mail = async function ( email, token ) {
   var html =
   `<h2> welcome to travel info</h2>
    <p> please click on the link below to varify your account<p>
-   <a href='https://localhost:8000/api/users/verify/${ token }' > Click to Varify </a>
+   <a href='https://localhost:8000/api/v1/users/verify/${ token }' > Click to Varify </a>
     `;
   // send mail with defined transport object
   let info = await transporter.sendMail({

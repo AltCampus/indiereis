@@ -41,23 +41,27 @@ var userSchema = new Schema({
 	token: {
 		type: String,
 		default: ""
-	}
+	},
+	strategies :{
+		type: [ String ],
+	},
+	google: {
+		name: {
+			type: String,
+			default: ""
+		},
+		photo: {
+			type: String,
+			default: ""
+		},
+	},
 }, {timestamps: true});
-
-// userSchema.pre('save', function (next) {
-// 	console.log(process.env.email, process.env.admin1, "check1...")
-//   if(this.email == ( process.env.email || process.env.admin1 )){
-// 		this.isAdmin = true
-// 		console.log('check3...')
-// 	}
-// 	next();
-// });
 
 userSchema.pre('save', function (next) {
   if(this.password && this.isModified('password')) {
     this.password = bcrypt.hashSync(this.password, salt);
   }
-  if(this.email === process.env.EMAIL || process.env.ADMIN ){
+  if(this.email === process.env.EMAIL || this.email === process.env.ADMIN ){
 		console.log('check3...');
 		this.isAdmin = true
 	} 
@@ -67,7 +71,6 @@ userSchema.pre('save', function (next) {
 userSchema.methods.validatePassword = function (password) {
   return bcrypt.compareSync( password, this.password );
 };
-
 
 var User = mongoose.model("User", userSchema);
 

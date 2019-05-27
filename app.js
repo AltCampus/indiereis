@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require("express");
-const session = require("express-session");
+// const session = require("express-session");
 const app = express();
 const mongoose = require("mongoose");
-const MongoStore = require("connect-mongo")(session);
+// const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
@@ -29,14 +29,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "./server/views"));
 app.set("view engine", "ejs");
 
-app.use(
- session({
-  secret: "travelInfo",
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ url: "mongodb://localhost/travelInfo" })
- })
-);
+// app.use(
+//  session({
+//   secret: "travelInfo",
+//   resave: true,
+//   saveUninitialized: true,
+//   store: new MongoStore({ url: "mongodb://localhost/travelInfo" })
+//  })
+// );
 
 if (process.env.NODE_ENV === "development") {
  var webpack = require("webpack");

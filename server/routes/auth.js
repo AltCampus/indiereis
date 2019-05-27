@@ -16,19 +16,37 @@ passport.use(new GoogleStrategy({
     User.findOne({ email: profile.emails[0].value }, (err, user) => {
       if(err) return done(null, null);
       if(user){
-        console.log(user)
-        return done(null, user);
+        if(user.strategies.includes(profile.provider)){
+          console.log(user, "user strategies found......")
+          return done(null, user);
+        }
+        else {
+          User.findOneAndUpdate({email: user.email},
+            {
+              $push: {strategies: profile.provider},
+              google:
+              {
+                photo: profile.photos[0].value,
+                name: profile.displayName
+              }
+          },(err, user) => {
+            if(err) return done(err)
+            return done(null, user);
+          })
+        }
       }
 			if(!user) {
-				User.create({
-					name: profile.displayName,
-					email: profile.emails[0].value,
-					photo: profile.photos[0].value,
-				},(err, user) => {
-          console.log(user, "google user.......");
-					if(err) return done(err, null);
-					done(null, user);
-			});
+        User.create({
+          email: profile.emails[0].value,
+          google: {
+            image: profile.photos[0].value,
+            name: profile.displayName
+          },
+          strategies: [profile.provider]
+        },(err, user) => {
+          if(err) { return done(err) };
+          done(null, user);
+        })
 			}	
 		});
   }
