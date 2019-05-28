@@ -43,17 +43,6 @@ class FormPage6 extends React.Component{
 							  </div>
 							</div>)
 								: <p>'no data'</p>}
-						{questions.data ?
-							(<div> 
-								<div className="field">
-								  <label className="label">{ questions.data.qset4.questions[0] }</label>
-								  <div className="control">
-								    <textarea className="textarea" placeholder="200 characters minimum" name={questions.data.qset4.name[0]} onChange={this.handleChange} required minLength="200">
-								    </textarea>
-								  </div>
-								</div>
-							</div>
-							): "" }
 							<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
 						</div>
 				</React.Fragment>

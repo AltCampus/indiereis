@@ -21,6 +21,7 @@ import FormPage4 from "./components/FormPage4";
 import FormPage5 from "./components/FormPage5";
 import FormPage6 from "./components/FormPage6";
 import { store } from "./store";
+import countryProfile from "./components/countryProfile";
 
 const URL = "http://localhost:8000/api/v1";
 
@@ -67,6 +68,7 @@ class App extends Component {
           <Route path="/form/page6" component={FormPage6} />
           <Route path="/submit" component={Home} />
           <Route path="/about" component={About} />
+          <Route path="/country-profile" component={countryProfile} />
           <Route exact path="/login" component={Login} />{" "}
         </Switch>{" "}
       </div>

@@ -45,8 +45,14 @@ ul li{
 	margin: 10px auto;
 	text-align: left;
 	color: white;
+  width: 600px;
+}
+.dash-flex{
+  display: flex;
+  
 }
 .wrapper {
-	width: 700px;
+	width: 800px;
 	margin: 0 auto;
+  padding: 20px 0;
 }
