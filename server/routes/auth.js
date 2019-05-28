@@ -21,30 +21,29 @@ passport.use(new GoogleStrategy({
           return done(null, user);
         }
         else {
-          User.findOneAndUpdate({email: user.email},
+          User.findOneAndUpdate({ email: user.email },
             {
-              $push: {strategies: profile.provider},
-              google:
-              {
-                photo: profile.photos[0].value,
-                name: profile.displayName
-              }
-          },(err, user) => {
-            if(err) return done(err)
-            return done(null, user);
+              $push: { strategies: profile.provider },
+              photo: profile.photos[0].value,
+              google: { name: profile.displayName }
+            },(err, user) => {
+              if(err) return done(err)
+              return done(null, user);
           })
         }
-      }
-			if(!user) {
+      } else {
+        console.log('cp1', profile)
         User.create({
+          name: profile.displayName,
           email: profile.emails[0].value,
+          photo: profile.photos[0].value,
           google: {
-            image: profile.photos[0].value,
             name: profile.displayName
           },
           strategies: [profile.provider]
         },(err, user) => {
           if(err) { return done(err) };
+
           done(null, user);
         })
 			}	

@@ -13,25 +13,14 @@ class FormPage6 extends React.Component{
     this.setState({ [name]: value });
 	};
 
-	// handleSubmit = () => {
-	// 	if(this.state){
-	// 		this.props.dispatch({
-	//       type:"ADD_FORM6",
-	//       data: this.state
-	//     })
-	//     this.setState({});
-	// 	}else {console.log("state is empty")}
-	// }
-
 	handleSubmit = () => {
-		// console.log(sendData, "inside form 6 hdlsub....");
 		if(this.state){
 			this.props.dispatch({
 	      type:"ADD_FORM6",
 	      data: this.state
 	    })
 	    sendData();
-      // store.history.push("/dashboard");
+      this.props.history.push("/dashboard");
 	    this.setState({});  
 		}else {console.log("state is empty")}
 	}
