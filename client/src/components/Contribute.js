@@ -5,7 +5,6 @@ import NavBar from './NavBar';
 import { Link, withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 import {User} from '../reducers/User';
-// import {handleSubmit} from '../container/methods';
 
 const countries = ['Thailand','Japan','Singapore','Malaysia','Indonesia','Bhutan','China','Vietnam','Nepal', 'Australia', 'Myanmar', 'HongKong','Cambodia'];
 const kindOfTrip = ['Solo', 'Couple', 'Family', 'Group', 'Company Trip'];
@@ -56,10 +55,10 @@ class Contribute extends React.Component{
 									<div className="field">
 									  <label className="label">Which country did you travel to?</label>
 									  <div className="control">
-									    <div className="select">
-									      <select name="country" onChange={this.handleChange}>
-									        <option>Pick Country</option>
-									        {countries.map((el, i) => <option key={i}>{el}</option>)}
+									    <div className="select contribute-btn">
+									      <select name="country" onChange={this.handleChange} required>
+									        <option value="">Pick Country</option>
+									        {countries.map((el, i) => <option key={i} val="">{el}</option>)}
 									      </select>
 									    </div>
 									  </div>
@@ -68,7 +67,7 @@ class Contribute extends React.Component{
 									<div className="field">
 									  <label className="label">What kind of trip did you take?</label>
 									  <div className="control">
-									    <div className="select">
+									    <div className="select contribute-btn">
 									      <select name="kindOfTrip" onChange={this.handleChange}>
 									        <option>Kind of Trip</option>
 									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}

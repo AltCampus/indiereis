@@ -39,7 +39,8 @@ class FormPage6 extends React.Component{
         //   user: data
         // });
         this.props.history.push("/dashboard");
-      });
+      })
+      this.setState({});
 	}
 
 	render(){
@@ -53,7 +54,7 @@ class FormPage6 extends React.Component{
 						<progress className="progress is-primary" value="100" max="100">100%</progress>
 						{questions.data ? 
 							(<div className="field">
-							  <label className="label">{ questions.data.qset4.questions[0] }</label>
+							  <label className="label">{ questions.data.qset4.questions}</label>
 							  <div className="control">
 							    <textarea className="textarea" placeholder="200 characters minimum" name={questions.data.qset4.name[0]} onChange={this.handleChange} >
 							    </textarea>

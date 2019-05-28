@@ -25,15 +25,16 @@ class FormPage3 extends React.Component{
 	
 	render(){
 		const questions = this.props.questions ? this.props.questions.Questions : null;
-
+		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
+		
 		return(
 			<React.Fragment>
 			<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="50" max="100">50%</progress>
-					{questions.data ? questions.data.qset2.questions.slice(5,10).map((q,i) => 
+					{questions.data && userFormData ? questions.data.qset2.questions.slice(5,10).map((q,i) => 
 						<div key={i} className="field">
-						  <label className="label">{q}</label>
+						  <label className="label">{q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ): q}</label>
 						  <div className="control">
 						    <div className="select">
 						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(5,10)[i]} >

@@ -3,6 +3,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+import UserProfile from './userProfile';
+import SourcedForm from './SourcedForm';
 
 class Dashboard extends React.Component {
   constructor() {
@@ -21,7 +23,8 @@ class Dashboard extends React.Component {
           {user ? 
 						<div className="user-info">Hello {user.name}</div> : ''}
         </div>
-        <Footer />
+        <UserProfile />
+        <SourcedForm />
       </div>
     );
   }

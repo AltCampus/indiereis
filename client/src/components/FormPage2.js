@@ -25,19 +25,20 @@ class FormPage2 extends React.Component{
 	
 	render(){
 		const questions = this.props.questions ? this.props.questions.Questions : null;
-		console.log(this.props, 'props form2')
+		console.log(questions.data.qset2)
+		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 
 		return(
 			<React.Fragment>
 			<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="30" max="100">30%</progress>
-					{questions.data ? questions.data.qset2.questions.slice(0,5).map((q,i) => 
+					{questions.data && userFormData ? questions.data.qset2.questions.slice(0,5).map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">{q}</label>
 						  <div className="control">
 						    <div className="select">
-						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(0,5)[i] } >
+						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(0,5)[i] } required>
 						        <option>Ratings</option>
 						          {num.map(i => <option>{i}</option>)}
 						      </select>

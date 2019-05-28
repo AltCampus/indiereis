@@ -69,7 +69,7 @@ var userDataSchema = new Schema({
 	},
 	Infra: {
 		type: String,
-		default: null
+		required: true
 	},
 	language: {
 		type: String,

@@ -25,7 +25,7 @@ export default function User(state = initialState, action) {
 		return {
 			...state,
 			user: null,
-			isAuthInProgress: false,
+			isAuthInProgress: true,
       token: '',
       isAuthenticated: false
 		}

@@ -1,0 +1,52 @@
+.menu-list-items{
+	border-radius: 2px;
+  color: #4a4a4a;
+  display: block;
+  padding: 1rem 1rem;
+}
+ul li{
+	text-decoration: none;
+}
+
+.box{
+  width:160px;
+  height:160px;
+  vertical-align: top;
+  box-sizing: border-box; 
+  padding: 10px;
+  font-size: 12px;
+  margin: 10px;
+}
+ .big-box{
+ 	width: 320px;
+ 	height: 160px;
+ 	vertical-align: top;
+ 	box-sizing: border-box;
+ 	padding: 10px;
+  font-size: 12px;
+  margin: 10px;
+ }
+.bg1{
+  background: indianred; 
+}
+.bc2{
+  background: #bada55;
+  margin-left: 10px;
+}
+.bg3{
+  background: yellow;
+  margin-left: 10px; 
+}
+.main-grid{
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr;
+}
+.main-card {
+	margin: 10px auto;
+	text-align: left;
+	color: white;
+}
+.wrapper {
+	width: 700px;
+	margin: 0 auto;
+}

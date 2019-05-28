@@ -1,6 +1,6 @@
 {
  "qset1":{
-"question":[
+"questions":[
 "How much did it cost you (in INR)?",
 "The total visa cost was",
 "How many days did you go for?"
@@ -13,7 +13,7 @@
 },
 
 "qset2": {
-"Questions": [
+"questions": [
 "It was easy to find vegetarian food wherever {I/we} went",
 "There were Indian food options almost everywhere {I/we} went",
 "There were plenty of (delicious) street food options to choose from",
@@ -49,7 +49,7 @@
 ]
 },
 "qset4": {
-"questions": "Tell us more!",
+"questions": ["Tell us more!"],
 "name":[ "tripExperience"]
 
 },

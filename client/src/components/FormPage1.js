@@ -13,7 +13,7 @@ class FormPage1 extends React.Component{
 	
 	componentDidMount(){
 		fetch(`${URL}/questions`).then(res => res.json()).then(d => {
-			console.log(d, 'inside cdm.....')
+			// console.log(d, 'inside cdm.....')
 			this.props.dispatch({
 				type: 'ADD_QUESTIONS',
 				data: d.data[0]
@@ -40,7 +40,7 @@ class FormPage1 extends React.Component{
 		const questions = this.props.questions ? this.props.questions.Questions : null;
 		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 		// console.log(this.props, 'props.....f1')
-		console.log(userFormData, questions.data, "questions in page1......");
+		// console.log(userFormData, questions.data, "questions in page1......");
 
 		return(
 			<React.Fragment>
@@ -52,7 +52,7 @@ class FormPage1 extends React.Component{
 							<div className="field">
 							  <label className="label">{ questions.data.qset3.questions[0].includes("COUNTRYNAME") ? questions.data.qset3.questions[0].replace( "COUNTRYNAME", userFormData.country ) : questions.data.qset3.questions[0] }</label>
 							  <div className="control">
-							    <input className="input" onChange={this.handleChange} placeholder="No. of days" type="text" name={ questions.data.qset3.name[0] }/>
+							    <input className="input" onChange={this.handleChange} placeholder="No. of days" type="text" name={ questions.data.qset3.name[0] } required/>
 							  </div>
 							</div>
 
@@ -97,7 +97,7 @@ class FormPage1 extends React.Component{
 }
 
 function mapStateToProps(state) {
-	console.log(state, 'inside map form1.....')
+	// console.log(state, 'inside map form1.....')
 	return {
 		questions: state
 	}
