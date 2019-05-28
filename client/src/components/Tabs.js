@@ -5,13 +5,15 @@ import Visa from './crowdsourcedData/Visa';
 import Accomodation from './crowdsourcedData/Accomodation';
 import Safety from './crowdsourcedData/Safety';
 import Experience from './crowdsourcedData/Experience';
+import {connect} from 'react-redux';
 
 const URL = "http://localhost:8000/api/v1";
 
 class Tabs extends React.Component{
-	constructor () {
-    super()
+	constructor (props) {
+    super(props)
     this.state = {
+    	formData: '',
       isHidden: true,
       innerText: ''
     }
@@ -23,7 +25,13 @@ class Tabs extends React.Component{
         "Content-Type": "application/json",
         Authorization: localStorage.getItem('jwt')
       },
-    }).then(res => res.json()).then(d => console.log(d))			
+    }).then(res => res.json()).then(data => {
+    	console.log(data, 'inside fetch')
+    	this.props.dispatch({
+    		type: 'SHOW_FORM_DATA',
+    		formData: data
+    	});
+    })			
 	}
 
 	toggleComponent =(e) => {
@@ -35,6 +43,7 @@ class Tabs extends React.Component{
 	}
 
 	render(){
+		// console.log(this.state)
 		const {isHidden, innerText} = this.state
 		return(
 			<div>
@@ -70,4 +79,11 @@ class Tabs extends React.Component{
 	}
 }
 
-export default Tabs;
+function mapStateToProps(state) {
+	console.log(state, 'inside map')
+  return {
+    crowdsourced: state.Crowdsourced.data
+  };
+}
+
+export default connect(mapStateToProps)(Tabs);

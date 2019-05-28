@@ -14,7 +14,7 @@ class Safety extends React.Component{
 function mapStateToProps(state){
 	console.log(state)
 	return{
-		state
+    crowdsourced: state.Crowdsourced.data
 	}
 }
 

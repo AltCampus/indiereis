@@ -35,4 +35,5 @@ function mapStateToProps(state) {
     loggeduser: state.User.user
   };
 }
+
 export default withRouter(connect(mapStateToProps)(Dashboard));
