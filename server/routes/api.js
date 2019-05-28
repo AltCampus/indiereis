@@ -7,6 +7,7 @@ var publicDataApi = require('./publicData');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 var User = require("../models/User");
+var jwtAuth = require("../config/jwtAuth");
 
 router.use('/users/login', userApi);
 router.use('/users/register', userApi);
@@ -17,5 +18,5 @@ router.use('/users/profiles/:username', userApi);
 router.use('/users/verify/:token', userApi);
 
 router.use('/questions', questionApi);
-router.use('/public-data', publicDataApi);
+router.use('/public-data', jwtAuth.verifyToken, publicDataApi);
 module.exports = router;

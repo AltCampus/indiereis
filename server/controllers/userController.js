@@ -105,19 +105,28 @@ module.exports = {
 			if(user) return res.status(200).json({ success: true, user });
 		});
 	},
+	
 	deleteUser: (req, res, next) => {
 		User.findOneAndDelete({ email: req.body.email }, (err, user) => {
 			if(err) return res.status(500).json({ success: false, error: "server side error" });
 			if(!user) return res.status(400).json({ success: false, error: "user does not exist" });
 			if(user) {
-				console.log("user deleted........")
+				console.log("user deleted........");
 				return res.status(200).json({ success: true, msg: "user sucessfully deleted" });
 			}
 		});
 	},
 	verifyUser: (req, res, next) => {
-		// user.findOne({token: })
-		// console.log(req.params.token, "user otp token....");
+		var token = req.params.token;
+		User.findOne({ token }).exec(function(err, user) {
+			if(user) {
+				user.verified = true;
+				user.save();
+				res.json({ message: 'succesfully verified' });
+			} else {
+				res.status(400).send({ message: 'Wrong Token' });
+			}
+		});
 	},
 	userProfile: (req,res,next) => {
 		var username = req.params.username;

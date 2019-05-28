@@ -20,7 +20,6 @@ var userSchema = new Schema({
 		type: String,
 		min: 6,
 		max: 20,
-		required: true,
 	},
 	photo: {
 		type: String,
@@ -42,15 +41,11 @@ var userSchema = new Schema({
 		type: String,
 		default: ""
 	},
-	strategies :{
-		type: [ String ],
-	},
-	google: {
+	strategies:[{
+		type: String,
+	}],
+	google:{
 		name: {
-			type: String,
-			default: ""
-		},
-		photo: {
 			type: String,
 			default: ""
 		},
