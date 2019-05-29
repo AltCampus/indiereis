@@ -8,10 +8,10 @@ import SourcedForm from './SourcedForm';
 
 
 class Dashboard extends React.Component {
-  constructor() {
-    super();
-		this.state= {};
-  }
+  // constructor(props) {
+  //   super(props);
+		// this.state = {};
+  // }
 
   render() 
 	{
@@ -32,7 +32,8 @@ class Dashboard extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    loggeduser: state.User.user
+    loggeduser: state.User.user,
+    crowdsourced: state
   };
 }
 

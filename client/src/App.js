@@ -21,8 +21,9 @@ import FormPage3 from "./components/FormPage3";
 import FormPage4 from "./components/FormPage4";
 import FormPage5 from "./components/FormPage5";
 import FormPage6 from "./components/FormPage6";
+import PrivateRoute from './components/PrivateRoute';
 import { store } from "./store";
-import countryProfile from "./components/countryProfile";
+import CountryProfile from "./components/CountryProfile";
 
 const URL = "http://localhost:8000/api/v1";
 
@@ -31,7 +32,7 @@ const URL = "http://localhost:8000/api/v1";
 if (localStorage.jwt) {
   //	console.log('inside login...')
   const { jwt } = localStorage;
-  fetch(`${URL}/users/login`, {
+  fetch(`${URL}/users/verify`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -60,18 +61,18 @@ class App extends Component {
           <Route path="/signup" component={SignUp} />{" "}
           <Route path="/map" component={Map} />
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/contribute" component={Contribute} />
-          <Route path="/form/page1" component={FormPage1} />
-          <Route path="/form/page2" component={FormPage2} />
-          <Route path="/form/page3" component={FormPage3} />
-          <Route path="/form/page4" component={FormPage4} />
-          <Route path="/form/page5" component={FormPage5} />
-          <Route path="/form/page6" component={FormPage6} />
-          <Route path="/user-profile" component={MainProfile} />
+          <Route path="/contribute"  component={Contribute} />
+          <PrivateRoute path="/form/page1" auth={this.props.isAuth} component={FormPage1} />
+          <PrivateRoute path="/form/page2" auth={this.props.isAuth} component={FormPage2} />
+          <PrivateRoute path="/form/page3" auth={this.props.isAuth} component={FormPage3} />
+          <PrivateRoute path="/form/page4" auth={this.props.isAuth} component={FormPage4} />
+          <PrivateRoute path="/form/page5" auth={this.props.isAuth} component={FormPage5} />
+          <PrivateRoute path="/form/page6" auth={this.props.isAuth} component={FormPage6} />
+          <PrivateRoute path="/user-profile" auth={this.props.isAuth} component={MainProfile} />
           <Route path="/submit" component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/country-profile" component={countryProfile} />
-          <Route exact path="/login" component={Login} />{" "}
+          <PrivateRoute path="/country-profile" auth={this.props.isAuth} component={CountryProfile} />
+          <Route exact path="/login" component={Login} />
         </Switch>{" "}
       </div>
     );
@@ -79,8 +80,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('inside mapState',state)
   return {
-    loggeduser: state.User
+    loggeduser: state.User,
+    isAuth:state.User.isAuthenticated
   };
 }
 

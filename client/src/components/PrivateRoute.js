@@ -8,13 +8,15 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const PrivateRoute = ({ component: Component, User, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    User.isAuthenticated === true
+const PrivateRoute = ({ component: Component, auth, ...rest }) => {
+  return(
+    <Route {...rest} render={(props) => (
+      auth
       ? <Component {...props} />
-      : <Redirect to='/login' />
-  )} />
-)
+      : <Redirect to={{pathname:'/login'}} />
+      )} />
+    )
+  }
 
 const mapStateToProps = (state) => {
   return { User: state.User }

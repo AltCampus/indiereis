@@ -12,9 +12,11 @@ const kindOfTrip = ['Solo', 'Couple', 'Family', 'Group', 'Company Trip'];
 class Contribute extends React.Component{
 	state = {
 		country: "",
+		terms:"",
 		kindOfTrip: "",
 		userId: ""
 	}
+	
 	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -53,7 +55,7 @@ class Contribute extends React.Component{
 									  <label className="label">Which country did you travel to?</label>
 									  <div className="control">
 									    <div className="select contribute-btn">
-									      <select name="country" onChange={this.handleChange} required >
+									      <select name="country" onChange={this.handleChange} value={this.state.country} required >
 									        <option>Pick Country</option>
 									        {countries.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -65,7 +67,7 @@ class Contribute extends React.Component{
 									  <label className="label">What kind of trip did you take?</label>
 									  <div className="control">
 									    <div className="select contribute-btn">
-									      <select name="kindOfTrip" onChange={this.handleChange} required >
+									      <select name="kindOfTrip" onChange={this.handleChange} value={this.state.kindOfTrip} required >
 									        <option>Kind of Trip</option>
 									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -75,7 +77,7 @@ class Contribute extends React.Component{
 								</div>
 								<div className="control">
 							    <label className="checkbox parallel" >
-							      <input type="checkbox" className="terms" required />
+							      <input type="checkbox" className="terms" name="terms" checked={this.state.terms} onChange={this.handleClick} required/>
 							      <div className="terms">I agree to the <Link to="#">terms and conditions</Link></div>
 							    </label>
 								</div>

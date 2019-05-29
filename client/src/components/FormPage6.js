@@ -34,7 +34,8 @@ class FormPage6 extends React.Component{
 				<NavBar />
 					<div className= "form-wrapper">
 						<progress className="progress is-primary" value="100" max="100">100%</progress>
-						{questions.data ? 
+						{
+							questions.data ? 
 							(<div className="field">
 							  <label className="label">{ questions.data.qset4.questions}</label>
 							  <div className="control">
@@ -42,9 +43,10 @@ class FormPage6 extends React.Component{
 							    </textarea>
 							  </div>
 							</div>)
-								: <p>'no data'</p>}
-							<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
-						</div>
+								: <p>'no data'</p>
+						}
+						<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
+					</div>
 				</React.Fragment>
 			)
 	}
