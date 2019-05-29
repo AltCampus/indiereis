@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import General from './crowdsourcedData/General';
 import Visa from './crowdsourcedData/Visa';
-import Accomodation from './crowdsourcedData/Accomodation';
+import Flights from './crowdsourcedData/Flights';
 import Safety from './crowdsourcedData/Safety';
 import Experience from './crowdsourcedData/Experience';
 import {connect} from 'react-redux';
@@ -51,7 +51,7 @@ class Tabs extends React.Component{
 				  <ul>
 				    <li onClick={this.toggleComponent}>General</li>
 				    <li onClick={this.toggleComponent}>Visa</li>
-				    <li onClick={this.toggleComponent}>Accomodation</li>
+				    <li onClick={this.toggleComponent}>Flights</li>
 				    <li onClick={this.toggleComponent}>Safety</li>
 				    <li onClick={this.toggleComponent}>Experience</li>
 				  </ul>
@@ -65,7 +65,7 @@ class Tabs extends React.Component{
 					  {innerText === 'Visa' ? !isHidden && <Visa /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Accomodation' ? !isHidden && <Accomodation /> : null}
+					  {innerText === 'Flights' ? !isHidden && <Flights /> : null}
 					</div>
 					<div className="onclick-display">
 					  {innerText === 'Safety' ? !isHidden && <Safety /> : null}

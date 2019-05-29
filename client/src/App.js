@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import Map from "./components/Map";
 import Dashboard from "./components/Dashboard";
 import About from "./components/About";
+import MainProfile from './components/MainProfile';
 import Contribute from "./components/Contribute";
 import FormPage1 from "./components/FormPage1";
 import FormPage2 from "./components/FormPage2";
@@ -66,6 +67,7 @@ class App extends Component {
           <Route path="/form/page4" component={FormPage4} />
           <Route path="/form/page5" component={FormPage5} />
           <Route path="/form/page6" component={FormPage6} />
+          <Route path="/user-profile" component={MainProfile} />
           <Route path="/submit" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/country-profile" component={countryProfile} />

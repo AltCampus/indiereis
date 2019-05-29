@@ -31,7 +31,6 @@
 "Things were open 24/7 in many places"
 ],
 "name": [
-"kindOfTrip",
 "vegAvailability",
 "indianFoodOption",
 "streetFood",
@@ -42,6 +41,7 @@
 "actvities",
 "nightLife",
 "safeTotravel",
+"womenFriendly"
 "Infra",
 "language",
 "wifi",
