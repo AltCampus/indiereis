@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import Header from './Header';
+import { URL } from '../utils/static';
 
 const { jwt } = localStorage;
-const URL = "http://localhost:8000/api/v1";
 
 class MainProfile extends React.Component{
 	state = {

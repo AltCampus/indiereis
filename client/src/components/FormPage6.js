@@ -2,8 +2,7 @@ import React from 'react';
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendData } from "../actions/User";
-
-const URL = "http://localhost:8000/api/v1";
+import { URL } from '../utils/static';
 
 class FormPage6 extends React.Component{
 

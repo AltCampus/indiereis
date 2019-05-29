@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 
-
 const Hero = () => {
   return (
     <React.Fragment>
@@ -20,7 +19,7 @@ const Hero = () => {
             country without worrying about the tiresome process of researching
             on all the travel info? This website is developed keeping in mind
             the requirements of an average Indian traveler visiting a foreign
-            country. Want to know more?{" "}
+            country. Want to know more?
             <small>
               <Link to="/about">Read here</Link>
             </small>

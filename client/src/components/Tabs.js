@@ -6,8 +6,7 @@ import Flights from './crowdsourcedData/Flights';
 import Safety from './crowdsourcedData/Safety';
 import Experience from './crowdsourcedData/Experience';
 import {connect} from 'react-redux';
-
-const URL = "http://localhost:8000/api/v1";
+import { URL } from '../utils/static';
 
 class Tabs extends React.Component{
 	constructor (props) {

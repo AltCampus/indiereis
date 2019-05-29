@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./stylesheets/index.scss";
+import { URL } from './utils/static';
 import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -20,10 +21,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { store } from "./store";
 import CountryProfile from "./components/CountryProfile";
 
-const URL = "http://localhost:8000/api/v1";
-
 //Keeping user logged in
-
 if (localStorage.jwt) {
   const { jwt } = localStorage;
   fetch(`${URL}/users/verify`, {

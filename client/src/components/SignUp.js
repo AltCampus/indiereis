@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
 // import File from './File';
-const URL = "http://localhost:8000/api/v1";
+import { URL } from '../utils/static';
 
 class SignUp extends Component {
   constructor(props){

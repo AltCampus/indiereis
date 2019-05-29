@@ -1,12 +1,9 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
-import NavBar from './NavBar';
 import { connect } from 'react-redux';
 import FormPage5 from './FormPage5';
+import { URL, num } from '../utils/static';
 
-
-const URL = "http://localhost:8000/api/v1";
-var num = [1,2,3,4,5,6,7,8,9,10];
 
 class FormPage4 extends React.Component{
 	constructor(){
