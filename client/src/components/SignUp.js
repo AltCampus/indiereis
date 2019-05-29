@@ -14,9 +14,7 @@ class SignUp extends Component {
         email: "",
         password: "",
         confirmpassword: "",
-        photo: ""
       },
-      file:""
     }
   }
 
@@ -30,8 +28,6 @@ class SignUp extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state.user),
-      // file: JSON.stringify(this.state.user.photo),
-
     }).then((res) => res.json())
       .then((data) => {
         console.log(data)
@@ -49,7 +45,6 @@ class SignUp extends Component {
               email: "",
               password: "",
               confirmpassword: "",
-              // photo: ""
             }
           })
         this.props.history.push('/');
@@ -60,7 +55,6 @@ class SignUp extends Component {
               email: "",
               password: "",
               confirmpassword: "",
-              // photo: ""
             }
           })
           this.props.history.push('/signup');
@@ -78,45 +72,6 @@ class SignUp extends Component {
       }
     })
   }
-
-  handleFile =(e) => {
-    const photo = event.target.files[0];
-    console.log(photo, "photo....");
-    this.previewFile(photo);
-  };
-
-  previewFile = (data) => {
-    var file = data;
-    const sendImg = (url) => {
-      url ? this.setState({ user:{ photo: url } }) : null;
-    }
-
-    var reader = new FileReader();
-    let cloud = null;
-
-    reader.addEventListener("load", function () {
-      cloud = reader.result;
-      var cloudData = {
-       file : cloud,
-       upload_preset: "zxwgo29d"
-      };
-      fetch("https://api.cloudinary.com/v1_1/ashutosh-sajan/image/upload", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(cloudData),
-          }).then((res) => res.json())
-          .then(data => {
-            console.log(data, "res data...");
-            sendImg(data.secure_url);
-          });
-    }, false);
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
 
   render() {
     return (

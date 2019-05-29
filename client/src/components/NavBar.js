@@ -16,7 +16,7 @@ class NavBar extends React.Component {
 	render() {
 		return ( 
 			<React.Fragment >
-				<nav className = "navbar is-link" role=" navigation " aria-label="main navigation"> 
+				<nav className = "navbar is-link is-small" role=" navigation " aria-label="main navigation"> 
 					<div className = "navbar-brand">
 						<Link to = "/" className = "navbar-item">Logo</Link> 
 					</div>
@@ -44,7 +44,7 @@ class NavBar extends React.Component {
 										</div>
 									) : 
 									( 
-										<Link type = "submit" className = "button is-light" onClick = {this.handleLogout}> Logout </Link>
+										<Link type = "submit" className = "button is-light is-small" onClick = {this.handleLogout}> Logout </Link>
 									)
 									}
 								</div> 

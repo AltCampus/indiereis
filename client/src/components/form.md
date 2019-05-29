@@ -1,6 +1,6 @@
 {
  "qset1":{
-"question":[
+"questions":[
 "How much did it cost you (in INR)?",
 "The total visa cost was",
 "How many days did you go for?"
@@ -13,8 +13,8 @@
 },
 
 "qset2": {
-"Questions": [
-"It was easy to find vegetarian food wherever I/we went",
+"questions": [
+"It was easy to find vegetarian food wherever {I/we} went",
 "There were Indian food options almost everywhere {I/we} went",
 "There were plenty of (delicious) street food options to choose from",
 "Overall, the visa application process was quite smooth",
@@ -31,7 +31,6 @@
 "Things were open 24/7 in many places"
 ],
 "name": [
-"kindOfTrip",
 "vegAvailability",
 "indianFoodOption",
 "streetFood",
@@ -42,6 +41,7 @@
 "actvities",
 "nightLife",
 "safeTotravel",
+"womenFriendly"
 "Infra",
 "language",
 "wifi",
@@ -49,13 +49,13 @@
 ]
 },
 "qset4": {
-"questions": "Tell us more!",
+"questions": ["Tell us more!"],
 "name":[ "tripExperience"]
 
 },
 "qset3": {
 "questions": [
-"Could you also recall how long the visa application process took (no:of days)?",
+"Could you also recall how long the visa application process took?",
 "In general, COUNTRYNAME is best suited for",
 "What type of holiday is COUNTRYNAME ideal for?"
 ],

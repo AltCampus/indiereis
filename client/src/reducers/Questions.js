@@ -1,5 +1,5 @@
 export function Questions(state = [], action) {
-	console.log(state, action, 'inside reducer');
+	// console.log(state, action, 'inside reducer');
 	switch (action.type) {
 		case "ADD_QUESTIONS":
 		return {
@@ -18,7 +18,7 @@ export function Questions(state = [], action) {
 }
 
 export function userFormData(state = [], action) {
-	console.log(state, action, 'inside reducer');
+	// console.log(state, action, 'inside reducer');
 	switch (action.type) {
 		case "ADD_COUNTRY" :
 		return {

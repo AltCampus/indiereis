@@ -32,28 +32,30 @@ class FormPage6 extends React.Component{
 		return(
 			<React.Fragment>
 				<NavBar />
-				<div className= "form-wrapper">
-					<progress className="progress is-primary" value="100" max="100">100%</progress>
-					{questions.data ?
-						(<div> 
-							<div className="field">
-							  <label className="label">{ questions.data.qset4.questions[0] }</label>
-							  <div className="control">
-							    <textarea className="textarea" placeholder="200 characters minimum" name={questions.data.qset4.name[0]} onChange={this.handleChange} required minLength="200">
-							    </textarea>
-							  </div>
-							</div>
-						</div>
-						): "" }
+					<div className= "form-wrapper">
+						<progress className="progress is-primary" value="100" max="100">100%</progress>
+						{ 
+							questions.data ? 
+							(
+								<div className="field">
+								  <label className="label">{ questions.data.qset4.questions}</label>
+								  <div className="control">
+								    <textarea className="textarea" placeholder="200 characters minimum" name={questions.data.qset4.name[0]} onChange={this.handleChange} >
+								    </textarea>
+								  </div>
+								</div>
+							)
+							: <p>'no data'</p>
+						}
 						<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
-					</div>
+						</div>
 			</React.Fragment>
 		)
 	}
 }
 
 function mapStateToProps(state){
-	console.log(state, "inside form 6");
+	// console.log(state, "inside form 6");
 	return {
 		questions: state
 	}

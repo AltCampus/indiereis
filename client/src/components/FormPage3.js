@@ -32,20 +32,18 @@ class FormPage3 extends React.Component{
 			<NavBar />
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="50" max="100">50%</progress>
-					{questions.data ? questions.data.qset2.questions.slice(5,10).map((q,i) => 
+					{questions.data && userFormData ? questions.data.qset2.questions.slice(5,10).map((q,i) => 
 						<div key={i} className="field">
 						  <label className="label">
 							  {
 							  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
-							  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
-							  	q.replace("{I/WE}", "I") :
-							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
-							    q.replace("{I/WE}", "We"): q
+							  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ? q.replace("{I/WE}", "I") :
+							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ? q.replace("{I/WE}", "We"): q
 							  }
 						  </label>
 						  <div className="control" key={i}>
 						    <div className="select">
-						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(5,10)[i]} required >
+						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(5,10)[i]}>
 						        <option>Ratings</option>
 						          {num.map(i => <option>{i}</option>)}
 						      </select>

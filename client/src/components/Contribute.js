@@ -3,16 +3,18 @@ import FormPage1 from './FormPage1';
 import Footer from './Footer';
 import NavBar from './NavBar';
 import { Link, withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
-import { User } from '../reducers/User';
 // import {handleSubmit} from '../container/methods';
+import {connect} from 'react-redux';
+import {User} from '../reducers/User';
 
 const countries = ['Thailand','Japan','Singapore','Malaysia','Indonesia','Bhutan','China','Vietnam','Nepal', 'Australia', 'Myanmar', 'HongKong','Cambodia'];
 const kindOfTrip = ['Solo', 'Couple', 'Family', 'Group', 'Company Trip'];
 
 class Contribute extends React.Component{
 	state = {
-
+		country:"",
+		terms: "",
+		kindOfTrip:""
 	}
 
 	handleChange = (e) => {
@@ -54,8 +56,9 @@ class Contribute extends React.Component{
 								<div className="form-wrapper">
 									<div className="field">
 									  <label className="label">Which country did you travel to?</label>
+									  
 									  <div className="control">
-									    <div className="select">
+									    <div className="select contribute-btn">
 									      <select name="country" value={ this.state.country } onChange={this.handleChange} required >
 									        <option>Pick Country</option>
 									        {countries.map((el, i) => <option key={i}>{el}</option>)}
@@ -67,7 +70,7 @@ class Contribute extends React.Component{
 									<div className="field">
 									  <label className="label">What kind of trip did you take?</label>
 									  <div className="control">
-									    <div className="select">
+									    <div className="select contribute-btn">
 									      <select name="kindOfTrip" value={ this.state.kindOfTrip } onChange={this.handleChange} required >
 									        <option>Kind of Trip</option>
 									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}
@@ -85,7 +88,8 @@ class Contribute extends React.Component{
 								</div>
 								</div>
 								<Link to="/form/page1" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
-							</div>)
+							</div>
+							)
 						: null
 				}
 				<Footer />
