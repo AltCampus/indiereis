@@ -30,19 +30,16 @@ const URL = "http://localhost:8000/api/v1";
 //Keeping user logged in
 
 if (localStorage.jwt) {
-  //	console.log('inside login...')
   const { jwt } = localStorage;
   fetch(`${URL}/users/verify`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      authorization: jwt
+      "authorization": jwt
     }
   })
     .then(res => res.json())
     .then(data => {
-      //	console.log('inside login...', data)
-
       store.dispatch({
         type: "LOGIN",
         user: data
@@ -71,8 +68,13 @@ class App extends Component {
           <PrivateRoute path="/user-profile" auth={this.props.isAuth} component={MainProfile} />
           <Route path="/submit" component={Home} />
           <Route path="/about" component={About} />
+<<<<<<< HEAD
           <PrivateRoute path="/country-profile" auth={this.props.isAuth} component={CountryProfile} />
           <Route exact path="/login" component={Login} />
+=======
+          <Route path="/country-profile" component={CountryProfile} />
+          <Route exact path="/login" component={Login} />{" "}
+>>>>>>> f07f01714a06500f089099fe02bc9e64d963c4b2
         </Switch>{" "}
       </div>
     );

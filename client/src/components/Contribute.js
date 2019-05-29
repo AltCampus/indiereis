@@ -13,14 +13,17 @@ class Contribute extends React.Component{
 	state = {
 		country: "",
 		terms:"",
-		kindOfTrip: "",
-		userId: ""
+		kindOfTrip: ""
 	}
 	
 	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
-	};
+	}
+
+	handleClick = (e) => {
+    this.setState({ terms : !this.state.terms });
+	}
 
 	handleSubmit = () => {
 		if(this.state){
@@ -29,16 +32,15 @@ class Contribute extends React.Component{
 	      data: this.state
 	    })
 	    this.setState({});
-		}else {console.log("state is empty")}
+		}else { console.log("state is empty") }
 	}
 
-	
 	render(){
 		const {loggeduser} = this.props;
 		return(
 			<div>
 				<NavBar />
-				{loggeduser.isAuthInProgress ? 
+				{ loggeduser.isAuthInProgress ? 
 
 					(<div className="is-small contribute">
 						<div>Thank you for showing interest in contributing to the project.</div>
@@ -53,9 +55,10 @@ class Contribute extends React.Component{
 								<div className="form-wrapper">
 									<div className="field">
 									  <label className="label">Which country did you travel to?</label>
+									  
 									  <div className="control">
 									    <div className="select contribute-btn">
-									      <select name="country" onChange={this.handleChange} value={this.state.country} required >
+									      <select name="country" value={ this.state.country } onChange={this.handleChange} required >
 									        <option>Pick Country</option>
 									        {countries.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -67,7 +70,7 @@ class Contribute extends React.Component{
 									  <label className="label">What kind of trip did you take?</label>
 									  <div className="control">
 									    <div className="select contribute-btn">
-									      <select name="kindOfTrip" onChange={this.handleChange} value={this.state.kindOfTrip} required >
+									      <select name="kindOfTrip" value={ this.state.kindOfTrip } onChange={this.handleChange} required >
 									        <option>Kind of Trip</option>
 									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -75,9 +78,10 @@ class Contribute extends React.Component{
 									  </div>
 									</div>
 								</div>
+
 								<div className="control">
 							    <label className="checkbox parallel" >
-							      <input type="checkbox" className="terms" name="terms" checked={this.state.terms} onChange={this.handleClick} required/>
+							      <input type="checkbox" className="terms" checked={ this.state.terms } name="terms" onChange={ this.handleClick } required />
 							      <div className="terms">I agree to the <Link to="#">terms and conditions</Link></div>
 							    </label>
 								</div>

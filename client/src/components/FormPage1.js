@@ -9,6 +9,7 @@ const countries = ['Thailand','Japan','Singapore','Malaysia','Indonesia','Bhutan
 const suitedTrip = ['Solo Travelers/Backpackers', 'Couples', 'Families', 'Groups', 'Any kind of trip'];
 const idealHoliday= ['City Hopping', 'Beach Bumming', 'Adventure', 'Leisure', 'Road Trip', 'Nature']
 
+
 class FormPage1 extends React.Component{
 	
 	componentDidMount(){
@@ -56,7 +57,7 @@ class FormPage1 extends React.Component{
 									}
 							  </label>
 							  <div className="control">
-							    <input className="input" onChange={this.handleChange} placeholder="No. of days" type="text" name={ questions.data.qset3.name[0] } required/>
+							    <input className="input" name={ questions.data.qset3.name[0] } onChange={this.handleChange} placeholder="No. of days" type="text"  required/>
 							  </div>
 							</div>
 
