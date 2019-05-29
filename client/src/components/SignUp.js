@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
-
+// import File from './File';
 const URL = "http://localhost:8000/api/v1";
 
 class SignUp extends Component {
@@ -15,7 +15,8 @@ class SignUp extends Component {
         password: "",
         confirmpassword: "",
         photo: ""
-      }
+      },
+      file:""
     }
   }
 
@@ -78,11 +79,44 @@ class SignUp extends Component {
     })
   }
 
-  // handleFile =(e) => {
-  //   const photo = event.target.files ? event.target.files[0] : null ;
-  //   console.log(photo, "photo....");
-  //   this.setState({ user: { photo: photo }});
-  // }
+  handleFile =(e) => {
+    const photo = event.target.files[0];
+    console.log(photo, "photo....");
+    this.previewFile(photo);
+  };
+
+  previewFile = (data) => {
+    var file = data;
+    const sendImg = (url) => {
+      url ? this.setState({ user:{ photo: url } }) : null;
+    }
+
+    var reader = new FileReader();
+    let cloud = null;
+
+    reader.addEventListener("load", function () {
+      cloud = reader.result;
+      var cloudData = {
+       file : cloud,
+       upload_preset: "zxwgo29d"
+      };
+      fetch("https://api.cloudinary.com/v1_1/ashutosh-sajan/image/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(cloudData),
+          }).then((res) => res.json())
+          .then(data => {
+            console.log(data, "res data...");
+            sendImg(data.secure_url);
+          });
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   render() {
     return (
@@ -95,7 +129,7 @@ class SignUp extends Component {
           	<input type="email" name="email" placeholder="Email address" value={this.state.user.email} onChange= {this.handleChange} required />
           	<input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange= {this.handleChange} required />
             <input type="password" name="confirmpassword" placeholder="Confirm password" value={this.state.user.confirmpassword} onChange= {this.handleChange} required />
-          	{ /* <input type='file' name='photo' onChange={this.handleFile} /> */}
+          	<input type='file' name='photo' onChange={this.handleFile} />
             <button type="submit" className="btn-standard">Register</button>
           </form>
         </div>

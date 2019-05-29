@@ -1,39 +1,16 @@
 var User = require('../models/User');
 var jwt = require('jsonwebtoken');
+var cloudinaryConfig = require('../routes/users');
 var mailController = require('./mailController');
 var jwtAuth = require("../config/jwtAuth");
-// cloudinary.config({
-// 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-// 	api_key: process.env.CLOUDINARY_API_KEY,
-// 	api_secret: process.env.CLOUDINARY_API_SECRET,
-// });
+const cloudinary = require("cloudinary");
 
-// const storage = cloudinaryStorage({
-// 	cloudinary: cloudinary,
-// 	folder: "demo",
-// 	allowedFormats: ["jpg", "png"],
-// 	// transformation: [{ width: 500, height: 500, crop: "limit" }]
-// });
-// const parser = multer({ storage: storage });
-
-
-// var storage = cloudinaryStorage({
-//   cloudinary: cloudinary,
-//   folder: 'public',
-//   allowedFormats: ['jpg', 'png'],
-//   filename: function (req, file, cb) {
-//     cb(undefined, 'my-file-name');
-//   }
-// });
- 
-// var parser = multer({ storage: storage });
-
-function generate_token(length) {
+function generate_token(length){
   var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
   var b = [];
   for (var i=0; i<length; i++) {
-      var j = (Math.random() * (a.length-1)).toFixed(0);
-      b[i] = a[j];
+    var j = (Math.random() * (a.length-1)).toFixed(0);
+    b[i] = a[j];
   }
   return b.join("");
 }
@@ -135,5 +112,15 @@ module.exports = {
 			if(err) return res.status(500).json({ success: false, error: "server side error" });
 			res.status(200).json({ success: true, user });
 		});
+	},
+	upload: async(req, res, next) => {
+		console.log(req.body, req.file, "inside file upload....")
+		try{
+			const result = await cloudinary.v2.uploader.upload(req.file.path);
+			res.send(result);
+		}catch(err){
+			console.log(err, "upload err1")
+			res.status(400).send(err, "upload err...");
+		}
 	}
 };
