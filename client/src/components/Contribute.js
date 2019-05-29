@@ -3,7 +3,6 @@ import FormPage1 from './FormPage1';
 import Footer from './Footer';
 import NavBar from './NavBar';
 import { Link, withRouter } from "react-router-dom";
-// import {handleSubmit} from '../container/methods';
 import {connect} from 'react-redux';
 import {User} from '../reducers/User';
 
