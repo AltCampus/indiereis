@@ -86,7 +86,7 @@ class Contribute extends React.Component{
 							    </label>
 								</div>
 								</div>
-								<Link to="/form/page1" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
+								<Link to="/form" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
 							</div>
 							)
 						: null

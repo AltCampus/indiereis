@@ -35,7 +35,7 @@ class Tabs extends React.Component{
 	}
 
 	toggleComponent =(e) => {
-		console.log(e.target.innerText)
+		// console.log(e.target.innerText)
 		this.setState({
 			isHidden: !this.state.isHidden,
 			innerText: e.target.innerText

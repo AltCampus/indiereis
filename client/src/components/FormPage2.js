@@ -1,14 +1,21 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
-import NavBar from './NavBar';
 import {connect} from 'react-redux';
+import FormPage3 from './FormPage3';
+
 
 const URL = "http://localhost:8000/api/v1";
 var num = [1,2,3,4,5,6,7,8,9,10];
 
 class FormPage2 extends React.Component{
+	constructor(){
+		super()
+		this.state={
+			nextFormPage: false
+		}
+	}
 
-		handleChange = (e) => {
+	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
 	};
@@ -19,17 +26,21 @@ class FormPage2 extends React.Component{
 	      type:"ADD_FORM2",
 	      data: this.state
 	    })
-	    this.setState({});
+	    this.setState({
+	    	nextFormPage: !this.state.nextFormPage	
+	    });
 		}else {console.log("state is empty")}
 	}
 	
 	render(){
+		const {nextFormPage} = this.state
 		const questions = this.props.questions ? this.props.questions.Questions : null;
 		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 
 		return(
 			<React.Fragment>
-			<NavBar />
+			{ !nextFormPage ?
+				(
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="30" max="100">30%</progress>
 					{questions.data && userFormData ? questions.data.qset2.questions.slice(0,5).map((q,i) => 
@@ -53,12 +64,15 @@ class FormPage2 extends React.Component{
 						  </div>
 						</div>
 						): ''}
-					<Link to="/form/page3" className="button is-primary" onClick={this.handleSubmit}>Next</Link>
+					<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
 				</div>
+				): <FormPage3 />
+			}
 			</React.Fragment>
 			)
 	}
 }
+
 function mapStateToProps(state){
 	console.log(state, 'inside map form2.....')
 	return {

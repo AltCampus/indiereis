@@ -16,11 +16,6 @@ import About from "./components/About";
 import MainProfile from './components/MainProfile';
 import Contribute from "./components/Contribute";
 import FormPage1 from "./components/FormPage1";
-import FormPage2 from "./components/FormPage2";
-import FormPage3 from "./components/FormPage3";
-import FormPage4 from "./components/FormPage4";
-import FormPage5 from "./components/FormPage5";
-import FormPage6 from "./components/FormPage6";
 import PrivateRoute from './components/PrivateRoute';
 import { store } from "./store";
 import CountryProfile from "./components/CountryProfile";
@@ -59,23 +54,13 @@ class App extends Component {
           <Route path="/map" component={Map} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/contribute"  component={Contribute} />
-          <PrivateRoute path="/form/page1" auth={this.props.isAuth} component={FormPage1} />
-          <PrivateRoute path="/form/page2" auth={this.props.isAuth} component={FormPage2} />
-          <PrivateRoute path="/form/page3" auth={this.props.isAuth} component={FormPage3} />
-          <PrivateRoute path="/form/page4" auth={this.props.isAuth} component={FormPage4} />
-          <PrivateRoute path="/form/page5" auth={this.props.isAuth} component={FormPage5} />
-          <PrivateRoute path="/form/page6" auth={this.props.isAuth} component={FormPage6} />
+          <PrivateRoute path="/form" auth={this.props.isAuth} component={FormPage1} />
           <PrivateRoute path="/user-profile" auth={this.props.isAuth} component={MainProfile} />
           <Route path="/submit" component={Home} />
           <Route path="/about" component={About} />
-<<<<<<< HEAD
           <PrivateRoute path="/country-profile" auth={this.props.isAuth} component={CountryProfile} />
           <Route exact path="/login" component={Login} />
-=======
-          <Route path="/country-profile" component={CountryProfile} />
-          <Route exact path="/login" component={Login} />{" "}
->>>>>>> f07f01714a06500f089099fe02bc9e64d963c4b2
-        </Switch>{" "}
+        </Switch>
       </div>
     );
   }
