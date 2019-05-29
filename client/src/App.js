@@ -29,19 +29,16 @@ const URL = "http://localhost:8000/api/v1";
 //Keeping user logged in
 
 if (localStorage.jwt) {
-  //	console.log('inside login...')
   const { jwt } = localStorage;
-  fetch(`${URL}/users/login`, {
+  fetch(`${URL}/users/verify`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      authorization: jwt
+      "authorization": jwt
     }
   })
     .then(res => res.json())
     .then(data => {
-      //	console.log('inside login...', data)
-
       store.dispatch({
         type: "LOGIN",
         user: data

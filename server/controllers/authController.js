@@ -1,11 +1,11 @@
 var User = require('../models/User');
 var jwt = require('jsonwebtoken');
-var jwtSign = "12w@3!fgrty5a7&*-+-0poAsWW)%@!`";
+// var jwtSign = "12w@3!fgrty5a7&*-+-0poAsWW)%@!`";
 
 exports.isUserLoggedIn = (req,res,next) => {
 	if(req.headers.authorization) {
     let authToken = req.headers.authorization;
-    let decoded = jwt.verify(authToken, jwtSign);
+    let decoded = jwt.verify(authToken, process.env.JWT_SIGN);
 
     jwt.verify(authToken, jwtSign, (err, decoded) => {
       if(err) return res.status(400).json({ success: false, error: "invalid token" })

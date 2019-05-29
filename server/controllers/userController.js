@@ -77,9 +77,10 @@ module.exports = {
 		});
 	},
 	updateUser: (req, res, next) => {
+		console.log(req.body, "inside user update...")
 		User.findOneAndUpdate({ email: req.body.email }, req.body, (err, user) => {
 			if(err) return res.status(500).json({ success: false, error: "server side error" });
-			if(user) return res.status(200).json({ success: true, user });
+			if(user) return res.status(200).json({ success: true, message: 'User updated!' });
 		});
 	},
 	
@@ -122,5 +123,17 @@ module.exports = {
 			console.log(err, "upload err1")
 			res.status(400).send(err, "upload err...");
 		}
-	}
+	},
+	verifyToken: (req, res, next) => {
+		var token = req.headers.authorization;
+		let decoded = jwt.verify(token, process.env.JWT_SIGN);
+		User.findOne({ _id: decoded._id }).select("-password -createdAt -updatedAt -__v").exec(function(err, user) {
+			if(err) res.status(500).send({ success: false, error: 'Server error' });
+			if(user) {
+				res.status(200).json({ success: true , user, token });
+			} else {
+				res.status(400).send({ message: 'User does not exist!' });
+			}
+		});
+	},
 };

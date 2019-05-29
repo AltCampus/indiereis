@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Header from './Header';
 const { jwt } = localStorage;
-// authorization: jwt
+const URL = "http://localhost:8000/api/v1";
 
 class MainProfile extends React.Component{
 	state = {
@@ -10,10 +10,31 @@ class MainProfile extends React.Component{
     lastName:"",
     name:"",
     email: "",
+    dob:"",
     phoneNumber:"",
-    password: "",
-    confirmpassword: "",
     photo: ""
+  }
+
+  componentDidMount(){
+    var { user } = this.props;
+    if(!user) setTimeout(this.getUser, 1000);
+  }
+
+  getUser = () => {
+    var { user } = this.props;
+    if(user){
+      this.setState({
+        firstName: user.user.firstName,
+        lastName: user.user.lastName,
+        name: user.user.name,
+        email: user.user.email,
+        dob: user.user.dob,
+        phoneNumber: user.user.phoneNumber,
+      })
+    }
+    else if(!user){
+      setTimeout(this.getUser, 2000);
+    }
   }
 
   handleChange = (e) => {
@@ -23,7 +44,6 @@ class MainProfile extends React.Component{
 
 	handleFile = (e) => {
     const photo = event.target.files[0];
-    console.log(photo, "photo....");
     this.previewFile(photo);
   };
 
@@ -49,7 +69,6 @@ class MainProfile extends React.Component{
           body: JSON.stringify(cloudData),
           }).then((res) => res.json())
           .then(data => {
-            console.log(data, "res data...");
             sendImg(data.secure_url);
           });
     }, false);
@@ -61,12 +80,23 @@ class MainProfile extends React.Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+    fetch(`${URL}/users/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": jwt
+      },
+      body: JSON.stringify(this.state),
+      }).then(res => res.json())
+      .then(data => {
+        console.log(data, "profile updated...");
+        this.setState({})
+    })
   }
 
 	render(){
-		return(
-			<div>
+		return( 
+      <div>
 				<Header />
 				<form className="profile-flex onclick-display-main" onSubmit={this.handleSubmit}>
 					<div className="profile-name">
@@ -74,7 +104,7 @@ class MainProfile extends React.Component{
 						<input type="text" placeholder="Last name" name="lastName" onChange={ this.handleChange } value={this.state.lastName} />
 					</div>
 					<input type="text" placeholder="Username" name="name" onChange={ this.handleChange } value={this.state.name}/>
-					<input type="email" placeholder="Email" name="email" onChange={ this.handleChange } readOnly />
+					<input type="email" placeholder="Email" name="email" onChange={ this.handleChange } value={this.state.email} readOnly />
 
 					<input type="number" placeholder="Phone Number" name="phoneNumber" onChange={ this.handleChange } value={this.state.phoneNumber} />
 
@@ -82,15 +112,14 @@ class MainProfile extends React.Component{
 					<input type="file" placeholder="Upload new profile image" name="photo" onChange={ this.handleFile } />		
 					<button type="submit" className="btn-standard">Save</button>
 				</form>
-			</div>
-		)
+  		</div> 
+    )
 	}
 }
 
-function mapStateToProps(state){
-	console.log(state);
+const mapStateToProps = (state) => {
 	return {
-		user: state
+		user: state.User.user,
 	}
 }
 

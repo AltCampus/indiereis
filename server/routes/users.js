@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+var jwtAuth = require("../config/jwtAuth");
 
 // cloudinary image uploading code block on 
 const multer = require("multer");
@@ -27,18 +28,11 @@ router.get('/', userController.allUsers);
 router.post('/login', userController.loginUser);
 router.post('/register', userController.registerUser);
 router.get('/profiles/:id', userController.userProfile);
-router.post('/update', userController.updateUser);
+router.post('/update', jwtAuth.verifyToken, userController.updateUser);
 router.post('/delete', userController.deleteUser);
+router.post('/verify', userController.verifyToken);
 router.get('/verify/:token', userController.verifyUser);
 
-router.post('/upload', loader.single('photo'), userController.upload);
-
-// router.use('/users/upload', userApi);
-// router.use('/users/login', userApi);
-// router.use('/users/register', userApi);
-// router.use('/users/update', userApi);
-// router.use('/users/delete', userApi);
-// router.use('/users/profiles/:username', userApi);
-// router.use('/users/verify/:token', userApi);
+// router.post('/upload', loader.single('photo'), userController.upload);
 
 module.exports = router;

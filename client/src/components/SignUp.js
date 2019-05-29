@@ -14,7 +14,7 @@ class SignUp extends Component {
         email: "",
         password: "",
         confirmpassword: "",
-      },
+      }
     }
   }
 
@@ -84,7 +84,6 @@ class SignUp extends Component {
           	<input type="email" name="email" placeholder="Email address" value={this.state.user.email} onChange= {this.handleChange} required />
           	<input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange= {this.handleChange} required />
             <input type="password" name="confirmpassword" placeholder="Confirm password" value={this.state.user.confirmpassword} onChange= {this.handleChange} required />
-          	<input type='file' name='photo' onChange={this.handleFile} />
             <button type="submit" className="btn-standard">Register</button>
           </form>
         </div>
