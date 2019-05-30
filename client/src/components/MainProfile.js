@@ -6,6 +6,7 @@ const { jwt } = localStorage;
 import { upload_preset, cloudName } from "../../../key";
 
 class MainProfile extends React.Component{
+  
   state = {
     firstName : this.props.user.user.firstName || null,
     lastName: this.props.user.user.lastName || null,
@@ -17,8 +18,9 @@ class MainProfile extends React.Component{
   }
 
   // componentDidMount(){
+  //   console.log('did mount')
   //   var { user } = this.props;
-  //   if(!user) this.getUser();
+  //   // if(!user) this.getUser();
   // }
 
   // getUser = () => {
@@ -39,6 +41,7 @@ class MainProfile extends React.Component{
   // }
 
   // componentWillMount(){
+  //   console.log('will mount');
   //   var { user } = this.props;
   //   if(user){
   //     this.setState({
@@ -52,6 +55,10 @@ class MainProfile extends React.Component{
   //   }
   // }
 
+  // componentDidUpdate(){
+  //   console.log('did update')
+  // }
+
   handleChange = (e) => {
     const {name, value} = e.target;
     this.setState({ [name]: value });
@@ -59,10 +66,10 @@ class MainProfile extends React.Component{
 
 	handleFile = (e) => {
     const photo = event.target.files[0];
-    this.previewFile(photo);
+    this.setState({ photo: photo });
   };
 
-  previewFile = (data) => {
+  uploadFile = (data) => {
     var file = data;
     const sendImg = (url) => {
       url ? this.setState({ photo: url }) : null;
@@ -93,20 +100,25 @@ class MainProfile extends React.Component{
     }
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async(e) => {
     e.preventDefault();
-    fetch(`${URL}/users/update`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": jwt
-      },
-      body: JSON.stringify(this.state),
-      }).then(res => res.json())
-      .then(data => {
-        console.log(data, "profile updated...");
-        this.setState({})
-    })
+
+    this.uploadFile(this.state.photo);
+
+    setTimeout(() => {
+      fetch(`${URL}/users/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": jwt
+        },
+        body: JSON.stringify(this.state),
+        }).then(res => res.json())
+        .then(data => {
+          console.log(data, "profile updated...");
+          this.setState({})
+      })
+    }, 3000);
   }
 
 	render(){

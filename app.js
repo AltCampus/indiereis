@@ -1,9 +1,12 @@
 require('dotenv').config();
 const express = require("express");
+
+// session authentication packages
 // const session = require("express-session");
+// const MongoStore = require("connect-mongo")(session);
+
 const app = express();
 const mongoose = require("mongoose");
-// const MongoStore = require("connect-mongo")(session);
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
@@ -29,6 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "./server/views"));
 app.set("view engine", "ejs");
 
+// code for session based authentication
 // app.use(
 //  session({
 //   secret: "travelInfo",
@@ -56,8 +60,8 @@ if (process.env.NODE_ENV === "development") {
 app.use(cors());
 app.use("/api/v1", require("./server/routes/api"));
 app.use("/auth", require("./server/routes/auth"));
-// app.use("/admin", require("./server/routes/admin"));
 app.use('/*', require("./server/routes/index"));
+// app.use("/admin", require("./server/routes/admin"));
 
 app.listen(port, () => {
  console.log(`Server is running on http://localhost:${port}`);

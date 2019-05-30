@@ -105,11 +105,16 @@ module.exports = {
 			if(user) {
 				user.verified = true;
 				user.save();
-				res.json({ message: 'succesfully verified' });
+				res.status(200).redirect('/');
 			} else {
 				res.status(400).send({ message: 'Wrong Token' });
 			}
 		});
+	},
+	verifyRequest: (req, res, next) => {
+		// var token = generate_token(6);
+		// mailController.mail(req.params.email, user.token ).catch(err => console.error(err));
+		// console.log("mail sent for sucessfull registration.....");
 	},
 	userProfile: (req,res,next) => {
 		var username = req.params.username;
