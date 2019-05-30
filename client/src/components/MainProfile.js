@@ -38,19 +38,19 @@ class MainProfile extends React.Component{
   //   }
   // }
 
-  componentWillMount(){
-    var { user } = this.props;
-    if(user){
-      this.setState({
-        firstName: user.user.firstName,
-        lastName: user.user.lastName,
-        name: user.user.name,
-        email: user.user.email,
-        dob: user.user.dob,
-        phoneNumber: user.user.phoneNumber,
-      })
-    }
-  }
+  // componentWillMount(){
+  //   var { user } = this.props;
+  //   if(user){
+  //     this.setState({
+  //       firstName: user.user.firstName,
+  //       lastName: user.user.lastName,
+  //       name: user.user.name,
+  //       email: user.user.email,
+  //       dob: user.user.dob,
+  //       phoneNumber: user.user.phoneNumber,
+  //     })
+  //   }
+  // }
 
   handleChange = (e) => {
     const {name, value} = e.target;

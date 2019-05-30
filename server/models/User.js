@@ -16,6 +16,8 @@ var userSchema = new Schema({
 	phoneNumber:{
 		type: Number,
 		default: null,
+		min: 10,
+		max: 10,
 		unique: true
 	},
 	dob:{

@@ -56,7 +56,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(cors());
 app.use("/api/v1", require("./server/routes/api"));
 app.use("/auth", require("./server/routes/auth"));
-app.use("/admin", require("./server/routes/admin"));
+// app.use("/admin", require("./server/routes/admin"));
 app.use('/*', require("./server/routes/index"));
 
 app.listen(port, () => {
