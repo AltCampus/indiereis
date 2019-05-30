@@ -2,25 +2,43 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Header from './Header';
 const { jwt } = localStorage;
+import { upload_preset, cloudName } from "../../../key";
 const URL = "http://localhost:8000/api/v1";
 
 class MainProfile extends React.Component{
-	state = {
-    firstName : "",
-    lastName:"",
-    name:"",
-    email: "",
-    dob:"",
-    phoneNumber:"",
-    photo: ""
+  state = {
+    firstName : this.props.user.user.firstName || null,
+    lastName: this.props.user.user.lastName || null,
+    name: this.props.user.user.name || null,
+    email: this.props.user.user.email || null,
+    dob: this.props.user.user.dob || null,
+    phoneNumber: this.props.user.user.phoneNumber || null,
+    photo: this.props.user.user.photo || null
   }
 
-  componentDidMount(){
-    var { user } = this.props;
-    if(!user) setTimeout(this.getUser, 1000);
-  }
+  // componentDidMount(){
+  //   var { user } = this.props;
+  //   if(!user) this.getUser();
+  // }
 
-  getUser = () => {
+  // getUser = () => {
+  //   var { user } = this.props;
+  //   if(user){
+  //     this.setState({
+  //       firstName: user.user.firstName,
+  //       lastName: user.user.lastName,
+  //       name: user.user.name,
+  //       email: user.user.email,
+  //       dob: user.user.dob,
+  //       phoneNumber: user.user.phoneNumber,
+  //     })
+  //   }
+  //   else if(!user){
+  //     setTimeout(this.getUser, 500);
+  //   }
+  // }
+
+  componentWillMount(){
     var { user } = this.props;
     if(user){
       this.setState({
@@ -31,9 +49,6 @@ class MainProfile extends React.Component{
         dob: user.user.dob,
         phoneNumber: user.user.phoneNumber,
       })
-    }
-    else if(!user){
-      setTimeout(this.getUser, 2000);
     }
   }
 
@@ -59,9 +74,9 @@ class MainProfile extends React.Component{
       cloud = reader.result;
       var cloudData = {
        file : cloud,
-       upload_preset: "zxwgo29d"
+       upload_preset: upload_preset
       };
-      fetch("https://api.cloudinary.com/v1_1/ashutosh-sajan/image/upload", {
+      fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
