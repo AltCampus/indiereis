@@ -20,6 +20,9 @@ class SourcedForm extends React.Component{
 
 	render(){
 
+		const data = this.props.crowdsourced ? this.props.crowdsourced.data : null;
+		// console.log(data)
+
 		return(
 				<div>
 					<div style={{width: '800px', margin: '0 auto'}}>
@@ -29,9 +32,10 @@ class SourcedForm extends React.Component{
 		        <UserProfile />
 						<div className="wrapper">
 							<div className="main-grid">
-								<Route>
-								<Link to="/country-profile"><div className="big-box bg1">Malaysia</div></Link>
-								</Route>
+							{ this.props.crowdsourced ? data.map((d, i) => 
+								<Link to="/country-profile"><div key={i} className="big-box bg1">{d.country}</div></Link>
+								) : null
+							}
 							</div>
 						</div>
 					</div>
@@ -42,7 +46,7 @@ class SourcedForm extends React.Component{
 
 function mapStateToProps(state){
 	return{
-    crowdsourced: state
+    crowdsourced: state.Crowdsourced.data
 	}
 }
 

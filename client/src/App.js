@@ -43,6 +43,22 @@ if (localStorage.jwt) {
 }
 
 class App extends Component {
+
+  componentDidMount = () => {
+    fetch(`${URL}/public-data`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem('jwt')
+      },
+    }).then(res => res.json()).then(data => {
+      console.log(data, 'inside fetch')
+      this.props.dispatch({
+        type: 'SHOW_FORM_DATA',
+        formData: data
+      });
+    })      
+  }
+  
   render() {
     return (
       <div className="App">
