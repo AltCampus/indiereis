@@ -2,8 +2,7 @@ import React from 'react';
 import Header from './Header';
 import UserProfile from './UserProfile';
 import Tabs from './Tabs';
-
-const URL = "http://localhost:8000/api/v1";
+import { URL } from '../utils/static';
 
 class CountryProfile extends React.Component{
 

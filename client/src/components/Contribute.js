@@ -1,21 +1,18 @@
 import React from 'react';
-import FormPage1 from './FormPage1';
 import Footer from './Footer';
 import NavBar from './NavBar';
 import { Link, withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 import {User} from '../reducers/User';
-
-const countries = ['Thailand','Japan','Singapore','Malaysia','Indonesia','Bhutan','China','Vietnam','Nepal', 'Australia', 'Myanmar', 'HongKong','Cambodia'];
-const kindOfTrip = ['Solo', 'Couple', 'Family', 'Group', 'Company Trip'];
+import { URL , countries, kindOfTrip } from '../utils/static';
 
 class Contribute extends React.Component{
 	state = {
-		country:"",
-		terms: "",
-		kindOfTrip:""
+		country: "",
+		terms:"",
+		kindOfTrip: ""
 	}
-
+	
 	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -86,7 +83,7 @@ class Contribute extends React.Component{
 							    </label>
 								</div>
 								</div>
-								<Link to="/form/page1" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
+								<Link to="/form" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
 							</div>
 							)
 						: null
@@ -98,7 +95,7 @@ class Contribute extends React.Component{
 }
 
 function mapStateToProps(state){
-	console.log(state, 'inside contribute')
+	// console.log(state, 'inside contribute')
 	return {
 		loggeduser: state.User
 	}

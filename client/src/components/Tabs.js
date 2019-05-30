@@ -6,8 +6,7 @@ import Flights from './crowdsourcedData/Flights';
 import Safety from './crowdsourcedData/Safety';
 import Experience from './crowdsourcedData/Experience';
 import {connect} from 'react-redux';
-
-const URL = "http://localhost:8000/api/v1";
+import { URL } from '../utils/static';
 
 class Tabs extends React.Component{
 	constructor (props) {
@@ -35,7 +34,7 @@ class Tabs extends React.Component{
 	}
 
 	toggleComponent =(e) => {
-		console.log(e.target.innerText)
+		// console.log(e.target.innerText)
 		this.setState({
 			isHidden: !this.state.isHidden,
 			innerText: e.target.innerText

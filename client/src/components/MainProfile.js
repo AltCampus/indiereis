@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import Header from './Header';
+import { URL } from '../utils/static';
 const { jwt } = localStorage;
 import { upload_preset, cloudName } from "../../../key";
-const URL = "http://localhost:8000/api/v1";
 
 class MainProfile extends React.Component{
   state = {
@@ -120,9 +120,7 @@ class MainProfile extends React.Component{
 					</div>
 					<input type="text" placeholder="Username" name="name" onChange={ this.handleChange } value={this.state.name}/>
 					<input type="email" placeholder="Email" name="email" onChange={ this.handleChange } value={this.state.email} readOnly />
-
 					<input type="number" placeholder="Phone Number" name="phoneNumber" onChange={ this.handleChange } value={this.state.phoneNumber} />
-
 					<input type="date" placeholder="Date of Birth" name="dob" onChange={ this.handleChange } value={this.state.dob} />
 					<input type="file" placeholder="Upload new profile image" name="photo" onChange={ this.handleFile } />		
 					<button type="submit" className="btn-standard">Save</button>

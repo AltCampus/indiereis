@@ -22,6 +22,7 @@ module.exports = {
 			res.json({ user, massage: "user found..." });
 		});
 	},
+
 	loginUser: (req, res, next) => {
 		const data = req.body;
 		User.findOne({ email: data.email }, (err, user) => {
@@ -36,15 +37,11 @@ module.exports = {
 					res.status(400).json({ success: false , error: "incorrect password" });
 				}
 				if(result){
-					const newUser = {
-						id: user._id,
-						name: user.name,
-						email: user.email,
-						createdAt: user.createdAt,
-						updatedAt: user.updatedAt,
-					};
-					console.log("login successfull...");
-					res.status(200).json({ success: true , user: newUser, token });
+					User.findOne({ _id: user._id }).select("-password -createdAt -updatedAt -__v").exec(function(err, user) {
+						if(err) return res.status(500).json({ success: false, error: "server error" });
+						console.log("login successfull...");
+						res.status(200).json({ success: true , user, token });
+					})
 				}
 			}
 		});
@@ -52,26 +49,34 @@ module.exports = {
 	registerUser: (req, res, next) => {
 		var data = req.body;
 		console.log(data, "inside register user...");
-		User.findOne({ email: data.email }, ( err, user ) => {
+		User.findOne({ email: data.email }).exec( (err, user ) => {
+			console.log(err, "user reg1 err")
 			if(err) return res.status(500).json({ success: false, error: "server error" });
 			if(user) return res.json({ success: false, error: "user already exist" });
 			if(!user) {
-				User.create(req.body, (err, user) => {
+				User.create( data, (err, user) => {
 					if(err) return res.status(500).json({success: false, error: "server error" });
-					const newUser = {
-						id: user._id,
-						name: user.name,
-						email: user.email,
-						createdAt: user.createdAt,
-						updatedAt: user.updatedAt
-					};
-					var token = jwtAuth.signToken({ _id: user._id });
-					user.token = generate_token(6);
-					user.save();
-					console.log(user, "user otp check1....");
-					mailController.mail(user.email, user.token ).catch(err => console.error(err));
-					console.log("mail sent for sucessfull registration.....");
-					if(user) return res.status(200).json({ success: true, user: newUser, token });
+					User.findOne({ _id: user._id }).select("-password -createdAt -updatedAt -__v").exec(function(err, user) {
+						if(err) return res.status(500).json({ success: false, error: "server error" });
+						var token = jwtAuth.signToken({ _id: user._id });
+						user.token = generate_token(6);
+						user.save();
+						mailController.mail(user.email, user.token ).catch(err => console.error(err));
+						console.log("mail sent for sucessfull registration.....");
+						if(user) return res.status(200).json({ success: true, user, token });
+					})
+					// const newUser = {}
+					// Object.keys(user).filter(v => {
+					// 	return (v !== "password" && v !== "createdAt" && v !== "updatedAt" && v !== "__v" )} ).forEach( v => newUser[v] = user[v])
+					
+					// console.log(newUser, "newUser.....");
+
+					// var token = jwtAuth.signToken({ _id: user._id });
+					// user.token = generate_token(6);
+					// user.save();
+					// mailController.mail(user.email, user.token ).catch(err => console.error(err));
+					// console.log("mail sent for sucessfull registration.....");
+					// if(user) return res.status(200).json({ success: true, user, token });
 				});
 			}
 		});

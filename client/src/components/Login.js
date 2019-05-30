@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
 import Footer from "./Footer";
-
-const URL = "http://localhost:8000/api/v1";
+import GoogleLogin from './GoogleLogin'
+import { URL } from '../utils/static';
 
 class Login extends Component {
   constructor() {
@@ -62,36 +62,19 @@ class Login extends Component {
     return (
       <div>
         <Header />
-        <div className="signup">
-          <p> Login using your account </p>{" "}
-          <form
-            action="/users/login"
-            method="post"
-            className="signup-form"
-            onSubmit={this.handleLogin}
-          >
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={this.state.user.email}
-              onChange={this.handleChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={this.state.user.password}
-              onChange={this.handleChange}
-              required
-            />
-            <button type="submit" className="btn-standard">
-              {" "}
-              Login{" "}
-            </button>{" "}
-          </form>{" "}
-        </div>{" "}
+        <div className="flex-dash">
+          <div className="signup">
+            <p> Login using your account </p>{" "}
+            <form action="/users/login"method="post" className="signup-form" onSubmit={this.handleLogin}>
+              <input type="email" name="email" placeholder="Email" value={this.state.user.email} onChange={this.handleChange} required />
+              <input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange={this.handleChange} required />
+              <button type="submit" className="btn-standard"> Login</button>
+            </form>
+          </div>
+          <div className="">
+            <GoogleLogin />
+          </div>
+        </div>
         <Footer />
       </div>
     );
