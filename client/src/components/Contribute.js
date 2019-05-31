@@ -83,7 +83,10 @@ class Contribute extends React.Component{
 							    </label>
 								</div>
 								</div>
+								{
+									!this.state.country ? <button className="button is-danger">Choose country</button>:
 								<Link to="/form" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
+								}
 							</div>
 							)
 						: null

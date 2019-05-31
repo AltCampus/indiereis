@@ -12,6 +12,11 @@ class FormPage3 extends React.Component{
 		}
 	}
 
+	goBack = () => {
+		console.log(this.props)
+		this.props.history.push('/contribute')
+	}
+
 	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -36,7 +41,8 @@ class FormPage3 extends React.Component{
 
 		return(
 			<React.Fragment>
-			{ !nextFormPage ?
+			{ questions.data && userFormData ?
+			 !nextFormPage ?
 				(
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="50" max="100">50%</progress>
@@ -46,7 +52,7 @@ class FormPage3 extends React.Component{
 							  {
 							  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
 							  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ? q.replace("{I/WE}", "I") :
-							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ? q.replace("{I/WE}", "We"): q
+							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ? q.replace("{I/WE}", "we"): q
 							  }
 						  </label>
 						  <div className="control" key={i}>
@@ -62,6 +68,7 @@ class FormPage3 extends React.Component{
 					<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
 				</div>
 				): <FormPage4 />
+				: this.goBack()
 			}
 			</React.Fragment>
 			)
@@ -69,10 +76,10 @@ class FormPage3 extends React.Component{
 }
 
 function mapStateToProps(state){
-	console.log(state, 'inside map form3.....')
+	// console.log(state, 'inside map form3.....')
 	return {
 		questions: state
 	}
 }
 
-export default connect(mapStateToProps)(FormPage3);						
+export default withRouter(connect(mapStateToProps)(FormPage3));						

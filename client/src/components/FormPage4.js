@@ -13,6 +13,10 @@ class FormPage4 extends React.Component{
 		}
 	}
 
+	goBack = () => {
+		this.props.history.push('/contribute')
+	}
+
 	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -38,7 +42,8 @@ class FormPage4 extends React.Component{
 		console.log(this.state, "form4 state...");
 		return(
 			<React.Fragment>
-			{ !nextFormPage ?
+			{ questions.data ?
+			 !nextFormPage ?
 				(
 				<div className= "form-wrapper">
 					<progress className="progress is-primary" value="80" max="100">80%</progress>
@@ -50,7 +55,7 @@ class FormPage4 extends React.Component{
 						  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
 						  	q.replace("{I/WE}", "I") :
 						  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
-						    q.replace("{I/WE}", "We"): q
+						    q.replace("{I/WE}", "we"): q
 						  }
 						  </label>
 						  <div className="control">
@@ -66,6 +71,7 @@ class FormPage4 extends React.Component{
 					<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
 				</div>
 				): <FormPage5 />
+				: this.goBack()
 			}
 			</React.Fragment>
 			)
@@ -79,4 +85,4 @@ function mapStateToProps(state){
 	}
 }
 
-export default connect(mapStateToProps)(FormPage4);						
+export default withRouter(connect(mapStateToProps)(FormPage4));						
