@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
+// import Form from './Form';
 
 class About extends React.Component {
 	render(){
@@ -16,4 +18,10 @@ class About extends React.Component {
 	}
 }
 
-export default About;
+const mapStateToProps = (state) => {
+	return {
+		data: state
+	}
+}
+
+export default connect(mapStateToProps)(About);

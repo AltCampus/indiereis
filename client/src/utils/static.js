@@ -1,5 +1,3 @@
-
-
 export const URL = "http://localhost:8000/api/v1";
 export var num = [1,2,3,4,5,6,7,8,9,10];
 export const countries = ['Thailand','Japan','Singapore','Malaysia','Indonesia','Bhutan','China','Vietnam','Nepal', 'Australia', 'Myanmar', 'HongKong','Cambodia'];

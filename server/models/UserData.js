@@ -3,6 +3,10 @@ var Schema = mongoose.Schema;
 const timestamp = require('time-stamp');
 
 var userDataSchema = new Schema({
+	userId: {
+		type: Schema.Types.ObjectId,
+		ref: "User",
+	},
 	country: {
 		type: String,
 		default: null

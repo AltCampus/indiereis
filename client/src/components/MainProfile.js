@@ -2,41 +2,62 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Header from './Header';
 import { URL } from '../utils/static';
-
 const { jwt } = localStorage;
+import { upload_preset, cloudName } from "../../../key";
 
 class MainProfile extends React.Component{
-	state = {
-    firstName : "",
-    lastName:"",
-    name:"",
-    email: "",
-    dob:"",
-    phoneNumber:"",
-    photo: ""
+  
+  state = {
+    firstName : this.props.user.user.firstName || null,
+    lastName: this.props.user.user.lastName || null,
+    name: this.props.user.user.name || null,
+    email: this.props.user.user.email || null,
+    dob: this.props.user.user.dob || null,
+    phoneNumber: this.props.user.user.phoneNumber || null,
+    photo: this.props.user.user.photo || null
   }
 
-  componentDidMount(){
-    var { user } = this.props;
-    if(!user) setTimeout(this.getUser, 1000);
-  }
+  // componentDidMount(){
+  //   console.log('did mount')
+  //   var { user } = this.props;
+  //   // if(!user) this.getUser();
+  // }
 
-  getUser = () => {
-    var { user } = this.props;
-    if(user){
-      this.setState({
-        firstName: user.user.firstName,
-        lastName: user.user.lastName,
-        name: user.user.name,
-        email: user.user.email,
-        dob: user.user.dob,
-        phoneNumber: user.user.phoneNumber,
-      })
-    }
-    else if(!user){
-      setTimeout(this.getUser, 2000);
-    }
-  }
+  // getUser = () => {
+  //   var { user } = this.props;
+  //   if(user){
+  //     this.setState({
+  //       firstName: user.user.firstName,
+  //       lastName: user.user.lastName,
+  //       name: user.user.name,
+  //       email: user.user.email,
+  //       dob: user.user.dob,
+  //       phoneNumber: user.user.phoneNumber,
+  //     })
+  //   }
+  //   else if(!user){
+  //     setTimeout(this.getUser, 500);
+  //   }
+  // }
+
+  // componentWillMount(){
+  //   console.log('will mount');
+  //   var { user } = this.props;
+  //   if(user){
+  //     this.setState({
+  //       firstName: user.user.firstName,
+  //       lastName: user.user.lastName,
+  //       name: user.user.name,
+  //       email: user.user.email,
+  //       dob: user.user.dob,
+  //       phoneNumber: user.user.phoneNumber,
+  //     })
+  //   }
+  // }
+
+  // componentDidUpdate(){
+  //   console.log('did update')
+  // }
 
   handleChange = (e) => {
     const {name, value} = e.target;
@@ -45,10 +66,10 @@ class MainProfile extends React.Component{
 
 	handleFile = (e) => {
     const photo = event.target.files[0];
-    this.previewFile(photo);
+    this.setState({ photo: photo });
   };
 
-  previewFile = (data) => {
+  uploadFile = (data) => {
     var file = data;
     const sendImg = (url) => {
       url ? this.setState({ photo: url }) : null;
@@ -60,9 +81,9 @@ class MainProfile extends React.Component{
       cloud = reader.result;
       var cloudData = {
        file : cloud,
-       upload_preset: "zxwgo29d"
+       upload_preset: upload_preset
       };
-      fetch("https://api.cloudinary.com/v1_1/ashutosh-sajan/image/upload", {
+      fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -79,20 +100,25 @@ class MainProfile extends React.Component{
     }
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async(e) => {
     e.preventDefault();
-    fetch(`${URL}/users/update`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": jwt
-      },
-      body: JSON.stringify(this.state),
-      }).then(res => res.json())
-      .then(data => {
-        console.log(data, "profile updated...");
-        this.setState({})
-    })
+
+    this.uploadFile(this.state.photo);
+
+    setTimeout(() => {
+      fetch(`${URL}/users/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": jwt
+        },
+        body: JSON.stringify(this.state),
+        }).then(res => res.json())
+        .then(data => {
+          console.log(data, "profile updated...");
+          this.setState({})
+      })
+    }, 3000);
   }
 
 	render(){
