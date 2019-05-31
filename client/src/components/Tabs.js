@@ -74,7 +74,7 @@ class Tabs extends React.Component{
 					</div>
 				</div>
 			</div>
-			)
+		)
 	}
 }
 
