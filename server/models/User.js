@@ -18,7 +18,6 @@ var userSchema = new Schema({
 		default: null,
 		min: 10,
 		max: 10,
-		unique: true
 	},
 	dob:{
 		type: String,

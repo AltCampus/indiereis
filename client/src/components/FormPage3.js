@@ -46,7 +46,7 @@ class FormPage3 extends React.Component{
 							  {
 							  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
 							  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ? q.replace("{I/WE}", "I") :
-							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ? q.replace("{I/WE}", "We"): q
+							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ? q.replace("{I/WE}", "we"): q
 							  }
 						  </label>
 						  <div className="control" key={i}>

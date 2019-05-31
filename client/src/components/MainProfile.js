@@ -118,7 +118,7 @@ class MainProfile extends React.Component{
           console.log(data, "profile updated...");
           this.setState({})
       })
-    }, 3000);
+    }, 5000);
   }
 
 	render(){

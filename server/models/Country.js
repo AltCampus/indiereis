@@ -3,18 +3,11 @@ var Schema = mongoose.Schema;
 const timestamp = require('time-stamp');
 
 var countrySchema = new Schema({
-	name: {
-		type: String,
-		min: 3,
-		max: 16,
-		required: true,
-	},
-	photo: {
-		type: String,
-		default: ""
+	country: {
+		type: Object,
+		default: null
 	}
-}, {timestamps: true});
-
+},{ timestamps: true });
 
 var Country = mongoose.model("Country", countrySchema);
 

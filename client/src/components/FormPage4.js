@@ -50,7 +50,7 @@ class FormPage4 extends React.Component{
 						  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
 						  	q.replace("{I/WE}", "I") :
 						  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
-						    q.replace("{I/WE}", "We"): q
+						    q.replace("{I/WE}", "we"): q
 						  }
 						  </label>
 						  <div className="control">
