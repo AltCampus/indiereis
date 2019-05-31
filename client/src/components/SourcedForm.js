@@ -18,6 +18,14 @@ class SourcedForm extends React.Component{
 		this.state = {};
   }
 
+  handleCountry = (country) => {
+  	console.log(country, 'form-country')
+  	this.props.dispatch({
+  		type: 'COUNTRY_NAME',
+  		countryName: country
+  	})
+  }
+
 	render(){
 
 		const data = this.props.crowdsourced ? this.props.crowdsourced.data : null;
@@ -33,7 +41,7 @@ class SourcedForm extends React.Component{
 						<div className="wrapper">
 							<div className="main-grid">
 							{ this.props.crowdsourced ? data.map((d, i) => 
-								<Link to="/country-profile"><div key={i} className="big-box bg1">{d.country}</div></Link>
+								<Link to={'/'+d.country}><div key={i} onClick={() => this.handleCountry(d.country)} className="big-box bg1">{d.country}</div></Link>
 								) : null
 							}
 							</div>

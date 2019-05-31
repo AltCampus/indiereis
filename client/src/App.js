@@ -60,6 +60,8 @@ class App extends Component {
   }
   
   render() {
+    const data = this.props.crowdsourced ? this.props.crowdsourced.data : null;
+
     return (
       <div className="App">
         <Switch>
@@ -72,7 +74,10 @@ class App extends Component {
           <PrivateRoute path="/user-profile" auth={this.props.isAuth} component={MainProfile} />
           <Route path="/submit" component={Home} />
           <Route path="/about" component={About} />
-          <PrivateRoute path="/country-profile" auth={this.props.isAuth} component={CountryProfile} />
+           { this.props.crowdsourced ? data.map((d, i) => 
+          <PrivateRoute path={'/'+d.country} auth={this.props.isAuth} component={CountryProfile} />
+          ) : null
+         }
           <Route exact path="/login" component={Login} />
         </Switch>
       </div>
@@ -84,7 +89,8 @@ function mapStateToProps(state) {
   console.log('inside mapState',state)
   return {
     loggeduser: state.User,
-    isAuth:state.User.isAuthenticated
+    isAuth:state.User.isAuthenticated,
+    crowdsourced: state.Crowdsourced.data
   };
 }
 

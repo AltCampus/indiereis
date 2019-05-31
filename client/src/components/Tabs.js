@@ -14,36 +14,22 @@ class Tabs extends React.Component{
     this.state = {
     	formData: '',
       isHidden: true,
-      innerText: ''
+      innerText: '',
+      isdefault: true,
     }
   }
-
- //  componentDidMount = () => {
- //  	fetch(`${URL}/public-data`, {
- //      headers: {
- //        "Content-Type": "application/json",
- //        Authorization: localStorage.getItem('jwt')
- //      },
- //    }).then(res => res.json()).then(data => {
- //    	console.log(data, 'inside fetch')
- //    	this.props.dispatch({
- //    		type: 'SHOW_FORM_DATA',
- //    		formData: data
- //    	});
- //    })			
-	// }
 
 	toggleComponent =(e) => {
 		// console.log(e.target.innerText)
 		this.setState({
-			isHidden: !this.state.isHidden,
-			innerText: e.target.innerText
+			innerText: e.target.innerText,
+			isdefault: this.state.default
 		})
 	}
 
 	render(){
 		// console.log(this.state)
-		const {isHidden, innerText} = this.state
+		const {innerText, isdefault} = this.state
 		return(
 			<div>
 				<div className="tabular">
@@ -58,19 +44,19 @@ class Tabs extends React.Component{
 
 				<div className="onclick-display-main">
 					<div className="onclick-display">
-					  {innerText === 'General' ? !isHidden && <General /> : null}
+					  {isdefault ? <General /> : innerText === 'General' ? <General /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Visa' ? !isHidden && <Visa /> : null}
+					  {innerText === 'Visa' ? !isdefault && <Visa /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Flights' ? !isHidden && <Flights /> : null}
+					  {innerText === 'Flights' ? !isdefault && <Flights /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Safety' ? !isHidden && <Safety /> : null}
+					  {innerText === 'Safety' ? !isdefault && <Safety /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Experience' ? !isHidden && <Experience /> : null}
+					  {innerText === 'Experience' ? !isdefault && <Experience /> : null}
 					</div>
 				</div>
 			</div>
