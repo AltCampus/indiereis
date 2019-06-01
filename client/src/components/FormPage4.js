@@ -39,7 +39,6 @@ class FormPage4 extends React.Component{
 		const questions = this.props.questions ? this.props.questions.Questions : null;
 		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 
-		console.log(this.state, "form4 state...");
 		return(
 			<React.Fragment>
 			{ questions.data ?
@@ -79,7 +78,6 @@ class FormPage4 extends React.Component{
 }
 
 function mapStateToProps(state){
-	// console.log(state, 'inside map form4.....')
 	return {
 		questions: state
 	}

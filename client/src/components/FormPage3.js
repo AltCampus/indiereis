@@ -50,7 +50,7 @@ class FormPage3 extends React.Component{
 						<div key={i} className="field">
 						  <label className="label">
 							  {
-							  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
+							  	q.includes("COUNTRYNAME") ? q.replace("COUNTRYNAME", userFormData.country ) : 
 							  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ? q.replace("{I/WE}", "I") :
 							  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ? q.replace("{I/WE}", "we"): q
 							  }
@@ -76,7 +76,6 @@ class FormPage3 extends React.Component{
 }
 
 function mapStateToProps(state){
-	// console.log(state, 'inside map form3.....')
 	return {
 		questions: state
 	}

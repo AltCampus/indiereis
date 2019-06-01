@@ -73,7 +73,7 @@ module.exports = {
 		});
 	},
 	updateUser: (req, res, next) => {
-		console.log(req.body, "inside user update...")
+		console.log(req.body, "inside user update...");
 		User.findOneAndUpdate({ email: req.body.email }, req.body, (err, user) => {
 			if(err) return res.status(500).json({ success: false, error: "server side error" });
 			if(user) return res.status(200).json({ success: true, message: 'User updated!' });

@@ -6,7 +6,6 @@
 		render(){
 			const crowdsourced = this.props.crowdsourced ? this.props.crowdsourced : null;
 			const ratingInfo = crowdsourced.data.slice(0,1)[0]
-			console.log(ratingInfo)
 
 			return(
 				<div>
@@ -30,7 +29,6 @@
 	}
 
 	function mapStateToProps(state){
-		console.log(state)
 		return{
 			crowdsourced: state.Crowdsourced.data
 		}

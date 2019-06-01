@@ -53,6 +53,7 @@ class SourcedForm extends React.Component{
 }
 
 function mapStateToProps(state){
+	console.log(state, "crd")
 	return{
     crowdsourced: state.Crowdsourced.data
 	}

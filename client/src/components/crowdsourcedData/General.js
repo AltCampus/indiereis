@@ -17,7 +17,6 @@ class General extends React.Component{
 
 	render(){
 		const crowdsourced = this.props.crowdsourced ? this.props.crowdsourced : null;
-		// const ratingInfo = crowdsourced.data.slice(0,1)[0]
 		const ratingInfo = crowdsourced.data
 		const countryName = this.props.countryName
 		// console.log(ratingInfo)

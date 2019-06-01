@@ -31,7 +31,6 @@ class Experience extends React.Component{
 }
 
 function mapStateToProps(state){
-	console.log(state)
 	return{
     crowdsourced: state.Crowdsourced.data
 	}

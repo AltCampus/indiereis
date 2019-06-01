@@ -19,8 +19,21 @@ class Tabs extends React.Component{
     }
   }
 
+  componentDidMount = () => {
+  	fetch(`${URL}/public-data`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem('jwt')
+      },
+    }).then(res => res.json()).then(data => {
+    	this.props.dispatch({
+    		type: 'SHOW_FORM_DATA',
+    		formData: data
+    	});
+    })			
+	}
+
 	toggleComponent =(e) => {
-		// console.log(e.target.innerText)
 		this.setState({
 			innerText: e.target.innerText,
 			isdefault: this.state.default
@@ -28,8 +41,7 @@ class Tabs extends React.Component{
 	}
 
 	render(){
-		// console.log(this.state)
-		const {innerText, isdefault} = this.state
+		const {isHidden, innerText, isdefault} = this.state
 		return(
 			<div>
 				<div className="tabular">
@@ -65,7 +77,6 @@ class Tabs extends React.Component{
 }
 
 function mapStateToProps(state) {
-	console.log(state, 'inside map')
   return {
     crowdsourced: state.Crowdsourced.data
   };
