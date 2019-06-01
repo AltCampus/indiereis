@@ -18,7 +18,6 @@ class Home extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state, "inside home...")
   return {
     sata: state
   }

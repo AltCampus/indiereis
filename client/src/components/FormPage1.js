@@ -15,7 +15,6 @@ class FormPage1 extends React.Component{
 	
 	componentDidMount(){
 		fetch(`${URL}/questions`).then(res => res.json()).then(d => {
-			// console.log(d, 'inside cdm.....')
 			this.props.dispatch({
 				type: 'ADD_QUESTIONS',
 				data: d.data[0]
@@ -29,7 +28,6 @@ class FormPage1 extends React.Component{
 	};
 
 	handleSubmit = () => {
-		// console.log(nextFormPage, 'inside state')
 		if(this.state){
 			this.props.dispatch({
 	      type:"ADD_FORM1",
@@ -117,7 +115,6 @@ class FormPage1 extends React.Component{
 }
 
 function mapStateToProps(state) {
-	// console.log(state, 'inside map form1.....')
 	return {
 		questions: state
 	}

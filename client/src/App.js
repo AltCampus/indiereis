@@ -52,7 +52,6 @@ class App extends Component {
   componentDidMount() {
     // google auth token save in localStorage
     const query = queryString.parse(this.props.location.search);
-    console.log(query, "app query....")
     const token = query.t || localStorage.getItem('jwt');
     if (token) {
       localStorage.setItem("jwt", token);
@@ -97,7 +96,6 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('inside mapState',state)
   return {
     loggeduser: state.User,
     isAuth:state.User.isAuthenticated

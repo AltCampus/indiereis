@@ -8,14 +8,9 @@ import SourcedForm from './SourcedForm';
 
 
 class Dashboard extends React.Component {
-  // constructor(props) {
-  //   super(props);
-		// this.state = {};
-  // }
-
+  
   render() 
 	{
-//	console.log(this.props.loggeduser)
 		const user = this.props.loggeduser ? this.props.loggeduser.user :  '';
     return (
       <div>

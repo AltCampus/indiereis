@@ -14,50 +14,8 @@ class MainProfile extends React.Component{
     email: this.props.user.user.email || null,
     dob: this.props.user.user.dob || null,
     phoneNumber: this.props.user.user.phoneNumber || null,
-    photo: this.props.user.user.photo || null
+    photo: ""
   }
-
-  // componentDidMount(){
-  //   console.log('did mount')
-  //   var { user } = this.props;
-  //   // if(!user) this.getUser();
-  // }
-
-  // getUser = () => {
-  //   var { user } = this.props;
-  //   if(user){
-  //     this.setState({
-  //       firstName: user.user.firstName,
-  //       lastName: user.user.lastName,
-  //       name: user.user.name,
-  //       email: user.user.email,
-  //       dob: user.user.dob,
-  //       phoneNumber: user.user.phoneNumber,
-  //     })
-  //   }
-  //   else if(!user){
-  //     setTimeout(this.getUser, 500);
-  //   }
-  // }
-
-  // componentWillMount(){
-  //   console.log('will mount');
-  //   var { user } = this.props;
-  //   if(user){
-  //     this.setState({
-  //       firstName: user.user.firstName,
-  //       lastName: user.user.lastName,
-  //       name: user.user.name,
-  //       email: user.user.email,
-  //       dob: user.user.dob,
-  //       phoneNumber: user.user.phoneNumber,
-  //     })
-  //   }
-  // }
-
-  // componentDidUpdate(){
-  //   console.log('did update')
-  // }
 
   handleChange = (e) => {
     const {name, value} = e.target;
@@ -73,31 +31,18 @@ class MainProfile extends React.Component{
     // file conversion to base64 using FileReader fn
     const reader = new FileReader();
     reader.onload = (event) => {
-      console.log(event.target.result);
+      console.log(event.target.result, "base64...");
       sendImg(event.target.result);
     };
     reader.readAsDataURL(photo);
   };
 
+
   handleSubmit = async(e) => {
     e.preventDefault();
 
-    // cloudinary image upload and user update
-    var cloudData = {
-      file : this.state.photo,
-      upload_preset: upload_preset
-    };
-    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cloudData),
-      }).then((res) => res.json())
-      .then(data => {
-        console.log(data, "img url...");
-        this.setState({ photo: data.secure_url });
-        fetch(`${URL}/users/update`, {
+    if(this.state.photo.startsWith("https://res.cloudinary.com") || !this.state.photo ){
+      fetch(`${URL}/users/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,15 +50,39 @@ class MainProfile extends React.Component{
         },
         body: JSON.stringify(this.state),
         })
-        .then(res => {
-          res.json()
-          console.log(res);
-        })
+        .then(res => res.json())
         .then(data => {
           console.log(data, "profile updated...");
           this.setState({})
+          return;
       })
-    })
+    }else {
+      // cloudinary image upload and user update
+      var cloudData = { file : this.state.photo, upload_preset: upload_preset };
+      fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cloudData),
+        }).then((res) => res.json())
+        .then(data => {
+          this.setState({ photo: data.secure_url });
+          fetch(`${URL}/users/update`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "authorization": jwt
+          },
+          body: JSON.stringify(this.state),
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data, "profile updated...");
+            this.setState({})
+        })
+      })
+    }
   }
 
 	render(){

@@ -65,7 +65,6 @@ class FormPage5 extends React.Component{
 }
 
 function mapStateToProps(state){
-	console.log(state, "inside form 5")
 	return {
 		questions: state
 	}

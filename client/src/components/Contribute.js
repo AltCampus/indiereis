@@ -95,7 +95,6 @@ class Contribute extends React.Component{
 }
 
 function mapStateToProps(state){
-	// console.log(state, 'inside contribute')
 	return {
 		loggeduser: state.User
 	}

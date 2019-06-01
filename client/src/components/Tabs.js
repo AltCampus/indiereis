@@ -25,7 +25,6 @@ class Tabs extends React.Component{
         Authorization: localStorage.getItem('jwt')
       },
     }).then(res => res.json()).then(data => {
-    	console.log(data, 'inside fetch')
     	this.props.dispatch({
     		type: 'SHOW_FORM_DATA',
     		formData: data
@@ -34,7 +33,6 @@ class Tabs extends React.Component{
 	}
 
 	toggleComponent =(e) => {
-		// console.log(e.target.innerText)
 		this.setState({
 			isHidden: !this.state.isHidden,
 			innerText: e.target.innerText
@@ -42,7 +40,6 @@ class Tabs extends React.Component{
 	}
 
 	render(){
-		// console.log(this.state)
 		const {isHidden, innerText} = this.state
 		return(
 			<div>
@@ -79,7 +76,6 @@ class Tabs extends React.Component{
 }
 
 function mapStateToProps(state) {
-	console.log(state, 'inside map')
   return {
     crowdsourced: state.Crowdsourced.data
   };
