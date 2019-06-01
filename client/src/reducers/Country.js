@@ -5,6 +5,11 @@ export function Country(state =[], action) {
 				...state,
 				data: action.data,
 			};
+		case 'DISCOVER_COUNTRY_NAME':
+			return {
+				...state,
+				country: action.payload,
+			};
 		default: {
 			return state
 		}

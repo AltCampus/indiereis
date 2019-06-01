@@ -62,6 +62,7 @@ class App extends Component {
   
   render() {
     const data = this.props.crowdsourced ? this.props.crowdsourced.data : null;
+    const countryList = this.props.scrappedCountries ? this.props.scrappedCountries.data : null
 
     return (
       <div className="App">
@@ -80,6 +81,9 @@ class App extends Component {
           <PrivateRoute path={'/'+d.country} auth={this.props.isAuth} component={CountryProfile} />
           ) : null
          }
+         {/*
+          this.props.scrappedCountries ? countryList
+         */}
           <Route exact path="/login" component={Login} />
         </Switch>
       </div>
@@ -92,7 +96,8 @@ function mapStateToProps(state) {
   return {
     loggeduser: state.User,
     isAuth:state.User.isAuthenticated,
-    crowdsourced: state.Crowdsourced.data
+    crowdsourced: state.Crowdsourced.data,
+    scrappedCountries: state.Country.data
   };
 }
 
