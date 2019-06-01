@@ -1,0 +1,39 @@
+.country-container{
+	width: 60%;
+	margin: 2rem auto;
+	.container-main{
+		border-radius: 4px;
+		background: var(--cyan);
+		padding: 0.5rem;
+		color: #fff;
+		// border: 1px solid #fff;
+		.visa-head{
+			// display: flex;
+			justify-content: space-between;
+			.container-head{
+				display: flex;
+				margin: 1rem 0;
+				img{
+					padding-right: 10px;
+					width: 40px;
+					height: 20px;
+				}
+			}
+			.country-notes{
+				text-align: left;
+				letter-spacing: 1px;
+			}
+		}
+	}
+}
+
+.visa-btn{
+	width: 6rem;
+	margin-bottom: 10px;
+	padding: 6px;
+	background: var(--yellow);
+	color: #fff;
+	border-radius: 10px;
+	font-size: 0.8rem;
+	text-transform: capitalize;
+}

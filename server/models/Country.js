@@ -5,9 +5,9 @@ const timestamp = require('time-stamp');
 var countrySchema = new Schema({
 	country: {
 		type: Object,
+		default: null
 	}
-}, {timestamps: true});
-
+},{ timestamps: true });
 
 var Country = mongoose.model("Country", countrySchema);
 

@@ -4,24 +4,24 @@ const userController = require('../controllers/userController');
 var jwtAuth = require("../config/jwtAuth");
 
 // cloudinary image uploading code block on 
-const multer = require("multer");
-const cloudinary = require("cloudinary");
+// const multer = require("multer");
+// const cloudinary = require("cloudinary");
 
-var cloudinaryConfig = () => cloudinary.config({
-	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// var cloudinaryConfig = () => cloudinary.config({
+// 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+// 	api_key: process.env.CLOUDINARY_API_KEY,
+// 	api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
 
-var loader = multer({
-	storage: multer.diskStorage({}),
-	fileFilter: (req, file, cb) => {
-		if(!file.mimetype.match(/jpg|jpej|png|gif&i/)){
-			cb(new Error("file is not supported"), false)
-		}
-		cb(null, true)
-	}
-})
+// var loader = multer({
+// 	storage: multer.diskStorage({}),
+// 	fileFilter: (req, file, cb) => {
+// 		if(!file.mimetype.match(/jpg|jpej|png|gif&i/)){
+// 			cb(new Error("file is not supported"), false)
+// 		}
+// 		cb(null, true)
+// 	}
+// })
 // ===================================
 
 router.get('/', userController.allUsers);

@@ -22,21 +22,27 @@ router.get('/:id', (req,res,next) => {
 	})
 });
 
-router.post('/', jwtAuth.verifyToken, (req,res,next) => {
-	console.log(req.body,req.user, "inside addCountry post...");
-	var data = req.body;
-	console.log(data, "data....");
-	User.findOne({ _id: req.user._id }, (err, user) => {
+router.post('/', (req,res,next) => {
+
+	Country.create(req.body, (err, data) => {
 		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		if(user.isAdmin){
-			Country.create(data, (err, data) => {
-				if(err) return res.status(500).json({ success: false, message: "server side error"});
-				res.status(200).json({ success: false, message: "Country data added successfully" });
-			})
-		}else {
-			res.status(401).json({ success: false, message: "Access denied!" });
-		}
+		res.status(200).json({ success: false, message: "Country data added successfully" });
 	})
+
+	// console.log(req.body,req.user, "inside addCountry post...");
+	// var data = req.body;
+	// console.log(data, "data....");
+	// User.findOne({ _id: req.user._id }, (err, user) => {
+	// 	if(err) return res.status(500).json({ success: false, message: "server side error"});
+	// 	if(user.isAdmin){
+	// 		Country.create(data, (err, data) => {
+	// 			if(err) return res.status(500).json({ success: false, message: "server side error"});
+	// 			res.status(200).json({ success: false, message: "Country data added successfully" });
+	// 		})
+	// 	}else {
+	// 		res.status(401).json({ success: false, message: "Access denied!" });
+	// 	}
+	// })
 	
 })
 

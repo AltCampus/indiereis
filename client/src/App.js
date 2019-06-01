@@ -14,6 +14,7 @@ import Home from "./components/Home";
 import Map from "./components/Map";
 import Dashboard from "./components/Dashboard";
 import About from "./components/About";
+import Discover from "./components/Discover";
 import MainProfile from './components/MainProfile';
 import Contribute from "./components/Contribute";
 import FormPage1 from "./components/FormPage1";
@@ -51,7 +52,7 @@ class App extends Component {
         Authorization: localStorage.getItem('jwt')
       },
     }).then(res => res.json()).then(data => {
-      console.log(data, 'inside fetch')
+      // console.log(data, 'inside fetch')
       this.props.dispatch({
         type: 'SHOW_FORM_DATA',
         formData: data
@@ -73,6 +74,7 @@ class App extends Component {
           <PrivateRoute path="/form" auth={this.props.isAuth} component={FormPage1} />
           <PrivateRoute path="/user-profile" auth={this.props.isAuth} component={MainProfile} />
           <Route path="/submit" component={Home} />
+          <Route path="/discover" component={Discover} />
           <Route path="/about" component={About} />
            { this.props.crowdsourced ? data.map((d, i) => 
           <PrivateRoute path={'/'+d.country} auth={this.props.isAuth} component={CountryProfile} />
@@ -86,7 +88,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('inside mapState',state)
+  // console.log('inside mapState',state)
   return {
     loggeduser: state.User,
     isAuth:state.User.isAuthenticated,

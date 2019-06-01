@@ -12,7 +12,7 @@ class UserProfile extends React.Component{
 					<ul className="">
 						<li><Link to="/user-profile">Profile</Link></li>
 						<li><Link to="/contribute">Contribute</Link></li>
-					  <li><Link to="/disocver">Discover</Link></li>
+					  <li><Link to="/discover">Discover</Link></li>
 					  <li><Link to="/about">About</Link></li>
 					</ul>
 				</div>
