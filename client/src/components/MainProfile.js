@@ -66,59 +66,54 @@ class MainProfile extends React.Component{
 
 	handleFile = (e) => {
     const photo = event.target.files[0];
-    this.setState({ photo: photo });
+    const sendImg = (str) => {
+      str ? this.setState({ photo: str }) : null;
+    }
+
+    // file conversion to base64 using FileReader fn
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      console.log(event.target.result);
+      sendImg(event.target.result);
+    };
+    reader.readAsDataURL(photo);
   };
-
-  uploadFile = (data) => {
-    var file = data;
-    const sendImg = (url) => {
-      url ? this.setState({ photo: url }) : null;
-    }
-    var reader = new FileReader();
-    let cloud = null;
-
-    reader.addEventListener("load", function () {
-      cloud = reader.result;
-      var cloudData = {
-       file : cloud,
-       upload_preset: upload_preset
-      };
-      fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cloudData),
-          }).then((res) => res.json())
-          .then(data => {
-            sendImg(data.secure_url);
-          });
-    }, false);
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }
 
   handleSubmit = async(e) => {
     e.preventDefault();
 
-    this.uploadFile(this.state.photo);
-
-    setTimeout(() => {
-      fetch(`${URL}/users/update`, {
+    // cloudinary image upload and user update
+    var cloudData = {
+      file : this.state.photo,
+      upload_preset: upload_preset
+    };
+    fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cloudData),
+      }).then((res) => res.json())
+      .then(data => {
+        console.log(data, "img url...");
+        this.setState({ photo: data.secure_url });
+        fetch(`${URL}/users/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "authorization": jwt
         },
         body: JSON.stringify(this.state),
-        }).then(res => res.json())
+        })
+        .then(res => {
+          res.json()
+          console.log(res);
+        })
         .then(data => {
           console.log(data, "profile updated...");
           this.setState({})
       })
-    }, 5000);
+    })
   }
 
 	render(){

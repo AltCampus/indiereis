@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./stylesheets/index.scss";
 import { URL } from './utils/static';
 import { connect } from "react-redux";
+import queryString from 'query-string';
 import {
   BrowserRouter as Router,
   Route,
@@ -18,31 +19,62 @@ import MainProfile from './components/MainProfile';
 import Contribute from "./components/Contribute";
 import FormPage1 from "./components/FormPage1";
 import PrivateRoute from './components/PrivateRoute';
-import { store } from "./store";
 import CountryProfile from "./components/CountryProfile";
+// import { store } from "./store";
 
-//Keeping user logged in
-if (localStorage.jwt) {
-  const { jwt } = localStorage;
-  fetch(`${URL}/users/verify`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "authorization": jwt
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      store.dispatch({
-        type: "LOGIN",
-        user: data
-      });
-    });
-} else {
-  //	store.history.push('/login');
-}
+// const query = queryString.parse(window.location.search);
+// console.log(query, "app query....")
+// const token = query.t || localStorage.getItem('jwt');
+
+// if (token) {
+//   localStorage.setItem("jwt", token);
+//   fetch(`${URL}/users/verify`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "authorization": token
+//     }
+//   })
+//     .then(res => res.json())
+//     .then(data => {
+//       store.dispatch({
+//         type: "LOGIN",
+//         user: data
+//       });
+//     });
+// } else {
+//    store.history.push('/login');
+// }
+
 
 class App extends Component {
+
+  componentDidMount() {
+    // google auth token save in localStorage
+    const query = queryString.parse(this.props.location.search);
+    console.log(query, "app query....")
+    const token = query.t || localStorage.getItem('jwt');
+    if (token) {
+      localStorage.setItem("jwt", token);
+      fetch(`${URL}/users/verify`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": token
+        }
+      }).then(res => res.json())
+        .then(data => {
+          this.props.dispatch({
+            type: "LOGIN",
+            user: data
+          });
+          this.props.history.push("/dashboard");
+        });
+    } else {
+      this.props.history.push('/login');
+    }
+  }
+
   render() {
     return (
       <div className="App">

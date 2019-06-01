@@ -3,6 +3,7 @@ import Header from "./Header";
 import Hero from "./Hero";
 import Footer from "./Footer";
 import ListCountry from "./ListCountry";
+import { connect } from "react-redux";
 
 class Home extends React.Component {
   render() {
@@ -16,5 +17,10 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home;
+const mapStateToProps = (state) => {
+  console.log(state, "inside home...")
+  return {
+    sata: state
+  }
+}
+export default connect(mapStateToProps)(Home);

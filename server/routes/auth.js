@@ -63,7 +63,6 @@ router.get('/google/callback', function(req, res, next) {
     var token = jwtAuth.signToken({ _id: user._id });
     // send the response it back to client.
     res.redirect('/?t='+token);
-    // res.status(200).json({ success: true, token, user })
   })(req, res, next);
 });
 
