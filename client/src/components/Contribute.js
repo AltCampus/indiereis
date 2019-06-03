@@ -9,31 +9,32 @@ import { URL , countries, kindOfTrip } from '../utils/static';
 class Contribute extends React.Component{
 	state = {
 		country: "",
-		terms:"",
-		kindOfTrip: ""
+		terms: false,
+		TripDetails: ""
 	}
 	
 	handleChange = (e) => {
+		e.preventDefault();
 		const { name, value } = e.target;
     this.setState({ [name]: value });
 	}
 
-	handleClick = (e) => {
-    this.setState({ terms : !this.state.terms });
+	handleToggle = (e) => {
+    this.setState({ terms: !this.state.terms });
 	}
 
 	handleSubmit = () => {
-		if(this.state){
-			this.props.dispatch({
-	      type:"ADD_COUNTRY",
-	      data: this.state
-	    })
-	    this.setState({});
-		}else { console.log("state is empty") }
+		this.props.dispatch({
+      type:"ADD_COUNTRY",
+      data: this.state
+    })
+    this.setState({})
+    this.props.history.push('/form');
 	}
 
 	render(){
-		const {loggeduser} = this.props;
+		const { loggeduser } = this.props;
+		const { country, terms, TripDetails } = this.state;
 		return(
 			<div>
 				<NavBar />
@@ -55,7 +56,7 @@ class Contribute extends React.Component{
 									  
 									  <div className="control">
 									    <div className="select contribute-btn">
-									      <select name="country" value={ this.state.country } onChange={this.handleChange} required >
+									      <select name="country" value={ country } onChange={this.handleChange} required >
 									        <option>Pick Country</option>
 									        {countries.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -67,7 +68,7 @@ class Contribute extends React.Component{
 									  <label className="label">What kind of trip did you take?</label>
 									  <div className="control">
 									    <div className="select contribute-btn">
-									      <select name="kindOfTrip" value={ this.state.kindOfTrip } onChange={this.handleChange} required >
+									      <select name="TripDetails" value={ TripDetails } onChange={this.handleChange} required >
 									        <option>Kind of Trip</option>
 									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
@@ -78,12 +79,16 @@ class Contribute extends React.Component{
 
 								<div className="control">
 							    <label className="checkbox parallel" >
-							      <input type="checkbox" className="terms" checked={ this.state.terms } name="terms" onChange={ this.handleClick } required />
+							      <input type="checkbox" className="terms" checked={ terms } name="terms" onClick={ this.handleToggle } required />
 							      <div className="terms">I agree to the <Link to="#">terms and conditions</Link></div>
 							    </label>
 								</div>
 								</div>
-								<Link to="/form" className="button is-primary" onClick={this.handleSubmit}>Continue</Link>
+								{
+									!country || !terms || !TripDetails ?
+									 <button className="button is-danger">Choose country</button> :
+									<Link to="/form" className="button is-primary" onClick={this.handleSubmit }>Continue</Link>
+								}
 							</div>
 							)
 						: null
@@ -100,5 +105,5 @@ function mapStateToProps(state){
 	}
 }
 
-export default connect(mapStateToProps)(Contribute);
+export default withRouter(connect(mapStateToProps)(Contribute));
 

@@ -12,7 +12,7 @@ class Flights extends React.Component{
 	render(){
 		return(
 			<div>
-				<h2></h2>
+				<h2>You're in flight info section.</h2>
 				<div className="flight-container">
 				<meta name="originLocation" />
 					<div data-skyscanner-widget="FlightSearchWidget" data-locale="en-GB"></div>

@@ -14,7 +14,7 @@ class MainProfile extends React.Component{
     email: this.props.user.user.email || null,
     dob: this.props.user.user.dob || null,
     phoneNumber: this.props.user.user.phoneNumber || null,
-    photo: ""
+    photo: this.props.user.user.photo || null
   }
 
   handleChange = (e) => {

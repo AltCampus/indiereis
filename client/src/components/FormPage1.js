@@ -12,6 +12,11 @@ class FormPage1 extends React.Component{
 			nextFormPage: false
 		}
 	}
+
+	goBack = () => {
+		console.log(this.props)
+		// this.props.history.push('/contribute')
+	}
 	
 	componentDidMount(){
 		fetch(`${URL}/questions`).then(res => res.json()).then(d => {
@@ -47,7 +52,8 @@ class FormPage1 extends React.Component{
 	return(
 		<React.Fragment>
 			<NavBar />
-		{ !nextFormPage ?
+		{ questions.data && userFormData ?
+			!nextFormPage ?
 			(
 			<div className= "form-wrapper">
 				<progress className="progress is-primary" value="10" max="100">10%</progress>
@@ -107,7 +113,8 @@ class FormPage1 extends React.Component{
 					 <button className="button is-primary" onClick={this.handleSubmit}>Next</button> 
 				</div>
 				)
-			: <FormPage2 />
+			: <FormPage2 /> 
+			: this.goBack()
 		}
 		</React.Fragment>
 		)
@@ -120,4 +127,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(FormPage1);						
+export default withRouter(connect(mapStateToProps)(FormPage1));						

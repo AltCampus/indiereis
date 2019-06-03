@@ -12,6 +12,11 @@ class FormPage5 extends React.Component{
 		}
 	}
 
+	goBack = () => {
+		console.log(this.props)
+		this.props.history.push('/contribute')
+	}
+
 	handleChange = (e) => {
 		const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -36,7 +41,8 @@ class FormPage5 extends React.Component{
 
 		return(
 			<React.Fragment>
-			{ !nextFormPage ?
+			{ questions.data ?  
+			 !nextFormPage ?
 				(<div className= "form-wrapper">
 					<progress className="progress is-primary" value="95" max="100">95%</progress>
 					{questions.data ? questions.data.qset1.questions.map((q,i) => 
@@ -58,6 +64,7 @@ class FormPage5 extends React.Component{
 					<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
 				</div>
 				): <FormPage6 />
+				: this.goBack()
 			}
 			</React.Fragment>
 			)

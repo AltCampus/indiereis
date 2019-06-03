@@ -115,8 +115,9 @@ small a {
 }
 .footer-items a {
   /* color: var(--white); */
-  margin: -20px;
+  /*margin: -20px;*/
   color: black;
+  display: block;
 }
 
 /* embed-map */

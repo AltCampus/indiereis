@@ -49,7 +49,7 @@ module.exports = {
 
 	registerUser: (req, res, next) => {
 		var data = req.body;
-		console.log(data, "inside register user1...");
+		console.log(data, "inside register user...");
 		User.findOne({ email: data.email },(err, user ) => {
 			console.log(err, "user reg1 err")
 			if(err) return res.status(500).json({ success: false, error: "server error" });
@@ -58,7 +58,6 @@ module.exports = {
 				console.log('no user2');
 				User.create( data, (err, user) => {
 					console.log('create user user3');
-
 					if(err) return res.status(500).json({success: false, error: "server error" });
 					User.findOne({ _id: user._id }).select("-password -createdAt -updatedAt -__v").exec(function(err, user) {
 						if(err) return res.status(500).json({ success: false, error: "server error" });

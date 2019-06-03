@@ -1,35 +1,50 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import SourcedForm from '../SourcedForm';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
 
 class General extends React.Component{
+
+	goBack = () => {
+		console.log(this.props)
+		this.props.history.push('/Dashboard')
+	}
+
 	render(){
 		const crowdsourced = this.props.crowdsourced ? this.props.crowdsourced : null;
-		const ratingInfo = crowdsourced.data.slice(0,1)[0]
+		const ratingInfo = crowdsourced.data
+		const countryName = this.props.countryName
+		// console.log(ratingInfo)
 
 		return(
-			<div>
 				<React.Fragment>
-					<h2>You're in General info section.</h2>
-					<div className="">
-						{crowdsourced ? Object.keys(ratingInfo).map((key, i) => 
-							<div key={i}>
-								<li>{key}:</li>
-								<progress className="progress is-primary" value={ratingInfo[key]} max="10">{ratingInfo[key]}</progress>
-							</div>
-							)
-						: null
-						}
-					</div>
+					{countryName ?
+					crowdsourced  ? ratingInfo.filter((val, i) => val.country === countryName).map((filteredCountry, j) => Object.keys(filteredCountry).map((key, i) => 
+						<div key={i}>
+							<p>{key}</p>
+							<progress className="progress is-primary" value={filteredCountry[key]} max="10">{filteredCountry[key]}</progress>
+						</div>
+							))
+					: null
+					: this.goBack()
+					}
+
 				</React.Fragment>
-			</div>
 			)
 	}
 }
 
 function mapStateToProps(state){
+	console.log(state)
 	return{
-    crowdsourced: state.Crowdsourced.data
+    crowdsourced: state.Crowdsourced.data,
+    countryName: state.Crowdsourced.country
 	}
 }
 
-export default connect(mapStateToProps)(General);
+export default withRouter(connect(mapStateToProps)(General));

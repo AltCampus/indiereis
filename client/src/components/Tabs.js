@@ -14,7 +14,8 @@ class Tabs extends React.Component{
     this.state = {
     	formData: '',
       isHidden: true,
-      innerText: ''
+      innerText: '',
+      isdefault: true,
     }
   }
 
@@ -34,13 +35,13 @@ class Tabs extends React.Component{
 
 	toggleComponent =(e) => {
 		this.setState({
-			isHidden: !this.state.isHidden,
-			innerText: e.target.innerText
+			innerText: e.target.innerText,
+			isdefault: this.state.default
 		})
 	}
 
 	render(){
-		const {isHidden, innerText} = this.state
+		const {isHidden, innerText, isdefault} = this.state
 		return(
 			<div>
 				<div className="tabular">
@@ -55,19 +56,19 @@ class Tabs extends React.Component{
 
 				<div className="onclick-display-main">
 					<div className="onclick-display">
-					  {innerText === 'General' ? !isHidden && <General /> : null}
+					  {isdefault ? <General /> : innerText === 'General' ? <General /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Visa' ? !isHidden && <Visa /> : null}
+					  {innerText === 'Visa' ? !isdefault && <Visa /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Flights' ? !isHidden && <Flights /> : null}
+					  {innerText === 'Flights' ? !isdefault && <Flights /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Safety' ? !isHidden && <Safety /> : null}
+					  {innerText === 'Safety' ? !isdefault && <Safety /> : null}
 					</div>
 					<div className="onclick-display">
-					  {innerText === 'Experience' ? !isHidden && <Experience /> : null}
+					  {innerText === 'Experience' ? !isdefault && <Experience /> : null}
 					</div>
 				</div>
 			</div>

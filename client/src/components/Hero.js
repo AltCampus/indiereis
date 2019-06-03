@@ -10,7 +10,7 @@ const Hero = () => {
           <hr />
         </div>
         <div className="hero-sub-text">
-          <Link to="/" className="btn-standard">Discover</Link>
+          <Link to="/discover" className="btn-standard">Discover</Link>
           <Link to= "/contribute" className="btn-standard">Contribute</Link>
         </div>
         <div className="hero-info">

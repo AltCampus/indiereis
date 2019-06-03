@@ -1,5 +1,6 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import { Link, withRouter } from "react-router-dom";
 
 const countries = [
   {
@@ -76,6 +77,12 @@ class ListCountry extends React.Component {
     });
   };
 
+  onClick = (e) => {
+    if(e.key === 'Enter'){
+      this.props.history.push('/discover')
+    }
+  }
+
   onSuggestionsFetchRequested = ({ value }) => {
     this.setState({
       suggestions: getSuggestions(value)
@@ -96,6 +103,7 @@ class ListCountry extends React.Component {
       value,
       onChange: this.onChange,
 			className: "country-input",
+      onKeyDown: this.onClick
     };
 
     return (
@@ -111,4 +119,4 @@ class ListCountry extends React.Component {
   }
 }
 
-export default ListCountry;
+export default withRouter(ListCountry);

@@ -30,7 +30,7 @@ class SignUp extends Component {
       body: JSON.stringify(this.state.user),
     }).then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)  
         if(data.token && data.user){
           let jwt = data.token
           localStorage.setItem('jwt', jwt);

@@ -5,9 +5,7 @@ const Footer = () => {
   return (
     <div className="foot">
       <nav className="navbar footer-items">
-        <Link to="/">Contact</Link>
-        <Link to="#">Github</Link>
-        <Link to="#">Sitemap</Link>
+       <div>Made with 🥤 and code</div>
       </nav>
     </div>	
   );
