@@ -13,12 +13,12 @@ router.get('/', (req,res,next) => {
 	})
 });
 
-router.get('/country', (req,res,next) => {
+router.get('/:country', (req,res,next) => {
 	console.log("inside get country...");
-	var country = req.params.country;
-	Country.findOne({ country: country }, (err, country) => {
+	var countryName = req.params.country;
+	Country.find({}, { country: { $elemMatch: { name: countryName } } }).exec((err, data) => {
 		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		res.status(200).json({ success: true, country });
+		res.status(200).json({ success: true, data });
 	})
 });
 

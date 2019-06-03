@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
-// import File from './File';
 import { URL } from '../utils/static';
 
 class SignUp extends Component {
@@ -20,7 +19,6 @@ class SignUp extends Component {
 
   handleSignup = (e) => {
     e.preventDefault()
-    console.log("inside submit...")
     if(this.state.password === this.state.confirmpassword) {
     fetch(URL + "/users/register", {
       method: "POST",
@@ -30,7 +28,6 @@ class SignUp extends Component {
       body: JSON.stringify(this.state.user),
     }).then((res) => res.json())
       .then((data) => {
-        // console.log(data)  
         if(data.token && data.user){
           let jwt = data.token
           localStorage.setItem('jwt', jwt);

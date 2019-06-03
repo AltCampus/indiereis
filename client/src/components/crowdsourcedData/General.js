@@ -11,7 +11,6 @@ import {
 class General extends React.Component{
 
 	goBack = () => {
-		console.log(this.props)
 		this.props.history.push('/Dashboard')
 	}
 
@@ -19,7 +18,6 @@ class General extends React.Component{
 		const crowdsourced = this.props.crowdsourced ? this.props.crowdsourced : null;
 		const ratingInfo = crowdsourced.data
 		const countryName = this.props.countryName
-		// console.log(ratingInfo)
 
 		return(
 				<React.Fragment>
@@ -40,7 +38,6 @@ class General extends React.Component{
 }
 
 function mapStateToProps(state){
-	console.log(state)
 	return{
     crowdsourced: state.Crowdsourced.data,
     countryName: state.Crowdsourced.country

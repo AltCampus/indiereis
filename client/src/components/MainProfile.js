@@ -31,7 +31,6 @@ class MainProfile extends React.Component{
     // file conversion to base64 using FileReader fn
     const reader = new FileReader();
     reader.onload = (event) => {
-      console.log(event.target.result, "base64...");
       sendImg(event.target.result);
     };
     reader.readAsDataURL(photo);

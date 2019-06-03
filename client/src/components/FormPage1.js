@@ -12,11 +12,6 @@ class FormPage1 extends React.Component{
 			nextFormPage: false
 		}
 	}
-
-	goBack = () => {
-		console.log(this.props)
-		// this.props.history.push('/contribute')
-	}
 	
 	componentDidMount(){
 		fetch(`${URL}/questions`).then(res => res.json()).then(d => {
@@ -114,7 +109,7 @@ class FormPage1 extends React.Component{
 				</div>
 				)
 			: <FormPage2 /> 
-			: this.goBack()
+			: null
 		}
 		</React.Fragment>
 		)

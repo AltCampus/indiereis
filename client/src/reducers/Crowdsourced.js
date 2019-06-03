@@ -1,5 +1,4 @@
 export function Crowdsourced(state =[], action) {
-	console.log(state, action, "red..")
 	switch (action.type) {
 		case "SHOW_FORM_DATA":
 			return {

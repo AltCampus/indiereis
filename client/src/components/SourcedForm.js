@@ -19,7 +19,6 @@ class SourcedForm extends React.Component{
   }
 
   handleCountry = (country) => {
-  	console.log(country, 'form-country')
   	this.props.dispatch({
   		type: 'COUNTRY_NAME',
   		countryName: country
@@ -27,9 +26,7 @@ class SourcedForm extends React.Component{
   }
 
 	render(){
-
 		const data = this.props.crowdsourced ? this.props.crowdsourced.data : null;
-		// console.log(data)
 
 		return(
 				<div>
@@ -40,8 +37,9 @@ class SourcedForm extends React.Component{
 		        <UserProfile />
 						<div className="wrapper">
 							<div className="main-grid">
-							{ this.props.crowdsourced ? data.map((d, i) => 
-								<Link to={'/'+d.country}><div key={i} onClick={() => this.handleCountry(d.country)} className="big-box bg1">{d.country}</div></Link>
+							{ this.props.crowdsourced ? data.map((d, i) =>
+								// key added to link
+								<Link to={'/'+d.country} key={i} ><div key={i} onClick={() => this.handleCountry(d.country)} className="big-box bg1">{d.country}</div></Link>
 								) : null
 							}
 							</div>
@@ -53,7 +51,6 @@ class SourcedForm extends React.Component{
 }
 
 function mapStateToProps(state){
-	console.log(state, "crd")
 	return{
     crowdsourced: state.Crowdsourced.data
 	}
