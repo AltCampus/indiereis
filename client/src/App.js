@@ -21,31 +21,6 @@ import Contribute from "./components/Contribute";
 import FormPage1 from "./components/FormPage1";
 import PrivateRoute from './components/PrivateRoute';
 import CountryProfile from "./components/CountryProfile";
-// import { store } from "./store";
-
-// const query = queryString.parse(window.location.search);
-// console.log(query, "app query....")
-// const token = query.t || localStorage.getItem('jwt');
-
-// if (token) {
-//   localStorage.setItem("jwt", token);
-//   fetch(`${URL}/users/verify`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "authorization": token
-//     }
-//   })
-//     .then(res => res.json())
-//     .then(data => {
-//       store.dispatch({
-//         type: "LOGIN",
-//         user: data
-//       });
-//     });
-// } else {
-//    store.history.push('/login');
-// }
 
 
 class App extends Component {
