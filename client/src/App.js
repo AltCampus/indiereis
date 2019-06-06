@@ -55,7 +55,6 @@ class App extends Component {
           Authorization: localStorage.getItem('jwt')
         },
       }).then(res => res.json()).then(data => {
-        // console.log(data, 'inside fetch')
         this.props.dispatch({
           type: 'SHOW_FORM_DATA',
           formData: data
@@ -80,10 +79,12 @@ class App extends Component {
           <Route path="/submit" component={Home} />
           <Route path="/discover" component={Discover} />
           <Route path="/about" component={About} />
-           { this.props.crowdsourced ? data.map((d, i) => 
-          <PrivateRoute path={'/'+d.country} auth={this.props.isAuth} component={CountryProfile} />
-          ) : null
-         }
+          { 
+            // key added
+            this.props.crowdsourced ? data.map((d, i) => 
+            <PrivateRoute key={i} path={'/'+d.country} auth={this.props.isAuth} component={CountryProfile} />
+            ) : null
+          }
          {/*
           this.props.scrappedCountries ? countryList
          */}
@@ -95,7 +96,6 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state, "app")
   return {
     loggeduser: state.User,
     isAuth:state.User.isAuthenticated,

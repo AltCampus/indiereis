@@ -1,6 +1,8 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import { Link, withRouter } from "react-router-dom";
+import { URL } from '../utils/static';
+import { connect } from 'react-redux';
 
 const countries = [
   {
@@ -64,11 +66,21 @@ const renderSuggestion = suggestion => (
 class ListCountry extends React.Component {
   constructor() {
     super();
-
     this.state = {
       value: '',
       suggestions: []
     };
+  }
+
+  searchCountry = (name) => {
+    fetch(`${URL}/country/${name}`).then(res =>res.json())
+    .then( data => {
+      this.props.dispatch({
+        type: 'FILTERED_COUNTRIES',
+        data: data.data[0].country[0]
+      });
+      this.props.history.push('/discover/'+name);
+    })
   }
 
   onChange = (event, { newValue }) => {
@@ -79,7 +91,7 @@ class ListCountry extends React.Component {
 
   onClick = (e) => {
     if(e.key === 'Enter'){
-      this.props.history.push('/discover')
+      this.searchCountry(e.target.value);
     }
   }
 
@@ -119,4 +131,4 @@ class ListCountry extends React.Component {
   }
 }
 
-export default withRouter(ListCountry);
+export default withRouter(connect()(ListCountry));

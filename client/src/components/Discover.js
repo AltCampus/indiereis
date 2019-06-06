@@ -31,21 +31,34 @@ class Discover extends React.Component{
 		this.props.dispatch({
   		type: 'DISCOVER_COUNTRY_NAME',
   		payload: name
-  	})
-		this.props.history.push('/discover/'+name)
+  	});
+		this.props.history.push('/discover/'+ name);
 		// this.setState({
 		// 	showDetails: !this.state.showDetails
 		// })
 	}
 
 	render(){
-		const data = this.props.scrappedCountries || null
-
+		const { data, filteredCountry } = this.props.scrappedCountries || null
 		return(
 			<div>
 				<Header />
 				{
-					data && data.country ? data.country.slice(0,100).map((v, i) => {
+					filteredCountry ? 
+					<div className ="country-container">
+						<div className="container-main">
+							<div className="visa-head">
+								<div className="container-head">
+									<img src={filteredCountry.flag} alt="flag" />
+										<p onClick={() => this.handleCountry(filteredCountry.name)}>{filteredCountry.name}</p>
+								</div>
+							<p className="visa-btn">{filteredCountry.Visa_Requirement}</p>
+							</div>
+							<p className="country-notes">{filteredCountry.notes}</p>
+						</div>
+					</div>
+					
+					: data && data.country ? data.country.slice(0,100).map((v, i) => {
 						return (	
 							<div key={i} className ="country-container">
 								<div className="container-main">
@@ -63,7 +76,7 @@ class Discover extends React.Component{
 					}): null
 				}
 			</div>
-			)
+		)
 	}
 
 
@@ -71,7 +84,7 @@ class Discover extends React.Component{
 
 function mapStateToProps(state){
 	return {
-		scrappedCountries: state.Country.data
+		scrappedCountries: state.Country,
 	}
 }
 

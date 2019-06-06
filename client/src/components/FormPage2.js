@@ -13,8 +13,7 @@ class FormPage2 extends React.Component{
 	}
 
 	goBack = () => {
-		console.log(this.props)
-		this.props.history.push('/contribute')
+		this.props.history.push('/contribute');
 	}
 
 	handleChange = (e) => {

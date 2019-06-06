@@ -14,7 +14,7 @@ class MainProfile extends React.Component{
     email: this.props.user.user.email || null,
     dob: this.props.user.user.dob || null,
     phoneNumber: this.props.user.user.phoneNumber || null,
-    photo: ""
+    photo: this.props.user.user.photo || null
   }
 
   handleChange = (e) => {
@@ -31,7 +31,6 @@ class MainProfile extends React.Component{
     // file conversion to base64 using FileReader fn
     const reader = new FileReader();
     reader.onload = (event) => {
-      console.log(event.target.result, "base64...");
       sendImg(event.target.result);
     };
     reader.readAsDataURL(photo);

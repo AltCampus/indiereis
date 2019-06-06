@@ -10,6 +10,11 @@ export function Country(state =[], action) {
 				...state,
 				country: action.payload,
 			};
+			case "FILTERED_COUNTRIES":
+			return {
+				...state,
+				filteredCountry: action.data,
+			};
 		default: {
 			return state
 		}
