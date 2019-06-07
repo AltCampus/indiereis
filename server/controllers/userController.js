@@ -30,6 +30,9 @@ module.exports = {
 			if(!user) {
 				res.status(400).json({ success: false, error: "user not found" });
 			}
+			if(user && !user.password && user.strategies.include("google")){
+				res.status(400).json({ success: false, error: "google user", message: "please login through google" })
+			}
 			if(user){
 				var result = user.validatePassword(data.password);
 				var token = jwtAuth.signToken({ _id: user._id });

@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 	Questions,
 	userFormData,
 	Crowdsourced,
-	Country
+	Country,
 })
 
 export const store = createStore(rootReducer);

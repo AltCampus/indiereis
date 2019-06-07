@@ -1,41 +1,39 @@
 import React from 'react';
 import {connect} from 'react-redux';
-var storeKey = [];
-
+import { withRouter } from "react-router-dom";
 class Experience extends React.Component{
 
-	render(){
-		const crowdsourced = this.props.crowdsourced ? this.props.crowdsourced : null;
-		const ratingInfo = crowdsourced.data.slice(0,1)[0]
+	goBack = () => {
+		this.props.history.push('/Dashboard')
+	}
 
-		return (
-			<div>
-				<div className=''>
-				{ 
-					Object.keys(ratingInfo).map((key, i) => {
-						key.includes("trip experience") ? storeKey[key]= ratingInfo[key] : ''
-					})
-				}
+	render(){
+		var country = this.props.country;
+		
+		return(
+			<React.Fragment>
 				{
-					crowdsourced ? Object.keys(storeKey).map((key, i) => 
-					<div key={i}>
-						<p style={{ fontSize:'16px', fontWeight:'bold' }}>{key.toUpperCase()}</p>
-						<p style={{ fontSize:'14px', fontWeight:'bold' }}>{ ratingInfo[key] }</p>
-					</div> ) : null 
+					country && typeof(country) === "object" ? 
+						Object.keys(country).filter( v => v === "trip experience" ).map((key, i) => 
+							<div key={i} style={{ padding :'5px 0', display:'flex', justifyContent:'space-between'}}>
+								 <p style={{ fontSize:'16px', fontWeight:'bold'}}>{key.toUpperCase()}</p>
+								 <p style={{ fontSize:'14px', fontWeight:'bold'}}>{ country[key] }</p>
+							</div>
+						)
+					: this.goBack()
 				}
-				</div>
-			</div>
+			</React.Fragment>
 		)
 	}
 }
 
 function mapStateToProps(state){
 	return{
-    crowdsourced: state.Crowdsourced.data
+    country: state.Country.countryName,
 	}
 }
 
-export default connect(mapStateToProps)(Experience);
+export default withRouter(connect(mapStateToProps)(Experience));
 
 
 

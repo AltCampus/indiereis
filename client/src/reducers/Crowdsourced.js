@@ -6,6 +6,7 @@ export function Crowdsourced(state =[], action) {
 				data: action.formData,
 			};
 		case 'COUNTRY_NAME':
+			return null
 			return {
 				...state,
 				country: action.countryName

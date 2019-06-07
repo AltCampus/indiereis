@@ -76,7 +76,7 @@ class FormPage1 extends React.Component{
 								    <div className="select">
 								      <select name={ questions.data.qset3.name[2] } onChange={this.handleChange} required >
 								        <option>Choice of Trip</option>
-								        {suitedTrip.map((el, i) => <option key={i}>{el}</option>)}
+								        {suitedTrip.map((el, i) => <option key={i} >{el}</option>)}
 								      </select>
 								   	</div>
 									</div>
@@ -92,7 +92,7 @@ class FormPage1 extends React.Component{
 								    <div className="select">
 								      <select name={ questions.data.qset3.name[1] } onChange={this.handleChange} required >
 								        <option>Ideal Holiday</option>
-								        {idealHoliday.map((el, i) => <option key={i}>{el}</option>)}
+								        {idealHoliday.map((el, i) => <option key={i} >{el}</option>)}
 								      </select>
 								   	</div>
 									</div>

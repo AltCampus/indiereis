@@ -53,9 +53,8 @@ class MainProfile extends React.Component{
         })
         .then(res => res.json())
         .then(data => {
-          console.log(data, "profile updated...");
-          this.setState({})
-          return;
+          this.setState({ message: "Profile updated!"})
+          return null;
       })
     }else {
       // cloudinary image upload and user update
@@ -79,8 +78,7 @@ class MainProfile extends React.Component{
           })
           .then(res => res.json())
           .then(data => {
-            console.log(data, "profile updated...");
-            this.setState({})
+            this.setState({ message: "Profile updated!"})
         })
       })
     }
@@ -129,6 +127,7 @@ class MainProfile extends React.Component{
           </div>
           :
   				<form style={{ marginTop:"20px", boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }} className="profile-flex onclick-display-main" onSubmit={this.handleSubmit}>
+            <label style={{textAlign: "center", color: "red"}}>{ this.state.message || "" }</label>
   					<div className="profile-name">
   						<input type="text" placeholder="First name" onChange={ this.handleChange } value={this.state.firstName} name="firstName" />
   						<input type="text" placeholder="Last name" name="lastName" onChange={ this.handleChange } value={this.state.lastName} />

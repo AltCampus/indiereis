@@ -58,7 +58,7 @@ class FormPage3 extends React.Component{
 						    <div className="select">
 						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(5,10)[i]}>
 						        <option>Ratings</option>
-						          {num.map(i => <option>{i}</option>)}
+						          {num.map((v,i) => <option key={i}>{v}</option>)}
 						      </select>
 						    </div>
 						  </div>

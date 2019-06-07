@@ -15,6 +15,11 @@ export function Country(state =[], action) {
 				...state,
 				filteredCountry: action.data,
 			};
+			case "SHOW_COUNTRY":
+			return {
+				...state,
+				countryName: action.data
+			};
 		default: {
 			return state
 		}

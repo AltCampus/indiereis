@@ -1,15 +1,9 @@
 import React from 'react';
 import UserProfile from './UserProfile';
 import CountryProfile from './CountryProfile';
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  withRouter
-} from "react-router-dom";
-import {connect} from 'react-redux';
+import { URL } from '../utils/static';
+import { withRouter } from "react-router-dom";
+import { connect } from 'react-redux';
 
 
 class SourcedForm extends React.Component{
@@ -18,16 +12,21 @@ class SourcedForm extends React.Component{
 		this.state = {};
   }
 
-  handleCountry = (country) => {
-  	this.props.dispatch({
-  		type: 'COUNTRY_NAME',
-  		countryName: country
-  	})
+  handleCountry = (id) => {
+  	fetch(`${URL}/public-data/${id}`)
+		.then(res => res.json())
+		.then(data => {
+			console.log(data, "inside SourcedForm...")
+			this.props.dispatch({
+				type: "SHOW_COUNTRY",
+				data: data.data
+			})
+			this.props.history.push(`/${ data.data.country }`);
+		})
   }
 
 	render(){
 		const data = this.props.crowdsourced ? this.props.crowdsourced.data : null;
-
 		return(
 				<div>
 					<div style={{width: '800px', margin: '0 auto'}}>
@@ -37,10 +36,12 @@ class SourcedForm extends React.Component{
 		        <UserProfile />
 						<div className="wrapper">
 							<div className="main-grid">
-							{ this.props.crowdsourced ? data.map((d, i) =>
-								// key added to link
-								<Link to={'/'+d.country} key={i} ><div key={i} onClick={() => this.handleCountry(d.country)} className="big-box bg1">{d.country}</div></Link>
-								) : null
+							{ this.props.crowdsourced ?
+									data.map((d, i) =>
+										<div key={i} style={{ cursor:'pointer'}} onClick={() => this.handleCountry(d._id)} className="big-box bg1">{d.country}
+										</div> 
+									)
+								: null
 							}
 							</div>
 						</div>

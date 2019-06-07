@@ -15,6 +15,14 @@ router.get('/', (req,res,next) => {
 	})
 });
 
+router.get('/:id', (req,res,next) => {
+	// console.log("inside fetch questions...");
+	UserData.findOne({ _id: req.params.id }, (err, data) => {
+		if(err) return res.status(500).json({ success: false, message: "server side error"});
+		res.status(200).json({ success: true, data });
+	})
+});
+
 router.post('/', jwtAuth.verifyToken, (req,res,next) => {
 	console.log(req.body, "inside userData post...");
 	console.log(req.user, "jwt user data");

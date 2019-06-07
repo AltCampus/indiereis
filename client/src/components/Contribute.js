@@ -81,7 +81,7 @@ class Contribute extends React.Component{
 
 								<div className="control">
 							    <label className="checkbox parallel" >
-							      <input type="checkbox" className="terms" checked={ terms } name="terms" onClick={ this.handleToggle } required />
+							      <input type="checkbox" className="terms" checked={ terms } name="terms" onChange={ this.handleToggle } required />
 							      <div className="terms">I agree to the <Link to="#">terms and conditions</Link></div>
 							    </label>
 								</div>

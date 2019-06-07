@@ -49,7 +49,7 @@ class FormPage2 extends React.Component{
 						<div key={i} className="field">
 						  <label className="label">
 						  { 
-						  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
+						  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) :
 						  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
 						  	q.replace("{I/WE}", "I") :
 						  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
@@ -60,7 +60,7 @@ class FormPage2 extends React.Component{
 						    <div className="select">
 						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(0,5)[i] } required >
 						        <option>Ratings</option>
-						          {num.map(i => <option>{i}</option>)}
+						          {num.map((v, i) => <option key={i}>{v}</option>)}
 						      </select>
 						    </div>
 						  </div>
