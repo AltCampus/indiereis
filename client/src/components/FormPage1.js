@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import NavBar from './NavBar';
 import {connect} from 'react-redux';
 import FormPage2 from './FormPage2';
-import {URL, num, countries, suitedTrip, idealHoliday} from '../utils/static';
+import { URL, num, countries, suitedTrip, idealHoliday } from '../utils/static';
 
 class FormPage1 extends React.Component{
 	constructor(){

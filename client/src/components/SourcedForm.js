@@ -16,7 +16,6 @@ class SourcedForm extends React.Component{
   	fetch(`${URL}/public-data/${id}`)
 		.then(res => res.json())
 		.then(data => {
-			console.log(data, "inside SourcedForm...")
 			this.props.dispatch({
 				type: "SHOW_COUNTRY",
 				data: data.data

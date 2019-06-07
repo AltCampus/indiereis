@@ -10,7 +10,6 @@ class Menu extends React.Component {
   }
 
   handleLogout = e => {
-    console.log("cleared localStorage");
     this.props.dispatch({
       type: "LOGOUT"
     });

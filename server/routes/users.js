@@ -22,6 +22,9 @@ var jwtAuth = require("../config/jwtAuth");
 // 		cb(null, true)
 // 	}
 // })
+
+// router.post('/upload', loader.single('photo'), userController.upload);
+
 // ===================================
 
 router.get('/', userController.allUsers);
@@ -33,7 +36,5 @@ router.post('/delete', userController.deleteUser);
 router.post('/verify', userController.verifyToken);
 router.get('/verify/:token', userController.verifyUser);
 router.post('/forgot-password', userController.forgotPassword);
-
-// router.post('/upload', loader.single('photo'), userController.upload);
 
 module.exports = router;

@@ -30,21 +30,23 @@ module.exports = {
 			if(!user) {
 				res.status(400).json({ success: false, error: "user not found" });
 			}
-			if(user && !user.password && user.strategies.include("google")){
-				res.status(400).json({ success: false, error: "google user", message: "please login through google" })
-			}
+			console.log(user, "user login");
 			if(user){
-				var result = user.validatePassword(data.password);
-				var token = jwtAuth.signToken({ _id: user._id });
-				if(!result){
-					res.status(400).json({ success: false , error: "incorrect password" });
-				}
-				if(result){
-					User.findOne({ _id: user._id }).select("-password -createdAt -updatedAt -__v").exec(function(err, user) {
-						if(err) return res.status(500).json({ success: false, error: "server error" });
-						console.log("login successfull...");
-						res.status(200).json({ success: true , user, token });
-					})
+				if(user.strategies.includes("google")){
+					return res.status(401).send({ success: false, error: "google user", message: "please login through google" })
+				}else {
+					var result = user.validatePassword(data.password);
+					var token = jwtAuth.signToken({ _id: user._id });
+					if(!result){
+						return res.status(400).json({ success: false , error: "incorrect password" });
+					}
+					if(result){
+						User.findOne({ _id: user._id }).select("-password -createdAt -updatedAt -__v").exec(function(err, user) {
+							if(err) return res.status(500).json({ success: false, error: "server error" });
+							console.log("login successfull...");
+							return res.status(200).json({ success: true , user, token });
+						})
+					}
 				}
 			}
 		});

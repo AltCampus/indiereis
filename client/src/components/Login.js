@@ -29,7 +29,7 @@ class Login extends Component {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data, "user login");
+        console.log(data, "login....")
         if (data.token && data.user) {
           let jwt = data.token;
           localStorage.setItem("jwt", jwt);
@@ -46,6 +46,8 @@ class Login extends Component {
             this.setState({ emailError: data.error.toUpperCase() });
           }else if(data.error === "incorrect password"){
             this.setState({ passwordError: data.error.toUpperCase() });
+          }else if(data.error === "google user"){
+            this.setState({ error: data.message.toUpperCase() });
           }
           // this.props.history.push("/login");
         }
@@ -70,7 +72,7 @@ class Login extends Component {
       },
       body: JSON.stringify(this.state.user.email)
     }).then(res => res.json()).then(data => {
-      console.log(data, "forgot-password...")
+      console.log(data, "forgot-password...");
     })
   }
 
@@ -83,7 +85,7 @@ class Login extends Component {
           <div className="signup">
             <p> Login using your account </p>{" "}
             <form action="/users/login"method="post" className="signup-form" onSubmit={this.handleLogin}>
-              <label style={{textAlign: "left", color: "red"}}>{ this.state.emailError || "" }</label>
+              <label style={{textAlign: "left", color: "red"}}>{ this.state.emailError || this.state.error || "" }</label>
               <input type="email" name="email" placeholder="Email" value={this.state.user.email} onChange={this.handleChange} required />
               <label style={{textAlign: "left", color: "red"}}>{ this.state.passwordError || "" }</label>
               <input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange={this.handleChange} required />

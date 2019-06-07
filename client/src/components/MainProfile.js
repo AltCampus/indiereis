@@ -5,6 +5,7 @@ const { jwt } = localStorage;
 import { upload_preset, cloudName } from "../../../key";
 import UserDash from './UserDash';
 import NavBar from './NavBar';
+import Loader from './Loader';
 
 class MainProfile extends React.Component{
   
@@ -16,7 +17,7 @@ class MainProfile extends React.Component{
     email: this.props.user.user.email || "",
     dob: this.props.user.user.dob || "",
     phoneNumber: this.props.user.user.phoneNumber || "",
-    photo: this.props.user.user.photo || ""
+    photo: this.props.user.user.photo || this.props.user.user.google.photo || "",
   }
 
   handleChange = (e) => {
@@ -41,8 +42,9 @@ class MainProfile extends React.Component{
 
   handleSubmit = async(e) => {
     e.preventDefault();
+    this.setState({ loading: true });
 
-    if(this.state.photo.startsWith("https://res.cloudinary.com") || !this.state.photo ){
+    if(this.state.photo.startsWith("https://") || !this.state.photo ){
       fetch(`${URL}/users/update`, {
         method: "POST",
         headers: {
@@ -53,7 +55,8 @@ class MainProfile extends React.Component{
         })
         .then(res => res.json())
         .then(data => {
-          this.setState({ message: "Profile updated!"})
+          this.setState({ loading: false, message: "Profile updated!"})
+          console.log("Profile updated!");
           return null;
       })
     }else {
@@ -78,18 +81,18 @@ class MainProfile extends React.Component{
           })
           .then(res => res.json())
           .then(data => {
-            this.setState({ message: "Profile updated!"})
+            this.setState({ loading: false, message: "Profile updated!"})
+            console.log("Profile updated!");
         })
       })
     }
   }
 
   handleProfile = (e) => {
-    console.log(e.target.innerText, "handleProfile....");
     e.target.innerText === "Edit Profile" ? 
-    this.setState({ showProfile: false }):
+      this.setState({ showProfile: false }):
     e.target.innerText === "Show Profile" ? 
-    this.setState({ showProfile: true }): null
+      this.setState({ showProfile: true }): null
   }
 
 	render(){
@@ -103,15 +106,19 @@ class MainProfile extends React.Component{
             <button className="button is-danger" style={{margin: "0 5px"}} onClick={this.handleProfile}>Edit Profile</button>
           </div>
         }
-        {
+        {     
           this.state.showProfile ? 
           <div style={{display: "grid", placeItems:"center"}}>
-            <div style={{ width: "500px", marginTop:"20px", padding:'40px', boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }}>
+            <div style={{ width: "500px", margin:"20px auto", padding:'40px', boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }}>
               <figure style={{ textAlign:'center' }}>
-                <label className="userInfo">{ this.state.name || "" }</label>
+                <label style={{ display: "block" }}className="userInfo">{ this.state.name || "" }</label>
+                
                 { this.props.user.user.photo ? 
-                  <img style={{ height: "200px", width: "200px", borderRadius:'50%', padding:'20px 0' }} src={ this.props.user.user.photo || null } alt="Profile photo"/>
-                  :<div style={{ height: "200px", width: "200px", borderRadius:'50%', background: "#00d1b2", display:"grid", placeItems:"center", margin: "20px auto"}}>
+                  <div style={{ height: "200px", display: 'inline-block', width: "200px", borderRadius:'50%', margin: "20px auto" }}>
+                    <img style={{ height: "100%", width: "100%", borderRadius:'50%' }} src={ this.props.user.user.photo || null } alt="Profile photo"/>
+                  </div>
+                  :
+                  <div style={{ height: "200px", width: "200px", borderRadius:'50%', background: "#00d1b2", display:"grid", placeItems:"center", margin: "20px auto"}}>
                     <span style={{fontSize:'50px', color:"#fff", fontWeight:'bold'}}>{this.state.name ? this.state.name.slice(0,1).toUpperCase(): ""}</span>
                   </div>
                 }
@@ -125,19 +132,25 @@ class MainProfile extends React.Component{
               <label className="userInfo">DOB :</label><h3>{this.state.dob || "Not Available"}</h3>
             </div>
           </div>
-          :
+          : 
   				<form style={{ marginTop:"20px", boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }} className="profile-flex onclick-display-main" onSubmit={this.handleSubmit}>
-            <label style={{textAlign: "center", color: "red"}}>{ this.state.message || "" }</label>
-  					<div className="profile-name">
-  						<input type="text" placeholder="First name" onChange={ this.handleChange } value={this.state.firstName} name="firstName" />
-  						<input type="text" placeholder="Last name" name="lastName" onChange={ this.handleChange } value={this.state.lastName} />
-  					</div>
-  					<input type="text" placeholder="Username" name="name" onChange={ this.handleChange } value={this.state.name}/>
-  					<input type="email" placeholder="Email" name="email" onChange={ this.handleChange } value={this.state.email} readOnly />
-  					<input type="number" placeholder="Phone Number" name="phoneNumber" onChange={ this.handleChange } value={this.state.phoneNumber} />
-  					<input type="date" placeholder="Date of Birth" name="dob" onChange={ this.handleChange } value={this.state.dob} />
-  					<input type="file" placeholder="Upload new profile image" name="photo" onChange={ this.handleFile } />		
-  					<button type="submit" className="btn-standard">Save</button>
+            { 
+              !this.state.loading ?
+              <>
+                <label style={{textAlign: "center", color: "red"}}>{ this.state.message || "" }</label>
+      					<div className="profile-name">
+      						<input type="text" placeholder="First name" onChange={ this.handleChange } value={this.state.firstName} name="firstName" />
+      						<input type="text" placeholder="Last name" name="lastName" onChange={ this.handleChange } value={this.state.lastName} />
+      					</div>
+      					<input type="text" placeholder="Username" name="name" onChange={ this.handleChange } value={this.state.name}/>
+      					<input type="email" placeholder="Email" name="email" onChange={ this.handleChange } value={this.state.email} readOnly />
+      					<input type="number" placeholder="Phone Number" name="phoneNumber" onChange={ this.handleChange } value={this.state.phoneNumber} />
+      					<input type="date" placeholder="Date of Birth" name="dob" onChange={ this.handleChange } value={this.state.dob} />
+      					<input type="file" placeholder="Upload new profile image" name="photo" onChange={ this.handleFile } />		
+      					<button type="submit" className="btn-standard">Save</button>
+              </>
+              : <Loader /> 
+            }
   				</form>
         }
   		</div> 
