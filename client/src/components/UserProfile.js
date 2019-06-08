@@ -17,7 +17,7 @@ class UserProfile extends React.Component{
 					</ul>
 				</div>
 			</div>
-			)
+		)
 	}
 }
 

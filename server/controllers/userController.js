@@ -151,18 +151,29 @@ module.exports = {
 				user.save();
 				var html =
 			  `<h2> welcome to travel info</h2>
-			   <p> please click on the link below to varify your account<p>
-			   <a href='http://localhost:8000/api/v1/users/verify/${ user.token }' > Click to Varify </a>
+			   <p> Your one time password is : <p>
+			   <h4>${user.token}</h4>
 			    `;
 				mailController.mail(user.email, user.token, html).catch(err => console.error(err));
 				console.log("Mail sent for password change.....");
-				res.status(200).json({ success: true , message: "Please check your email inbox for the password recovery code" });
+				res.status(200).json({ success: true , message: "Please check your mail inbox for OTP" });
 			} else {
 				res.status(400).send({ message: 'User does not exist!' });
 			}
 		});
 	},
+	confirmOTP: (req, res, next) => {
+		console.log(req.body,"confirmOTP");
+		User.findOne({ token : req.body }, (err, user) => {
+			if(err) return res.status(500).send({ success: false, error: 'Server error' });
+			res.status(200).json({ success: true, message: 'otp verified', otp: user.otp });
+		})
+	},
 	changePassword: (req, res, next) => {
-		console.log("changePassword");
+		console.log(req.body,"changePassword");
+		User.findOneAndUpdate({ email : req.body.email }, req.body, (err, user) => {
+			if(err) return res.status(500).send({ success: false, error: 'Server error' });
+			res.status(200).json({ success: true, message: 'password changed sucessfully' });
+		})
 	}
 };

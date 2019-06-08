@@ -28,9 +28,7 @@ ul li{
  	padding: 10px;
   margin: 1rem;
   border-radius: 4px;
-  display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
+  position: relative;
  }
 .bg1{
   background: linear-gradient(325deg, rgba(238,174,202,1) 0%, rgba(190,177,218,1) 22%, rgba(89,94,112,1) 59%, rgba(148,187,233,1) 100%);

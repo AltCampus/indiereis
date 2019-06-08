@@ -12,20 +12,22 @@ class UserDash extends Component {
 
 		return (
 			<div style={{cursor: 'pointer'}} className="user-dash" onClick={this.handleClick}>
-          {
-            user ? 
+        {
+          user ? 
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
-              { user.photo ? 
-                <img style={{width:"40px", height: '40px', borderRadius:'50%'}} src={user.photo} alt='profile-image' /> 
-                :<div style={{height: "40px", width: "40px", borderRadius:'50%', background: "green", display:"grid", placeItems:"center"}}>
+              { 
+                user.photo ? 
+                  <img style={{width:"40px", height: '40px', borderRadius:'50%'}} src={user.photo} alt='profile-image' /> 
+                :
+                <div style={{height: "40px", width: "40px", borderRadius:'50%', background: "green", display:"grid", placeItems:"center"}}>
                   <span style={{color:"#fff"}}>{user.name.slice(0,1).toUpperCase()}</span>
                 </div>
               }
-						  <div className="user-info">Hello {user.name}</div>
+						  <p className="user-info">Hello {user.name}</p>
             </div> 
-              : ''
-          }
-        </div>
+          : null
+        }
+      </div>
 		);
 	}
 }

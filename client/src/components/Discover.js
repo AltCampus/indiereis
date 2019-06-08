@@ -5,6 +5,7 @@ import CountryModal from './CountryModal';
 import {Link, withRouter} from 'react-router-dom';
 import UserDash from './UserDash';
 import NavBar from './NavBar';
+import Footer from "./Footer";
 
 class Discover extends React.Component{
 	constructor(){
@@ -41,42 +42,43 @@ class Discover extends React.Component{
 	render(){
 		const { data, filteredCountry } = this.props.scrappedCountries || null
 		return(
-			<div>
+			<React.Fragment>
 				<NavBar />
 				<UserDash />
-				{
-					filteredCountry ? 
-					<div className ="country-container" /*onClick={() => this.searchCountry(filteredCountry.name)}*/>
-						<div className="container-main">
-							<div className="visa-head">
-								<div className="container-head">
-									<img src={filteredCountry.flag} alt="flag" />
-										<p>{filteredCountry.name}</p>
-								</div>
-							<p className="visa-btn">{filteredCountry.Visa_Requirement}</p>
-							</div>
-							<p className="country-notes">{filteredCountry.notes}</p>
-						</div>
-					</div>
-					
-					: data && data.country ? data.country.slice(0,100).map((v, i) => {
-						return (	
-							<div key={i} className ="country-container" /*onClick={() => this.searchCountry(v.name)}*/>
-								<div className="container-main">
-									<div className="visa-head">
-										<div className="container-head">
-											<img src={v.flag} alt="flag" />
-												<p>{v.name}</p>
-										</div>
-									<p className="visa-btn">{v.Visa_Requirement}</p>
+					{
+						filteredCountry ? 
+						<div className ="country-container" /*onClick={() => this.searchCountry(filteredCountry.name)}*/>
+							<div className="container-main">
+								<div className="visa-head">
+									<div className="container-head">
+										<img src={filteredCountry.flag} alt="flag" />
+											<p>{filteredCountry.name}</p>
 									</div>
-								<p className="country-notes">{v.notes}</p>
+								<p className="visa-btn">{filteredCountry.Visa_Requirement}</p>
 								</div>
+								<p className="country-notes">{filteredCountry.notes}</p>
 							</div>
-						)
-					}): null
-				}
-			</div>
+						</div>
+						
+						: data && data.country ? data.country.slice(0,100).map((v, i) => {
+							return (	
+								<div key={i} className ="country-container" /*onClick={() => this.searchCountry(v.name)}*/>
+									<div className="container-main">
+										<div className="visa-head">
+											<div className="container-head">
+												<img src={v.flag} alt="flag" />
+													<p>{v.name}</p>
+											</div>
+										<p className="visa-btn">{v.Visa_Requirement}</p>
+										</div>
+									<p className="country-notes">{v.notes}</p>
+									</div>
+								</div>
+							)
+						}): null
+					}
+				<Footer />
+			</React.Fragment>
 		)
 	}
 

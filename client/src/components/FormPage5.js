@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import FormPage6 from './FormPage6';
 import { URL, num } from '../utils/static';
+import Footer from "./Footer";
+import NavBar from './NavBar';
+import UserDash from './UserDash';
 
 class FormPage5 extends React.Component{
 	constructor(){
@@ -40,33 +43,39 @@ class FormPage5 extends React.Component{
 
 		return(
 			<React.Fragment>
-			{ questions.data ?  
-			 !nextFormPage ?
-				(<div className= "form-wrapper">
-					<progress className="progress is-primary" value="95" max="100">95%</progress>
-					{questions.data ? questions.data.qset1.questions.map((q,i) => 
-						<div key={i} className="field">
-						  <label className="label">
-						  {
-						  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
-						  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
-						  	q.replace("{I/WE}", "I") :
-						  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
-						    q.replace("{I/WE}", "we"): q
-						  }
-						  </label>
-						  <div className="control">
-						    <input className="input" type="text" onChange={this.handleChange} name={ questions.data.qset1.name[i] } required/>
-						  </div>
-						</div>
-					) : ''}
-					<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
-				</div>
-				): <FormPage6 />
-				: this.goBack()
-			}
+				<NavBar />
+				<UserDash />
+					{ questions.data ?  
+					 !nextFormPage ?
+						(
+							<div className= "form-wrapper">
+							<progress className="progress is-primary" value="95" max="100">95%</progress>
+							{
+								questions.data ? questions.data.qset1.questions.map((q,i) => 
+									<div key={i} className="field">
+									  <label className="label">
+									  {
+									  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
+									  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
+									  	q.replace("{I/WE}", "I") :
+									  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
+									    q.replace("{I/WE}", "we"): q
+									  }
+									  </label>
+									  <div className="control">
+									    <input className="input" type="text" onChange={this.handleChange} name={ questions.data.qset1.name[i] } required/>
+									  </div>
+									</div>
+								) : ''
+							}
+							<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
+							</div>
+						): <FormPage6 />
+						: this.goBack()
+					}
+				<Footer />
 			</React.Fragment>
-			)
+		)
 	}
 }
 

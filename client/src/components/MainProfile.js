@@ -6,6 +6,7 @@ import { upload_preset, cloudName } from "../../../key";
 import UserDash from './UserDash';
 import NavBar from './NavBar';
 import Loader from './Loader';
+import Footer from './Footer';
 
 class MainProfile extends React.Component{
   
@@ -108,51 +109,53 @@ class MainProfile extends React.Component{
         }
         {     
           this.state.showProfile ? 
-          <div style={{display: "grid", placeItems:"center"}}>
-            <div style={{ width: "500px", margin:"20px auto", padding:'40px', boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }}>
-              <figure style={{ textAlign:'center' }}>
-                <label style={{ display: "block" }}className="userInfo">{ this.state.name || "" }</label>
-                
-                { this.props.user.user.photo ? 
-                  <div style={{ height: "200px", display: 'inline-block', width: "200px", borderRadius:'50%', margin: "20px auto" }}>
-                    <img style={{ height: "100%", width: "100%", borderRadius:'50%' }} src={ this.props.user.user.photo || null } alt="Profile photo"/>
-                  </div>
-                  :
-                  <div style={{ height: "200px", width: "200px", borderRadius:'50%', background: "#00d1b2", display:"grid", placeItems:"center", margin: "20px auto"}}>
-                    <span style={{fontSize:'50px', color:"#fff", fontWeight:'bold'}}>{this.state.name ? this.state.name.slice(0,1).toUpperCase(): ""}</span>
-                  </div>
-                }
-                
-              </figure>
-              <label className="userInfo">First Name :</label><h3>{this.state.firstName || "Not Available"}</h3>
-              <label className="userInfo">Last Name :</label><h3>{this.state.lastName || "Not Available"}</h3>
-              <label className="userInfo">Name :</label><h3>{this.state.name || "Not Available"}</h3>
-              <label className="userInfo">Email :</label><h3>{this.state.email || "Not Available"}</h3>
-              <label className="userInfo">Phone Number :</label><h3>{this.state.phoneNumber || "Not Available"}</h3>
-              <label className="userInfo">DOB :</label><h3>{this.state.dob || "Not Available"}</h3>
+            <div style={{display: "grid", placeItems:"center"}}>
+              <div style={{ width: "500px", margin:"20px auto", padding:'40px', boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }}>
+                <figure style={{ textAlign:'center' }}>
+                  <label style={{ display: "block" }}className="userInfo">{ this.state.name || "" }</label>
+                  
+                  { 
+                    this.props.user.user.photo ? 
+                      <div style={{ height: "200px", display: 'inline-block', width: "200px", borderRadius:'50%', margin: "20px auto" }}>
+                        <img style={{ height: "100%", width: "100%", borderRadius:'50%' }} src={ this.props.user.user.photo || null } alt="Profile photo"/>
+                      </div>
+                    :
+                      <div style={{ height: "200px", width: "200px", borderRadius:'50%', background: "#00d1b2", display:"grid", placeItems:"center", margin: "20px auto"}}>
+                        <span style={{fontSize:'50px', color:"#fff", fontWeight:'bold'}}>{this.state.name ? this.state.name.slice(0,1).toUpperCase(): ""}</span>
+                      </div>
+                  }
+                  
+                </figure>
+                <label className="userInfo">First Name :</label><h3>{this.state.firstName || "Not Available"}</h3>
+                <label className="userInfo">Last Name :</label><h3>{this.state.lastName || "Not Available"}</h3>
+                <label className="userInfo">Name :</label><h3>{this.state.name || "Not Available"}</h3>
+                <label className="userInfo">Email :</label><h3>{this.state.email || "Not Available"}</h3>
+                <label className="userInfo">Phone Number :</label><h3>{this.state.phoneNumber || "Not Available"}</h3>
+                <label className="userInfo">DOB :</label><h3>{this.state.dob || "Not Available"}</h3>
+              </div>
             </div>
-          </div>
           : 
   				<form style={{ marginTop:"20px", boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }} className="profile-flex onclick-display-main" onSubmit={this.handleSubmit}>
             { 
               !this.state.loading ?
-              <>
-                <label style={{textAlign: "center", color: "red"}}>{ this.state.message || "" }</label>
-      					<div className="profile-name">
-      						<input type="text" placeholder="First name" onChange={ this.handleChange } value={this.state.firstName} name="firstName" />
-      						<input type="text" placeholder="Last name" name="lastName" onChange={ this.handleChange } value={this.state.lastName} />
-      					</div>
-      					<input type="text" placeholder="Username" name="name" onChange={ this.handleChange } value={this.state.name}/>
-      					<input type="email" placeholder="Email" name="email" onChange={ this.handleChange } value={this.state.email} readOnly />
-      					<input type="number" placeholder="Phone Number" name="phoneNumber" onChange={ this.handleChange } value={this.state.phoneNumber} />
-      					<input type="date" placeholder="Date of Birth" name="dob" onChange={ this.handleChange } value={this.state.dob} />
-      					<input type="file" placeholder="Upload new profile image" name="photo" onChange={ this.handleFile } />		
-      					<button type="submit" className="btn-standard">Save</button>
-              </>
+                <div>
+                  <label style={{textAlign: "center", color: "red"}}>{ this.state.message || "" }</label>
+        					<div className="profile-name">
+        						<input type="text" placeholder="First name" onChange={ this.handleChange } value={this.state.firstName} name="firstName" />
+        						<input type="text" placeholder="Last name" name="lastName" onChange={ this.handleChange } value={this.state.lastName} />
+        					</div>
+        					<input type="text" placeholder="Username" name="name" onChange={ this.handleChange } value={this.state.name}/>
+        					<input type="email" placeholder="Email" name="email" onChange={ this.handleChange } value={this.state.email} readOnly />
+        					<input type="number" placeholder="Phone Number" name="phoneNumber" onChange={ this.handleChange } value={this.state.phoneNumber} />
+        					<input type="date" placeholder="Date of Birth" name="dob" onChange={ this.handleChange } value={this.state.dob} />
+        					<input type="file" placeholder="Upload new profile image" name="photo" onChange={ this.handleFile } />		
+        					<button type="submit" className="btn-standard">Save</button>
+                </div>
               : <Loader /> 
             }
   				</form>
         }
+        <Footer/>
   		</div> 
     )
 	}

@@ -14,7 +14,8 @@ class Login extends Component {
       user: {
         email: "",
         password: ""
-      }
+      },
+      changePass: false
     };
   }
 
@@ -64,7 +65,13 @@ class Login extends Component {
     });
   };
 
+  handleForgotPass = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
   handlePassword = () => {
+    this.setState({ changePass: true });
     fetch(`${URL}/users/forgot-password`, {
       method: "POST",
       headers: {
@@ -76,33 +83,89 @@ class Login extends Component {
     })
   }
 
+  handleWindow = () => {
+    this.setState({ changePass: false });
+  }
+
+  confirmOTP = (e) => {
+    console.log(e.key,e.target.innerText, "onKeyPress...");
+    if(e.key === "Enter" && e.target.value.trim() || e.target.innerText === "Submit"){
+      fetch(`${URL}/users/confirm-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ otp: e.target.value })
+      }).then(res => res.json()).then(data => {
+        if(data.otp){
+          this.setState({ changePass: false, addNewPass: true });
+        }
+        console.log(data, "forgot-password...");
+      })
+    }
+  }
+
+  changePassword = () => {
+    fetch(`${URL}/users/change-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.state)
+    }).then(res => res.json()).then(data => {
+      console.log(data, "change-password data...");
+    })
+  }
+
   render() {
     return (
       <div>
         <NavBar />
         <UserDash />
-        <div className="flex-dash">
-          <div className="signup">
-            <p> Login using your account </p>{" "}
-            <form action="/users/login"method="post" className="signup-form" onSubmit={this.handleLogin}>
-              <label style={{textAlign: "left", color: "red"}}>{ this.state.emailError || this.state.error || "" }</label>
-              <input type="email" name="email" placeholder="Email" value={this.state.user.email} onChange={this.handleChange} required />
-              <label style={{textAlign: "left", color: "red"}}>{ this.state.passwordError || "" }</label>
-              <input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange={this.handleChange} required />
-              <button style={{margin:"0"}} type="submit" className="btn-standard"> Login</button>
-            </form>
-            <p style={{textAlign: "left", color:"dodgerblue", cursor: "pointer", padding:"10px 0"}} onClick={this.handlePassword}>Forgot password</p>
-            <div style={{display:"flex", justifyContent:'space-between', padding:"20px 0"}}> 
-              <span>Don't have an account</span>
-              <Link to = "/signup">
-                <strong > Sign up </strong>
-              </Link>
+          {
+            this.state.changePass ?
+            <div className="handle-pass-recovery">
+              <p style={{ display:'flex', justifyContent:'flex-end', cursor: "pointer" }} onClick={ this.handleWindow }>X</p>
+              <label style={{ fontSize: '20px', padding:'20px 0'  }}>Enter the password which is sent to you by mail</label>
+              <input style={{ display:'block', padding:'4px 10px', fontSize: '18px', border: "1px solid rgba(0,0,0,0.07)" }} type="text" name="recoverycode" onChange={ this.handleForgotPass } value={ this.state.recoverycode } placeholder="Enter OTP" onKeyPress={ this.confirmOTP } />
+              <button style={{ background:'#111', fontSize:'16px', padding:'8px 18px', borderRadius:'4px', marginTop:'10px', color: "#fff" }} onClick={ this.confirmOTP } >Submit</button>
             </div>
-          </div>
-          <div className="">
-            <GoogleLogin />
-          </div>
-        </div>
+            : 
+            this.state.addNewPass ?
+            <div className="handle-pass-recovery">
+              <p style={{ display:'flex', justifyContent:'flex-end', cursor: "pointer" }} onClick={ this.handleWindow }>X</p>
+              <label style={{ fontSize: '18px', padding:'20px 0'  }}>Enter your email address</label>
+              <input style={{ display:'block', padding:'4px 10px', fontSize: '18px', border: "0.5px solid rgba(0,0,0,0.07)" }} type="text" name="email" onChange={ this.handleForgotPass } value={ this.state.email } />
+              <label style={{ fontSize: '18px', padding:'20px 0'  }}>Enter new password</label>
+              <input style={{ display:'block', padding:'4px 10px', fontSize: '18px', border: "0.5px solid rgba(0,0,0,0.07)" }} type="text" name="newPassword" onChange={ this.handleForgotPass } value={ this.state.newPassword } />
+              <label style={{ fontSize: '18px', padding:'20px 0'  }}>Confirm password</label>
+              <input style={{ display:'block', padding:'4px 10px', fontSize: '18px', border: "0.5px solid rgba(0,0,0,0.07)" }} type="text" name="confirmNewPassword" onChange={ this.handleForgotPass } value={ this.state.confirmNewPassword } />
+              <button style={{ background:'#111', fontSize:'16px', padding:'8px 18px', borderRadius:'4px', marginTop:'10px', color: "#fff" }} onClick={ this.changePassword } >Submit</button>
+            </div>
+            :
+            <div className="flex-dash">
+              <div className="signup">
+                <p> Login using your account </p>{" "}
+                <form action="/users/login"method="post" className="signup-form" onSubmit={this.handleLogin}>
+                  <label style={{textAlign: "left", color: "red"}}>{ this.state.emailError || this.state.error || "" }</label>
+                  <input type="email" name="email" placeholder="Email" value={this.state.user.email} onChange={this.handleChange} required />
+                  <label style={{textAlign: "left", color: "red"}}>{ this.state.passwordError || "" }</label>
+                  <input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange={this.handleChange} required />
+                  <button style={{margin:"0"}} type="submit" className="btn-standard"> Login</button>
+                </form>
+                <p style={{textAlign: "left", color:"dodgerblue", cursor: "pointer", padding:"10px 0"}} onClick={ this.handlePassword }>Forgot password</p>
+                <div style={{display:"flex", justifyContent:'space-between', padding:"20px 0"}}> 
+                  <span>Don't have an account</span>
+                  <Link to = "/signup">
+                    <strong > Sign up </strong>
+                  </Link>
+                </div>
+              </div>
+              <div className="">
+                <GoogleLogin />
+              </div>
+            </div>
+          }
         <Footer />
       </div>
     );

@@ -15,6 +15,7 @@ class Dashboard extends React.Component {
         <NavBar />
         <UserDash />
         <SourcedForm />
+        <Footer />
       </div>
     );
   }

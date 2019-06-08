@@ -100,3 +100,23 @@ h6 {
 	margin: 10px;
 	border-radius: 6px;
 }
+
+
+.fas {
+	color: rgba(0,0,0,0.4);
+}
+.fas:hover {
+	color: rgba(0,0,0,0.8);
+}
+
+/*//////////====not working===/////////////*/
+/*.btn-box {
+	visibility: hidden;
+	display: none;
+	transition: all 400ms ease-out;
+}*/
+
+/*.country-card:hover .btn-box {
+	visibility: visible;
+	display: block;
+}*/

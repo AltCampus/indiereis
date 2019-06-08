@@ -3,6 +3,9 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendData } from "../actions/User";
 import { URL } from '../utils/static';
+import Footer from "./Footer";
+import NavBar from './NavBar';
+import UserDash from './UserDash';
 
 class FormPage6 extends React.Component{
 
@@ -28,11 +31,13 @@ class FormPage6 extends React.Component{
 		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 
 		return(
-				<React.Fragment>
-					<div className= "form-wrapper">
-						<progress className="progress is-primary" value="100" max="100">100%</progress>
-						{ 
-							questions.data ? 
+			<React.Fragment>
+				<NavBar />
+				<UserDash />
+				<div className= "form-wrapper">
+					<progress className="progress is-primary" value="100" max="100">100%</progress>
+					{ 
+						questions.data ? 
 							(
 								<div className="field">
 									<label className="label">{ questions.data.qset4.questions}</label>
@@ -41,12 +46,13 @@ class FormPage6 extends React.Component{
 										</textarea>
 									</div>
 								</div>
-								)
-							: <p>'no data'</p>
-						}
-						<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
-					</div>
-				</React.Fragment>
+							)
+						: <p>'no data'</p>
+					}
+					<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
+				</div>
+				<Footer />
+			</React.Fragment>
 		)
 	}
 }

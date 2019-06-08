@@ -3,6 +3,9 @@ import { Link, withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 import FormPage3 from './FormPage3';
 import { URL, num } from '../utils/static';
+import Footer from "./Footer";
+import NavBar from './NavBar';
+import UserDash from './UserDash';
 
 class FormPage2 extends React.Component{
 	constructor(){
@@ -40,39 +43,42 @@ class FormPage2 extends React.Component{
 
 		return(
 			<React.Fragment>
-		{ questions.data && userFormData ?
-			!nextFormPage ?
-				(
-				<div className= "form-wrapper">
-					<progress className="progress is-primary" value="30" max="100">30%</progress>
-					{questions.data && userFormData ? questions.data.qset2.questions.slice(0,5).map((q,i) => 
-						<div key={i} className="field">
-						  <label className="label">
-						  { 
-						  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) :
-						  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
-						  	q.replace("{I/WE}", "I") :
-						  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
-						    q.replace("{I/WE}", "we"): q
-						  }
-						  </label>
-						  <div className="control">
-						    <div className="select">
-						      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(0,5)[i] } required >
-						        <option>Ratings</option>
-						          {num.map((v, i) => <option key={i}>{v}</option>)}
-						      </select>
-						    </div>
-						  </div>
+				<NavBar />
+				<UserDash />
+				{ questions.data && userFormData ?
+					!nextFormPage ?
+						(
+						<div className= "form-wrapper">
+							<progress className="progress is-primary" value="30" max="100">30%</progress>
+							{questions.data && userFormData ? questions.data.qset2.questions.slice(0,5).map((q,i) => 
+								<div key={i} className="field">
+								  <label className="label">
+								  { 
+								  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) :
+								  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
+								  	q.replace("{I/WE}", "I") :
+								  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
+								    q.replace("{I/WE}", "we"): q
+								  }
+								  </label>
+								  <div className="control">
+								    <div className="select">
+								      <select onChange={this.handleChange} name={ questions.data.qset2.name.slice(0,5)[i] } required >
+								        <option>Ratings</option>
+								          {num.map((v, i) => <option key={i}>{v}</option>)}
+								      </select>
+								    </div>
+								  </div>
+								</div>
+								): ''}
+							<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
 						</div>
-						): ''}
-					<button className="button is-primary" onClick={this.handleSubmit}>Next</button>
-				</div>
-				): <FormPage3 />
-				: this.goBack()
-			}
+						): <FormPage3 />
+					: this.goBack()
+				}
+				<Footer />
 			</React.Fragment>
-			)
+		)
 	}
 }
 

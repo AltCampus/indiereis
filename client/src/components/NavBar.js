@@ -37,17 +37,18 @@ class NavBar extends React.Component {
 						<div className = "navbar-end">
 							<div className = "navbar-item">
 								<div className = "buttons"> 
-									{!this.props.loggeduser ? 
-									( 
-										<div>		
-											<Link to = "/signup" className = "button is-primary">
-											<strong > Sign up </strong></Link>
-											<Link to = "/login" className = "button is-light">Log in </Link>
-										</div>
-									) : 
-									( 
-										<Link type = "submit" className = "button is-light" onClick = {this.handleLogout}> Logout </Link>
-									)
+									{
+										!this.props.loggeduser ? 
+										( 
+											<div>		
+												<Link to = "/signup" className = "button is-primary">
+												<strong > Sign up </strong></Link>
+												<Link to = "/login" className = "button is-light">Log in </Link>
+											</div>
+										) : 
+										( 
+											<Link type = "submit" className = "button is-light" onClick = {this.handleLogout}> Logout </Link>
+										)
 									}
 								</div> 
 							</div> 
@@ -55,9 +56,9 @@ class NavBar extends React.Component {
 					</div>
 				</nav> 
 			</React.Fragment>
-			)
-		}
+		)
 	}
+}
 
 	function mapStateToProps(state) {
 		return {
