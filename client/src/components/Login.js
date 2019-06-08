@@ -72,7 +72,7 @@ class Login extends Component {
 
   handlePassword = () => {
     this.setState({ changePass: true });
-    fetch(`${URL}/users/forgot-password`, {
+    fetch(`${ URL }/users/forgot-password`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -144,6 +144,7 @@ module.exports = {
 		});
 	},
 	forgotPassword:(req, res, next) => {
+		console.log(req.body,'inside forgotPassword');
 		User.findOne({ email: req.body.email }, (err, user) => {
 			if(err) res.status(500).send({ success: false, error: 'Server error' });
 			if(user) {

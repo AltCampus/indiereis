@@ -109,7 +109,7 @@ class MainProfile extends React.Component{
         }
         {     
           this.state.showProfile ? 
-            <div style={{display: "grid", placeItems:"center"}}>
+            <div style={{display: "grid", placeItems:"center", marginBottom: '70px'}}>
               <div style={{ width: "500px", margin:"20px auto", padding:'40px', boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }}>
                 <figure style={{ textAlign:'center' }}>
                   <label style={{ display: "block" }}className="userInfo">{ this.state.name || "" }</label>

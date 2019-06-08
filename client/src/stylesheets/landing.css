@@ -101,8 +101,8 @@ small a {
 
 /*Footer Section*/
 .foot {
-  display: none;
-  padding: 40px 0;
+  /*display: none;*/
+  padding: 20px 0;
   width: 100%;
   background: #111;
   margin-top: 20px;

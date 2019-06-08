@@ -22,6 +22,7 @@ import FormPage1 from "./components/FormPage1";
 import PrivateRoute from './components/PrivateRoute';
 import CountryProfile from "./components/CountryProfile";
 import EditUserData from './components/EditUserData';
+import CountryInfo from './components/CountryInfo';
 
 class App extends Component {
 
@@ -72,6 +73,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />{" "}
           <Route path="/signup" component={SignUp} />{" "}
           <Route path="/map" component={Map} />
+          <Route path="/country" component={CountryInfo} />
           <Route path="/edit-data" component={EditUserData} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/contribute"  component={Contribute} />

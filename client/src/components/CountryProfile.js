@@ -10,15 +10,15 @@ class CountryProfile extends React.Component{
 
 	render(){
 		return(
-			<div>
+			<React.Fragment>
 				<NavBar />
 				<UserDash />
-				<div className="dash-flex" style={{marginTop: '40px'}}>
+				<div className="dash-flex" style={{ marginTop: '40px' }}>
 					<UserProfile />
 					<Tabs />
 				</div>
-			</div>
-			)
+			</React.Fragment>
+		)
 	}
 }
 

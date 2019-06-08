@@ -44,7 +44,7 @@ class EditUserData extends Component {
 			<React.Fragment>
 				<NavBar />
 				<UserDash />
-				<div style={{ width: "600px", margin:"0 auto", boxShadow: "3px 3px 6px 2px rgba(0,0,0,0.4)", padding:'20px' }}>
+				<div style={{ width: "600px", margin:"0 auto", boxShadow: "3px 3px 6px 2px rgba(0,0,0,0.4)", padding:'20px', marginBottom: '70px' }}>
 				
 					{
 						country && typeof(country) === "object" ? 
