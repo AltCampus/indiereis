@@ -36,6 +36,11 @@ router.post('/delete', userController.deleteUser);
 router.post('/verify', userController.verifyToken);
 router.get('/verify/:token', userController.verifyUser);
 router.post('/forgot-password', userController.forgotPassword);
+
+// router.get('/forgot', userController.forgotPassword);
+
+router.get('/forgot-password', userController.forgotPassword);
+
 router.post('/change-password', userController.changePassword);
 router.post('/confirm-otp', userController.confirmOTP);
 

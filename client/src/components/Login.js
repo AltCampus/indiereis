@@ -72,49 +72,66 @@ class Login extends Component {
 
   handlePassword = () => {
     this.setState({ changePass: true });
-    fetch(`${ URL }/users/forgot-password`, {
+
+    fetch(`${URL}/users/forgot-password`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state.user.email)
-    }).then(res => res.json()).then(data => {
-      console.log(data, "forgot-password...");
+      body: JSON.stringify({ email : this.state.user.email }),
     })
+      .then( res => res.json() )
+      .then( data => {
+        console.log(data, "forgot-password");
+      });
   }
 
   handleWindow = () => {
     this.setState({ changePass: false });
   }
 
-  confirmOTP = (e) => {
-    console.log(e.key,e.target.innerText, "onKeyPress...");
-    if(e.key === "Enter" && e.target.value.trim() || e.target.innerText === "Submit"){
-      fetch(`${URL}/users/confirm-otp`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ otp: e.target.value })
-      }).then(res => res.json()).then(data => {
-        if(data.otp){
-          this.setState({ changePass: false, addNewPass: true });
-        }
-        console.log(data, "forgot-password...");
-      })
-    }
-  }
-
-  changePassword = () => {
-    fetch(`${URL}/users/change-password`, {
+  otpConfirmPostReq = (data) => {
+    console.log(data, "otp");
+    fetch(`${URL}/users/confirm-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify( data ),
     }).then(res => res.json()).then(data => {
-      console.log(data, "change-password data...");
+      if(data.otp){
+        this.setState({ changePass: false, addNewPass: true });
+      }
+      console.log(data, "forgot-password...");
     })
+  }
+
+  confirmOTP = (e) => {
+    console.log(e.key,e.target.innerText, "onKeyPress...");
+    if(e.key === "Enter" && e.target.value.trim()){
+      this.otpConfirmPostReq({otp: e.target.value});
+    }else if(e.target.innerText === "Submit") {
+      console.log(e.target, e.target.innerText, "btn click");
+      this.otpConfirmPostReq({ otp: this.state.recoverycode });
+    }
+  }
+
+  changePassword = () => {
+    if(this.state.newPassword === this.state.confirmNewPassword){
+      fetch(`${URL}/users/change-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: this.state.user.email, password: this.state.newPassword }),
+      }).then(res => res.json()).then(data => {
+        console.log(data, "change-password data...");
+        this.setState({ changePass: false, addNewPass: false });
+      })
+    }else {
+      this.setStayte({ err: `password did't match`});
+      console.log(this.state.err);
+    }
   }
 
   render() {
@@ -134,8 +151,9 @@ class Login extends Component {
             this.state.addNewPass ?
             <div className="handle-pass-recovery">
               <p style={{ display:'flex', justifyContent:'flex-end', cursor: "pointer" }} onClick={ this.handleWindow }>X</p>
-              <label style={{ fontSize: '18px', padding:'20px 0'  }}>Enter your email address</label>
-              <input style={{ display:'block', padding:'4px 10px', fontSize: '18px', border: "0.5px solid rgba(0,0,0,0.07)" }} type="text" name="email" onChange={ this.handleForgotPass } value={ this.state.email } />
+              <label style={{ fontSize: '18px', padding:'20px 0', color: 'red'  }}>{this.state.err ? this.state.err.toUpperCase() : "" }</label>
+              <label style={{ fontSize: '18px', padding:'20px 0' }}>Enter your email address</label>
+              <input style={{ display:'block', padding:'4px 10px', fontSize: '18px', border: "0.5px solid rgba(0,0,0,0.07)" }} type="text" name="email" value={ this.state.user.email } disabled="true" />
               <label style={{ fontSize: '18px', padding:'20px 0'  }}>Enter new password</label>
               <input style={{ display:'block', padding:'4px 10px', fontSize: '18px', border: "0.5px solid rgba(0,0,0,0.07)" }} type="text" name="newPassword" onChange={ this.handleForgotPass } value={ this.state.newPassword } />
               <label style={{ fontSize: '18px', padding:'20px 0'  }}>Confirm password</label>

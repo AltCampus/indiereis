@@ -21,7 +21,7 @@ exports.mail = async function ( email, token, html ) {
   });
 
   console.log("inside mail function....",process.env.EMAIL, 'process.env.EMAIL',process.env.PASSWORD, "process.env.PASSWORD" )
-  var html =
+  var message =
   `<h2> welcome to travel info</h2>
    <p> please click on the link below to varify your account<p>
    <a href='http://localhost:8000/api/v1/users/verify/${ token }' > Click to Varify </a>
@@ -32,7 +32,7 @@ exports.mail = async function ( email, token, html ) {
     to: `${ email }`, // list of receivers
     subject: "travel info", // Subject line
     text: "welcome to travel Info", // plain text body
-    html: html || `${html}` // html body
+    html: html ? html : `${ message }; ` // html body
   });
 
   console.log("Message sent: %s", info.messageId);

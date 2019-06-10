@@ -17,7 +17,7 @@ class NavBar extends React.Component {
 			<React.Fragment >
 				<nav className = "navbar is-link is-small" role=" navigation " aria-label="main navigation"> 
 					<div className = "navbar-brand">
-						<Link to = "/" className = "navbar-item">Indiereis</Link> 
+						<Link to = "/" className = "navbar-item" style={{ fontSize:'30px', fontWeight:'bold', paddingBottom: '18px'}}>Indiereis</Link> 
 					</div>
 
 					<div id = "navbarBasicExample"className = "navbar-menu">
