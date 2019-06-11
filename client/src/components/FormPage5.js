@@ -56,10 +56,10 @@ class FormPage5 extends React.Component{
 									  <label className="label">
 									  {
 									  	q.includes("COUNTRYNAME") ? q.replace( "COUNTRYNAME", userFormData.country ) : 
-									  	q.includes("{I/WE}") && userFormData.kindOfTrip === "Solo" ?
-									  	q.replace("{I/WE}", "I") :
-									  	q.includes("{I/WE}") && userFormData.kindOfTrip !== "Solo" ?
-									    q.replace("{I/WE}", "we"): q
+									  	q.includes("{I/we}") && userFormData.kindOfTrip === "Solo" ?
+									  	q.replace("{I/we}", "I") :
+									  	q.includes("{I/we}") && userFormData.kindOfTrip !== "Solo" ?
+									    q.replace("{I/we}", "we"): q
 									  }
 									  </label>
 									  <div className="control">
