@@ -3,9 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendData } from "../actions/User";
 import { URL } from '../utils/static';
-import Footer from "./Footer";
-import NavBar from './NavBar';
-import UserDash from './UserDash';
 
 class FormPage6 extends React.Component{
 
@@ -31,28 +28,23 @@ class FormPage6 extends React.Component{
 		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
 
 		return(
-			<React.Fragment>
-				<NavBar />
-				<UserDash />
-				<div className= "form-wrapper">
-					<progress className="progress is-primary" value="100" max="100">100%</progress>
-					{ 
-						questions.data ? 
-							(
-								<div className="field">
-									<label className="label">{ questions.data.qset4.questions}</label>
-									<div className="control">
-										<textarea className="textarea" placeholder="200 characters minimum" name={questions.data.qset4.name[0]} onChange={this.handleChange} >
-										</textarea>
-									</div>
+			<div className= "form-wrapper">
+				<progress className="progress is-primary" value="100" max="100">100%</progress>
+				{ 
+					questions.data ? 
+						(
+							<div className="field">
+								<label className="label">{ questions.data.qset4.questions}</label>
+								<div className="control">
+									<textarea className="textarea" placeholder="200 characters minimum" name={questions.data.qset4.name[0]} onChange={this.handleChange} >
+									</textarea>
 								</div>
-							)
-						: <p>'no data'</p>
-					}
-					<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
-				</div>
-				<Footer />
-			</React.Fragment>
+							</div>
+						)
+					: <p>'no data'</p>
+				}
+				<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
+			</div>
 		)
 	}
 }

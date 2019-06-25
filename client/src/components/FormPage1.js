@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
-import NavBar from './NavBar';
 import {connect} from 'react-redux';
 import FormPage2 from './FormPage2';
 import { URL, num, countries, suitedTrip, idealHoliday } from '../utils/static';
-import Footer from "./Footer";
+import NavBar from './NavBar';
 import UserDash from './UserDash';
+import Footer from './Footer';
 
 class FormPage1 extends React.Component{
 	constructor(){
@@ -48,8 +48,8 @@ class FormPage1 extends React.Component{
 
 	return(
 		<React.Fragment>
-			<NavBar />
-			<UserDash />
+				<NavBar />
+				<UserDash />
 				{
 					questions.data && userFormData ?
 					!nextFormPage ?
@@ -115,7 +115,7 @@ class FormPage1 extends React.Component{
 						: <FormPage2 /> 
 						: null
 				}
-			<Footer />
+				<Footer />
 		</React.Fragment>
 		)
 	}

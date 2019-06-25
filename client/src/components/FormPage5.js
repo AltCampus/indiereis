@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import FormPage6 from './FormPage6';
 import { URL, num } from '../utils/static';
-import Footer from "./Footer";
-import NavBar from './NavBar';
-import UserDash from './UserDash';
 
 class FormPage5 extends React.Component{
 	constructor(){
@@ -43,8 +40,6 @@ class FormPage5 extends React.Component{
 
 		return(
 			<React.Fragment>
-				<NavBar />
-				<UserDash />
 					{ questions.data ?  
 					 !nextFormPage ?
 						(
@@ -73,7 +68,6 @@ class FormPage5 extends React.Component{
 						): <FormPage6 />
 						: this.goBack()
 					}
-				<Footer />
 			</React.Fragment>
 		)
 	}

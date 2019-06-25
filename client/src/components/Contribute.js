@@ -1,11 +1,11 @@
 import React from 'react';
 import Footer from './Footer';
 import NavBar from './NavBar';
+import UserDash from './UserDash';
 import { Link, withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 import {User} from '../reducers/User';
 import { URL , countries, tripDetails } from '../utils/static';
-import UserDash from './UserDash';
 
 class Contribute extends React.Component{
 	state = {
