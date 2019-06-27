@@ -19,6 +19,7 @@ class SourcedForm extends React.Component{
 	  	fetch(`${URL}/public-data/${id}`)
 			.then(res => res.json())
 			.then(data => {
+				console.log(data, "del data...")
 				this.props.dispatch({
 					type: "SHOW_COUNTRY",
 					data: data.data
@@ -57,6 +58,7 @@ class SourcedForm extends React.Component{
 	}
 
 	render(){
+		console.log(this.props,'props in crowdsourced');
 		const data = this.props.crowdsourced ? this.props.crowdsourced.data : null;
 		return(
 			<div>
@@ -91,6 +93,7 @@ class SourcedForm extends React.Component{
 }
 
 function mapStateToProps(state){
+	console.log(`%c ${state} map props`, 'color: green');
 	return{
     crowdsourced: state.Crowdsourced.data
 	}

@@ -9,6 +9,7 @@ import {
   Switch,
   withRouter
 } from "react-router-dom";
+
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
@@ -71,11 +72,13 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route exact path="/" component={Home} />{" "}
+          <Route exact path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />{" "}
           <Route path="/map" component={Map} />
           <Route path="/country" component={CountryInfo} />
           <Route path="/edit-data" component={EditUserData} />
-          <Route path="/dashboard" component={Dashboard} />
+          {/*<Route path="/dashboard" component={Dashboard} /> */}
+          <PrivateRoute path="/dashboard" auth={this.props.isAuth} component={Dashboard} />
           <Route path="/contribute"  component={Contribute} />
           <PrivateRoute path="/form" auth={this.props.isAuth} component={FormPage1} />
           <PrivateRoute path="/user-profile" auth={this.props.isAuth} component={MainProfile} />
@@ -88,10 +91,7 @@ class App extends Component {
             <PrivateRoute key={i} path={'/'+d.country} auth={this.props.isAuth} component={CountryProfile} />
             ) : null
           }
-         {/*
-          this.props.scrappedCountries ? countryList
-         */}
-          <Route exact path="/login" component={Login} />
+         {/* this.props.scrappedCountries ? countryList */}
         </Switch>
       </div>
     );

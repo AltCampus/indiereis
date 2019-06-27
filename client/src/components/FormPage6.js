@@ -5,6 +5,8 @@ import { sendData } from "../actions/User";
 import { URL } from '../utils/static';
 
 class FormPage6 extends React.Component{
+	
+	state = {}
 
 	handleChange = (e) => {
 		const { name, value } = e.target;

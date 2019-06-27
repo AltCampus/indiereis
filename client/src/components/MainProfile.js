@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import React from 'react';
+
 import { URL } from '../utils/static';
-const { jwt } = localStorage;
 import { upload_preset, cloudName } from "../../../key";
 import UserDash from './UserDash';
 import NavBar from './NavBar';
 import Loader from './Loader';
 import Footer from './Footer';
+const { jwt } = localStorage;
 
 class MainProfile extends React.Component{
   
@@ -19,6 +20,7 @@ class MainProfile extends React.Component{
     dob: this.props.user.user.dob || "",
     phoneNumber: this.props.user.user.phoneNumber || "",
     photo: this.props.user.user.photo || this.props.user.user.google.photo || "",
+    loading: false
   }
 
   handleChange = (e) => {
@@ -42,8 +44,9 @@ class MainProfile extends React.Component{
 
 
   handleSubmit = async(e) => {
+    console.log('submit fired...');
     e.preventDefault();
-    this.setState({ loading: true });
+    this.setState ({ loading: true });
 
     if(this.state.photo.startsWith("https://") || !this.state.photo ){
       fetch(`${URL}/users/update`, {
@@ -58,11 +61,11 @@ class MainProfile extends React.Component{
         .then(data => {
           this.setState({ loading: false, message: "Profile updated!"})
           console.log("Profile updated!");
-          return null;
+          this.props.history.push('/');
       })
-    }else {
+    } else {
       // cloudinary image upload and user update
-      var cloudData = { file : this.state.photo, upload_preset: upload_preset };
+      const cloudData = { file : this.state.photo, upload_preset: upload_preset };
       fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
         method: "POST",
         headers: {
@@ -73,17 +76,19 @@ class MainProfile extends React.Component{
         .then(data => {
           this.setState({ photo: data.secure_url });
           fetch(`${URL}/users/update`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "authorization": jwt
-          },
-          body: JSON.stringify(this.state),
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "authorization": jwt
+            },
+            body: JSON.stringify(this.state),
           })
           .then(res => res.json())
           .then(data => {
             this.setState({ loading: false, message: "Profile updated!"})
             console.log("Profile updated!");
+            this.props.history.push('/user-profile');
+            // router.replace({ pathname: "/user-profile" });
         })
       })
     }
@@ -137,7 +142,7 @@ class MainProfile extends React.Component{
           : 
   				<form style={{ marginTop:"20px", boxShadow:" -0.5px -0.5px 0 0 rgba(0,0,0,0.175), 2px 2px 10px 1px rgba(0,0,0,0.175)" }} className="profile-flex onclick-display-main" onSubmit={this.handleSubmit}>
             { 
-              !this.state.loading ?
+              this.state.loading ? "Uploading..." :
                 <div>
                   <label style={{textAlign: "center", color: "red"}}>{ this.state.message || "" }</label>
         					<div className="profile-name">
@@ -151,7 +156,6 @@ class MainProfile extends React.Component{
         					<input type="file" placeholder="Upload new profile image" name="photo" onChange={ this.handleFile } />		
         					<button type="submit" className="btn-standard">Save</button>
                 </div>
-              : <Loader /> 
             }
   				</form>
         }
