@@ -1,16 +1,17 @@
 import React from 'react';
 import Footer from './Footer';
 import NavBar from './NavBar';
+import UserDash from './UserDash';
 import { Link, withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 import {User} from '../reducers/User';
-import { URL , countries, kindOfTrip } from '../utils/static';
+import { URL , countries, tripDetails } from '../utils/static';
 
 class Contribute extends React.Component{
 	state = {
 		country: "",
 		terms: false,
-		TripDetails: ""
+		kindOfTrip: ""
 	}
 	
 	handleChange = (e) => {
@@ -34,10 +35,11 @@ class Contribute extends React.Component{
 
 	render(){
 		const { loggeduser } = this.props;
-		const { country, terms, TripDetails } = this.state;
+		const { country, terms, kindOfTrip } = this.state;
 		return(
 			<div>
 				<NavBar />
+				<UserDash />
 				{ loggeduser.isAuthInProgress ? 
 
 					(<div className="is-small contribute">
@@ -68,9 +70,9 @@ class Contribute extends React.Component{
 									  <label className="label">What kind of trip did you take?</label>
 									  <div className="control">
 									    <div className="select contribute-btn">
-									      <select name="TripDetails" value={ TripDetails } onChange={this.handleChange} required >
+									      <select name="kindOfTrip" value={ kindOfTrip } onChange={this.handleChange} required >
 									        <option>Kind of Trip</option>
-									        {kindOfTrip.map((el, i) => <option key={i}>{el}</option>)}
+									        {tripDetails.map((el, i) => <option key={i}>{el}</option>)}
 									      </select>
 									    </div>
 									  </div>
@@ -79,13 +81,13 @@ class Contribute extends React.Component{
 
 								<div className="control">
 							    <label className="checkbox parallel" >
-							      <input type="checkbox" className="terms" checked={ terms } name="terms" onClick={ this.handleToggle } required />
+							      <input type="checkbox" className="terms" checked={ terms } name="terms" onChange={ this.handleToggle } required />
 							      <div className="terms">I agree to the <Link to="#">terms and conditions</Link></div>
 							    </label>
 								</div>
 								</div>
 								{
-									!country || !terms || !TripDetails ?
+									!country || !terms || !kindOfTrip ?
 									 <button className="button is-danger">Choose country</button> :
 									<Link to="/form" className="button is-primary" onClick={this.handleSubmit }>Continue</Link>
 								}

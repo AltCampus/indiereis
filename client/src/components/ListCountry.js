@@ -73,13 +73,15 @@ class ListCountry extends React.Component {
   }
 
   searchCountry = (name) => {
+    console.log("searchCountry....")
     fetch(`${URL}/country/${name}`).then(res =>res.json())
     .then( data => {
+      console.log(data, "data.....");
       this.props.dispatch({
         type: 'FILTERED_COUNTRIES',
         data: data.data[0].country[0]
       });
-      this.props.history.push('/discover/'+name);
+      this.props.history.push('/country/'+name);
     })
   }
 

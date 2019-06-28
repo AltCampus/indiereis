@@ -24,8 +24,10 @@ passport.use(new GoogleStrategy({
           User.findOneAndUpdate({ email: user.email },
             {
               $push: { strategies: profile.provider },
-              photo: profile.photos[0].value,
-              google: { name: profile.displayName }
+              google: { 
+                name: profile.displayName,
+                photo: profile.photos[0].value,
+              }
             },(err, user) => {
               if(err) return done(err)
               return done(null, user);
@@ -36,9 +38,9 @@ passport.use(new GoogleStrategy({
         User.create({
           name: profile.displayName,
           email: profile.emails[0].value,
-          photo: profile.photos[0].value,
           google: {
-            name: profile.displayName
+            name: profile.displayName,
+            photo: profile.photos[0].value,
           },
           strategies: [profile.provider]
         },(err, user) => {

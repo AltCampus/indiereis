@@ -15,95 +15,99 @@ var userDataSchema = new Schema({
 		type: String,
 		default: null
 	},
-	tripinfo: {
+	terms: {
 		type: String,
 		default: null
 	},
-	visacost: {
+	"Total traveling cost": {
 		type: String,
 		default: null
 	},
-	numberofDays: {
+	"Total visa cost":{
 		type: String,
 		default: null
 	},
-	kindOfTrip: {
+	"Trip duration": {
 		type: String,
 		default: null
 	},
-	vegAvailability: {
+	"veg food availability": {
 		type: String,
 		default: null
 	},
-	indianFoodOption: {
+	"indian food options": {
 		type: String,
 		default: null
 	},
-	streetFood: {
+	"street food options": {
 		type: String,
 		default: null
 	},
-	visaProcess: {
+	"overall visa process": {
 		type: String,
 		default: null
 	},
-	travelInfo: {
+	"traveling and knowing the country": {
 		type: String,
 		default: null
 	},
-	todoCountry: {
+	"todo options": {
 		type: String,
 		default: null
 	},
-	peopleFriendly: {
+	"people friendly": {
 		type: String,
 		default: null
 	},
-	actvities: {
+	"places to explore": {
 		type: String,
 		default: null
 	},
-	nightLife: {
+	"nighttime activities": {
 		type: String,
 		default: null
 	},
-	safeTotravel: {
+	"safe to travel": {
 		type: String,
 		default: null
 	},
-	Infra: {
-		type: String,
-		required: true
-	},
-	language: {
+	"safe to travel for women":{
 		type: String,
 		default: null
 	},
-	wifi: {
+	infrastructure: {
 		type: String,
 		default: null
 	},
-	dayNight: {
+	"english communication": {
 		type: String,
 		default: null
 	},
-	
-	visaDays: {
+	"wifi availability": {
 		type: String,
 		default: null
 	},
-	suitedFor: {
+	"24/7 service": {
 		type: String,
 		default: null
 	},
-	typeOfHoliday: {
+	"trip experience": {
 		type: String,
 		default: null
 	},
-	tripExperience: {
+	"visa application process time": {
 		type: String,
 		default: null
 	},
+	"countyname best suited for": {
+		type: String,
+		default: null
+	},
+	"ideal holiday": {
+		type: String,
+		default: null
+	},
+
 }, {timestamps: true});
 
 

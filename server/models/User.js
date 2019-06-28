@@ -38,6 +38,7 @@ var userSchema = new Schema({
 		type: String,
 		min: 6,
 		max: 20,
+		default: ""
 	},
 	photo: {
 		type: String,
@@ -61,9 +62,14 @@ var userSchema = new Schema({
 	},
 	strategies:[{
 		type: String,
+		default: "local"
 	}],
 	google:{
 		name: {
+			type: String,
+			default: ""
+		},
+		photo: {
 			type: String,
 			default: ""
 		},
@@ -76,7 +82,8 @@ userSchema.pre('save', function (next) {
   }
   if(this.email === process.env.EMAIL || this.email === process.env.ADMIN ){
 		console.log('check3...');
-		this.isAdmin = true
+		this.isAdmin = true;
+		this.verified = true;
 	} 
   next();
 });

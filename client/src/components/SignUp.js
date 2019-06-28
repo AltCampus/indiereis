@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import Header from './Header';
 import Footer from './Footer';
 import { URL } from '../utils/static';
+import UserDash from './UserDash';
+import NavBar from './NavBar';
+import { Link } from "react-router-dom";
 
 class SignUp extends Component {
   constructor(props){
@@ -19,7 +21,7 @@ class SignUp extends Component {
 
   handleSignup = (e) => {
     e.preventDefault()
-    if(this.state.password === this.state.confirmpassword) {
+    if(this.state.user.password === this.state.user.confirmpassword) {
     fetch(URL + "/users/register", {
       method: "POST",
       headers: {
@@ -37,26 +39,19 @@ class SignUp extends Component {
             user: data
           }); 
           this.setState({
-            user:{
-              name: "",
-              email: "",
-              password: "",
-              confirmpassword: "",
-            }
+            user:{}
           })
         this.props.history.push('/');
         }else if(!data.user) {
            this.setState({
-            user:{
-              name: "",
-              email: "",
-              password: "",
-              confirmpassword: "",
-            }
+            registerError: "User already exist!",
+            user:{}
           })
           this.props.history.push('/signup');
         }
       }) 
+    }else if(this.state.user.password !== this.state.user.confirmpassword){
+      this.setState({ passwordError: "Password did not match!"})
     }
   }
 
@@ -73,16 +68,25 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <NavBar />
+        <UserDash />
         <div className="signup">
           <p>Sign Up for a user account</p>
           <form onSubmit= {this.handleSignup} className="signup-form" id={ `encType="multipart/form-data"`}>
           	<input type="text" name="name" placeholder="Username" value={this.state.user.name} onChange= {this.handleChange} required />
+            <label style={{textAlign: "left", color: "red"}}>{ this.state.registerError || "" }</label>
           	<input type="email" name="email" placeholder="Email address" value={this.state.user.email} onChange= {this.handleChange} required />
           	<input type="password" name="password" placeholder="Password" value={this.state.user.password} onChange= {this.handleChange} required />
+            <label style={{textAlign: "left", color: "red"}}>{ this.state.passwordError || "" }</label>
             <input type="password" name="confirmpassword" placeholder="Confirm password" value={this.state.user.confirmpassword} onChange= {this.handleChange} required />
-            <button type="submit" className="btn-standard">Register</button>
+            <button style={{margin:"0"}} type="submit" className="btn-standard">Register</button>
           </form>
+          <div style={{display:"flex", justifyContent:'space-between', padding:"20px 0"}}> 
+            <span>Already have an account?</span>
+            <Link to = "/login" >
+              <strong > Log In </strong>
+            </Link>
+          </div>
         </div>
         <Footer />
       </div>

@@ -7,9 +7,9 @@ class GoogleLogin extends React.Component{
 				<a href="/auth/google">
 					<div className='g-sign-in-button'>
 					  <div className="content-wrapper">
-					  <div className='logo-wrapper'>  
-					    <img src='https://developers.google.com/identity/images/g-logo.png' />
-					    </div>  
+						  <div className='logo-wrapper'>  
+						    <img src='https://developers.google.com/identity/images/g-logo.png' />
+						  </div>  
 					    <span className='text-container'> 
 					      <span>Sign in with Google</span>
 					    </span>
@@ -17,7 +17,7 @@ class GoogleLogin extends React.Component{
 					</div>
 				</a>
 			</div>
-			)
+		)
 	}
 }
 

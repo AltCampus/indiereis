@@ -5,6 +5,10 @@
 	text-align: center;
 	width: 300px;
 }
+
+.signup input {
+  background: #e8f0fe;
+}
 .signup-form{
 	display: flex;
 	flex-direction: column;
@@ -27,7 +31,7 @@
   height: 50px;
   position: fixed;
   right: -200px;
-  top: 20%;
+  top: 10%;
   background-color: #4285f4;
   color: #fff;
   border-radius: 1px;

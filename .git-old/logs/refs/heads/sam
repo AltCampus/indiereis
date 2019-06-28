@@ -1,0 +1,45 @@
+0000000000000000000000000000000000000000 673511d1412ab5879fbccbf23521b8067a9096fd sajan <sajanloveu123@gmail.com> 1558341456 +0530	branch: Created from HEAD
+673511d1412ab5879fbccbf23521b8067a9096fd d26a3e98649f30aed660781311b15b16ff7fe601 sajan <sajanloveu123@gmail.com> 1558422520 +0530	commit: user api
+d26a3e98649f30aed660781311b15b16ff7fe601 c3d426a1bc1010c0ad72f4d77727828820929203 sajan <sajanloveu123@gmail.com> 1558438562 +0530	commit: add parsed body data
+c3d426a1bc1010c0ad72f4d77727828820929203 b99b37e0344dc7a5af0691b8ed8255af3687eafe sajan <sajanloveu123@gmail.com> 1558446538 +0530	commit: cogin compare password
+b99b37e0344dc7a5af0691b8ed8255af3687eafe 1ff74d020c3a9b63742ffbbcb842f43bdaa4ad7a sajan <sajanloveu123@gmail.com> 1558500958 +0530	commit: add user profile api
+1ff74d020c3a9b63742ffbbcb842f43bdaa4ad7a 98c60af6246f5c5cb78d1bb308dff221ac699df9 sajan <sajanloveu123@gmail.com> 1558501891 +0530	commit: pulling from sk-landing
+98c60af6246f5c5cb78d1bb308dff221ac699df9 942f6481da81916c04e01b6781dc379d476920a3 sajan <sajanloveu123@gmail.com> 1558501921 +0530	pull origin SK-landing: Merge made by the 'recursive' strategy.
+942f6481da81916c04e01b6781dc379d476920a3 e23efb4eef40f360dfe253bd2807e5da1fc8198c sajan <sajanloveu123@gmail.com> 1558503049 +0530	commit: signup form frontend code update
+e23efb4eef40f360dfe253bd2807e5da1fc8198c cc3b3d454a34b67fcda1c36842777a369eb21d17 sajan <sajanloveu123@gmail.com> 1558512933 +0530	commit: login token auth
+cc3b3d454a34b67fcda1c36842777a369eb21d17 22e37ad7091912d6979a964dff228df424db8d58 sajan <sajanloveu123@gmail.com> 1558515868 +0530	commit: solve route refresh problem
+22e37ad7091912d6979a964dff228df424db8d58 575e8537c301d5a3aade1f07ed68a763d75898d8 sajan <sajanloveu123@gmail.com> 1558518004 +0530	pull origin SK-landing: Merge made by the 'recursive' strategy.
+575e8537c301d5a3aade1f07ed68a763d75898d8 7425caca81d9ec7e7a5dc85222506305899ad710 sajan <sajanloveu123@gmail.com> 1558525888 +0530	commit: add auth contoller
+7425caca81d9ec7e7a5dc85222506305899ad710 da3005ea1e27e8711b8549308782d6ada06cdb38 sajan <sajanloveu123@gmail.com> 1558590680 +0530	commit (merge): login route update
+da3005ea1e27e8711b8549308782d6ada06cdb38 36c7560f09f2cd23de7edb57fafba02b52501f91 sajan <sajanloveu123@gmail.com> 1558592914 +0530	commit: pulling login app js condition
+36c7560f09f2cd23de7edb57fafba02b52501f91 2800530d7c9cfd1e0770839fdf41699e4ac5250d sajan <sajanloveu123@gmail.com> 1558592962 +0530	pull origin SK-landing: Merge made by the 'recursive' strategy.
+2800530d7c9cfd1e0770839fdf41699e4ac5250d ec6c8c048fa60106ae844cf356194d488f992dd1 sajan <sajanloveu123@gmail.com> 1558601549 +0530	commit: pulling new changes
+ec6c8c048fa60106ae844cf356194d488f992dd1 368281e6711cc9105d13c1207cdb8618313021d5 sajan <sajanloveu123@gmail.com> 1558625769 +0530	commit: pre-save hook use for admin
+368281e6711cc9105d13c1207cdb8618313021d5 b55f8494acbe02c80ec5944b4390a156cdc00263 sajan <sajanloveu123@gmail.com> 1558688262 +0530	commit: google auth route
+b55f8494acbe02c80ec5944b4390a156cdc00263 31ab3be39d289f68e1ae0c17acf8e9e1fc65dab0 sajan <sajanloveu123@gmail.com> 1558701599 +0530	commit: add questions db
+31ab3be39d289f68e1ae0c17acf8e9e1fc65dab0 14f2d79f6d46a4b734440d61b2c78185650ee704 sajan <sajanloveu123@gmail.com> 1558756964 +0530	commit (merge): add question api
+14f2d79f6d46a4b734440d61b2c78185650ee704 73d913dc9229bd6859a1f22000129735fec40ff9 sajan <sajanloveu123@gmail.com> 1558762772 +0530	commit (merge): add croud source data schema
+73d913dc9229bd6859a1f22000129735fec40ff9 2a82eec0f2de3b78c7bad2a464b5dc8ce5bc9ec4 sajan <sajanloveu123@gmail.com> 1558768290 +0530	commit: add options in question schema
+2a82eec0f2de3b78c7bad2a464b5dc8ce5bc9ec4 1f1a8a5d62ccf54499ef08a75a60a90be386c54e sajan <sajanloveu123@gmail.com> 1558937775 +0530	commit: passport code update
+1f1a8a5d62ccf54499ef08a75a60a90be386c54e 4d5b9e17da744e6d29afe3b795c0c5325805ed65 sajan <sajanloveu123@gmail.com> 1558938232 +0530	pull origin form-data: Merge made by the 'recursive' strategy.
+4d5b9e17da744e6d29afe3b795c0c5325805ed65 9f95e56741d5ebc2485c2644aca53e5d72941fa0 sajan <sajanloveu123@gmail.com> 1558946504 +0530	commit: sending form data to backend
+9f95e56741d5ebc2485c2644aca53e5d72941fa0 e3b46d99076ade89ee6b1a6f65227e7a8535acc0 sajan <sajanloveu123@gmail.com> 1558969395 +0530	commit: add public data
+e3b46d99076ade89ee6b1a6f65227e7a8535acc0 bfc4a1db5a35657abd448d3ac42e4fd9f27e934c sajan <sajanloveu123@gmail.com> 1559018550 +0530	commit: add google o-auth and nodemailer verification
+bfc4a1db5a35657abd448d3ac42e4fd9f27e934c cb4b3e030a7f06d8ad2276e0c972c0ce08299f2b sajan <sajanloveu123@gmail.com> 1559114730 +0530	commit: add photo in cloudinary
+cb4b3e030a7f06d8ad2276e0c972c0ce08299f2b abd9f2d568d999f9895e24af4c48984e1a08e040 sajan <sajanloveu123@gmail.com> 1559115234 +0530	commit: add user schema profile feild update
+abd9f2d568d999f9895e24af4c48984e1a08e040 6d220411a0f33873da7646bc7fe78215c1f1d404 sajan <sajanloveu123@gmail.com> 1559121765 +0530	commit (merge): add profile edit
+6d220411a0f33873da7646bc7fe78215c1f1d404 f07f01714a06500f089099fe02bc9e64d963c4b2 sajan <sajanloveu123@gmail.com> 1559137507 +0530	commit: add edit profile final
+f07f01714a06500f089099fe02bc9e64d963c4b2 b948ed2765063c59162ce15459eac6d5812ac24f sajan <sajanloveu123@gmail.com> 1559138469 +0530	commit: pull from form branch may/29/7:30
+b948ed2765063c59162ce15459eac6d5812ac24f f8dd645b89492a32bfb1e27721823a29071d4da2 sajan <sajanloveu123@gmail.com> 1559197322 +0530	commit: add edit profile
+f8dd645b89492a32bfb1e27721823a29071d4da2 8cabae7f86e3ba6c370d2919a9d1dfe3f70ba3ea sajan <sajanloveu123@gmail.com> 1559203360 +0530	commit (merge): user data filter from backend
+8cabae7f86e3ba6c370d2919a9d1dfe3f70ba3ea d41f487ad20dfe37a6f32c89a27c89bca013b2c5 sajan <sajanloveu123@gmail.com> 1559212881 +0530	commit: code refectoring
+d41f487ad20dfe37a6f32c89a27c89bca013b2c5 124e1cf13521383bb17696878f157c55b2ca88de sajan <sajanloveu123@gmail.com> 1559223691 +0530	commit: add user photo on submit
+124e1cf13521383bb17696878f157c55b2ca88de 873f03a478951b24ff38052207f750b90b331bd9 sajan <sajanloveu123@gmail.com> 1559277873 +0530	commit: pull from form
+873f03a478951b24ff38052207f750b90b331bd9 f9561dd4681b895d2eb79f0ff3170c3fed27b6c2 sajan <sajanloveu123@gmail.com> 1559306609 +0530	commit: register error solve
+f9561dd4681b895d2eb79f0ff3170c3fed27b6c2 9584a29476d680197f04f563bde7d0d6a118ffcb sajan <sajanloveu123@gmail.com> 1559307584 +0530	commit: add country auth remove
+9584a29476d680197f04f563bde7d0d6a118ffcb 99442ed228dcbe692a2185b35e58f163b71e4650 sajan <sajanloveu123@gmail.com> 1559374240 +0530	commit: cloudinary img upload and profilr update syn
+99442ed228dcbe692a2185b35e58f163b71e4650 7087a0d9221c2550e70a4affb0d0ba0d173c1c60 sajan <sajanloveu123@gmail.com> 1559377190 +0530	commit: remove cnsl and add condition in update user for cloud image upload
+7087a0d9221c2550e70a4affb0d0ba0d173c1c60 6b015879fc871df16928810c48774474b66af9e5 sajan <sajanloveu123@gmail.com> 1559382514 +0530	commit: remove app.js outer login code
+6b015879fc871df16928810c48774474b66af9e5 a81bb1b0340174f91cba97d575148a115d784ae3 sajan <sajanloveu123@gmail.com> 1559538822 +0530	commit (merge): solve contribute form dbl click problem
+a81bb1b0340174f91cba97d575148a115d784ae3 cb5fab1525ae5b76204f3272dafd4b167c8f0f4b sajan <sajanloveu123@gmail.com> 1559552264 +0530	commit: search impliment in homepage
+cb5fab1525ae5b76204f3272dafd4b167c8f0f4b bb56e5d8347aecd9c0a2229809ee37c44ed6f91c sajan <sajanloveu123@gmail.com> 1559656479 +0530	commit: add user profile, pass change fn() ui update & bugfixes

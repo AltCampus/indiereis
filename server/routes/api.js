@@ -10,6 +10,6 @@ var jwtAuth = require("../config/jwtAuth");
 router.use('/users', userApi);
 router.use('/questions', questionApi);
 router.use('/country', countryApi);
-router.use('/public-data', jwtAuth.verifyToken, publicDataApi);
+router.use('/public-data', publicDataApi);
 
 module.exports = router;

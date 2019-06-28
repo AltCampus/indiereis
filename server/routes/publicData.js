@@ -15,6 +15,14 @@ router.get('/', (req,res,next) => {
 	})
 });
 
+router.get('/:id', (req,res,next) => {
+	// console.log("inside fetch questions...");
+	UserData.findOne({ _id: req.params.id }, (err, data) => {
+		if(err) return res.status(500).json({ success: false, message: "server side error"});
+		res.status(200).json({ success: true, data });
+	})
+});
+
 router.post('/', jwtAuth.verifyToken, (req,res,next) => {
 	console.log(req.body, "inside userData post...");
 	console.log(req.user, "jwt user data");
@@ -35,12 +43,12 @@ router.post('/', jwtAuth.verifyToken, (req,res,next) => {
 
 router.get('/delete/:id', jwtAuth.verifyToken, (req,res,next) => {
 	console.log("inside delete userData get...");
-	var dataId = req.params.id;
+	var id = req.params.id;
 	UserData.findOneAndDelete({ _id: id }, ( err, data ) => {
 		if(err) return res.status(500).json({ success: false, message: "server side error"});
 		console.log(data, data._id, "data deleted ...");
 		
-		User.findOneAndUpdate({ _id: req.user._id },{ $pull: { userData: data._id } }, (err, user) => {
+		User.findOneAndUpdate({ _id: req.user._id },{ $pull: { userData: id } }, (err, user) => {
 			if(err) return res.status(500).json({ success: false, message: "server side error" });
 			console.log(user, "user updated after deleting userData...");
 			res.status(200).json({ success: true , message: "UserData deleted!" });
@@ -54,7 +62,7 @@ router.post('/update/:id', jwtAuth.verifyToken, (req,res,next) => {
 	UserData.findOneAndUpdate({ _id: Id }, req.body, ( err, data ) => {
 		if(err) return res.status(500).json({ success: false, message: "server side error"});
 		console.log(data, "userdata updated....");
-		res.status(200).json({ success: true });
+		res.status(200).json({ success: true, message: "user data updated successfully" });
 	})
 })
 

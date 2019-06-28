@@ -11,6 +11,7 @@
  "license": "ISC",
  "dependencies": {
   "axios": "^0.18.0",
+  "babel-loader": "^8.0.6",
   "bcrypt": "^3.0.6",
   "cloudinary": "^1.14.0",
   "connect-mongo": "^2.0.3",
@@ -39,6 +40,7 @@
   "react-scripts": "2.1.1",
   "redux": "^4.0.1",
   "redux-thunk": "^2.3.0",
+  "serve-favicon": "^2.5.0",
   "time-stamp": "^2.2.0"
  },
  "devDependencies": {

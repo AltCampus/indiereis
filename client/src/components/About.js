@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Header from './Header';
 import Footer from './Footer';
+import UserDash from './UserDash';
+import NavBar from './NavBar';
 
 class About extends React.Component {
 	render(){
 		return(
 			<React.Fragment>
-				<Header />
+				<NavBar />
+				<UserDash />
 				<div className="about-main">
 					<p className="about-info">More coming sooon!</p>
 				</div>

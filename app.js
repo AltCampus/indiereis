@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
-
+// fevicon icon npm package
+var favicon = require('serve-favicon');
 // session authentication packages
 // const session = require("express-session");
 // const MongoStore = require("connect-mongo")(session);
@@ -56,6 +57,9 @@ if (process.env.NODE_ENV === "development") {
 
  app.use(require("webpack-hot-middleware")(compiler));
 }
+
+app.use(favicon( __dirname + '/assets/favicon.png'));
+
 
 app.use(cors());
 app.use("/api/v1", require("./server/routes/api"));
