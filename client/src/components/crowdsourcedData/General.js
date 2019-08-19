@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import SourcedForm from '../SourcedForm';
 import { withRouter } from "react-router-dom";
 
 class General extends React.Component {
