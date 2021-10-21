@@ -1,1 +1,9 @@
-rename this file to .env and add variables bellow
+NOTE=rename this file to .env and add variables bellow
+
+CLIENT_ID=yourClientId
+CLIENT_SECRET=yourClientSecret
+CALLBACK_URL=yourCallbackURL
+JWT_SIGN=JWTSignature
+EMAIL=yourEmail
+PASSWORD=yourPassword
+ADMIN=adminUserMail

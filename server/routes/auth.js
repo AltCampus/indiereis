@@ -14,12 +14,11 @@ passport.use(
       callbackURL: process.env.CALLBACK_URL,
     },
     function (accessToken, refreshToken, profile, done) {
-      console.log(profile, "user profile......");
       User.findOne({ email: profile.emails[0].value }, (err, user) => {
         if (err) return done(null, null);
+
         if (user) {
           if (user.strategies.includes(profile.provider)) {
-            console.log(user, "user strategies found......");
             return done(null, user);
           } else {
             User.findOneAndUpdate(
@@ -38,7 +37,6 @@ passport.use(
             );
           }
         } else {
-          console.log("cp1", profile);
           User.create(
             {
               name: profile.displayName,
@@ -70,7 +68,6 @@ router.get(
 
 router.get("/google/callback", function (req, res, next) {
   passport.authenticate("google", function (err, user) {
-    console.log(user, "google user........");
     if (err) {
       return res.send({ message: "Something went wrong with google auth" });
     }

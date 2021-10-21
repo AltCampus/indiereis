@@ -19,19 +19,13 @@ exports.mail = async function (email, token, html) {
     },
   });
 
-  console.log(
-    "inside mail function....",
-    process.env.EMAIL,
-    "process.env.EMAIL",
-    process.env.PASSWORD,
-    "process.env.PASSWORD"
-  );
-  var message = `<h2> Welcome to travel info</h2>
+  const message = `<h2> Welcome to travel info</h2>
    <p> Please click on the link below to verify your account<p>
    <a href='http://localhost:8000/api/v1/users/verify/${token}' > Click to Verify </a>
     `;
+
   // send mail with defined transport object
-  let info = await transporter.sendMail({
+  const info = await transporter.sendMail({
     from: `travel Info 👻 <${process.env.EMAIL}>`, // sender address
     to: `${email}`, // list of receivers
     subject: "travel info", // Subject line

@@ -86,11 +86,12 @@ userSchema.pre("save", function (next) {
   if (this.password && this.isModified("password")) {
     this.password = bcrypt.hashSync(this.password, salt);
   }
+
   if (this.email === process.env.EMAIL || this.email === process.env.ADMIN) {
-    console.log("check3...");
     this.isAdmin = true;
     this.verified = true;
   }
+
   next();
 });
 
