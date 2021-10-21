@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import FormPage5 from "./FormPage5";
-import { URL, num } from "../utils/static";
+import { num } from "../utils/static";
 
 class FormPage4 extends React.Component {
   constructor() {

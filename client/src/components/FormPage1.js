@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import FormPage2 from "./FormPage2";
-import { URL, num, countries, suitedTrip, idealHoliday } from "../utils/static";
+import { URL, suitedTrip, idealHoliday } from "../utils/static";
 import NavBar from "./NavBar";
 import UserDash from "./UserDash";
 import Footer from "./Footer";

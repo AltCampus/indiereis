@@ -1,8 +1,8 @@
 import React from "react";
 import Iframe from "react-iframe";
 import Footer from "./Footer";
-import UserDash from './UserDash';
-import NavBar from './NavBar';
+import UserDash from "./UserDash";
+import NavBar from "./NavBar";
 
 class Map extends React.Component {
   render() {

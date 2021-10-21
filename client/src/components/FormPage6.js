@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendData } from "../actions/User";
-import { URL } from "../utils/static";
 
 class FormPage6 extends React.Component {
   handleChange = (e) => {
