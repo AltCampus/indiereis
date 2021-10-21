@@ -1,27 +1,28 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-const timestamp = require('time-stamp');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-var questionSchema = new Schema({
-	qset1: {
-		type: Object,
-		default: null
-	},
-	qset2: {
-		type: Object,
-		default: null
-	},
-	qset3: {
-		type: Object,
-		default: null
-	},
-	qset4: {
-		type: Object,
-		default: null
-	},
-}, {timestamps: true});
+const questionSchema = new Schema(
+  {
+    qset1: {
+      type: Object,
+      default: null,
+    },
+    qset2: {
+      type: Object,
+      default: null,
+    },
+    qset3: {
+      type: Object,
+      default: null,
+    },
+    qset4: {
+      type: Object,
+      default: null,
+    },
+  },
+  { timestamps: true }
+);
 
-
-var Question = mongoose.model("Question", questionSchema);
+const Question = mongoose.model("Question", questionSchema);
 
 module.exports = Question;
