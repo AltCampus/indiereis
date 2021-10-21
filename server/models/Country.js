@@ -1,14 +1,16 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-const timestamp = require('time-stamp');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-var countrySchema = new Schema({
-	country: {
-		type: Object,
-		default: null
-	}
-},{ timestamps: true });
+const countrySchema = new Schema(
+  {
+    country: {
+      type: Object,
+      default: null,
+    },
+  },
+  { timestamps: true }
+);
 
-var Country = mongoose.model("Country", countrySchema);
+const Country = mongoose.model("Country", countrySchema);
 
 module.exports = Country;

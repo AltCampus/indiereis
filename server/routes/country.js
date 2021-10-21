@@ -1,82 +1,128 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-var Question = require("../models/Question");
-var User = require("../models/User");
-var Country = require("../models/Country");
-var jwtAuth = require("../config/jwtAuth");
+const User = require("../models/User");
+const Country = require("../models/Country");
+const jwtAuth = require("../config/jwtAuth");
 
-router.get('/', (req,res,next) => {
-	console.log("inside get countries...");
-	Country.find({}, (err, data) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		res.status(200).json({ success: true, data });
-	})
+router.get("/", (req, res) => {
+  Country.find({}, (err, data) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
+
+    res.status(200).json({ success: true, data });
+  });
 });
 
-router.get('/:country', (req,res,next) => {
-	console.log("inside get country...");
-	var countryName = req.params.country;
-	Country.find({}, { country: { $elemMatch: { name: countryName } } }).exec((err, data) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		res.status(200).json({ success: true, data });
-	})
+router.get("/:country", (req, res) => {
+  const countryName = req.params.country;
+
+  Country.find({}, { country: { $elemMatch: { name: countryName } } }).exec(
+    (err, data) => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ success: false, message: "server side error" });
+      }
+
+      res.status(200).json({ success: true, data });
+    }
+  );
 });
 
-router.post('/', jwtAuth.verifyToken, (req,res,next) => {
+router.post("/", jwtAuth.verifyToken, (req, res) => {
+  // Country.create(req.body, (err, data) => {
+  // 	if(err) return res.status(500).json({ success: false, message: "server side error"});
+  // 	res.status(200).json({ success: true, message: "Country data added successfully" });
+  // })
 
-	// Country.create(req.body, (err, data) => {
-	// 	if(err) return res.status(500).json({ success: false, message: "server side error"});
-	// 	res.status(200).json({ success: true, message: "Country data added successfully" });
-	// })
+  const data = req.body;
 
-	console.log(req.body,req.user, "inside addCountry post...");
-	var data = req.body;
-	console.log(data, "data....");
-	User.findOne({ _id: req.user._id }, (err, user) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		if(user.isAdmin){
-			Country.create(data, (err, data) => {
-				if(err) return res.status(500).json({ success: false, message: "server side error"});
-				res.status(200).json({ success: false, message: "Country data added successfully" });
-			})
-		}else {
-			res.status(401).json({ success: false, message: "Access denied!" });
-		}
-	})
-	
-})
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
 
-router.get('/delete/:id', jwtAuth.verifyToken, (req,res,next) => {
-	console.log(req.user, "inside delete Country...");
-	var id = req.params.id;
-	User.findOne({ _id: req.user._id }, (err, user) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		if(user.isAdmin){
-			Country.findOneAndDelete({ _id: id }, (err, data) => {
-				if(err) return res.status(500).json({ success: false, message: "server side error"});
-				res.status(200).json({ success: true, message: "Country deleted successfully" });
-			})
-		}else {
-			res.status(401).json({ success: false, message: "Access denied! You are not allowed to delete this data!" });
-		}
-	})
-})
+    if (user.isAdmin) {
+      Country.create(data, (err) => {
+        if (err) {
+          return res
+            .status(500)
+            .json({ success: false, message: "server side error" });
+        }
 
-router.post('/update/:id', jwtAuth.verifyToken, (req,res,next) => {
-	console.log("inside update Country.....");
-	var Id = req.params.id;
-	User.findOne({ _id: req.user._id }, (err, user) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		if(user.isAdmin){
-			Country.findOneAndUpdate({ _id: Id }, req.body, ( err, data ) => {
-				if(err) return res.status(500).json({ success: false, message: "server side error"});
-				console.log(data, "country updated....");
-				res.status(200).json({ success: true, message: "country updated!" });
-			})
-		}else {
-			res.status(401).json({ success: false, message: "Access denied! You are not allowed to change this data!" });
-		}
-	})
-})
+        res
+          .status(200)
+          .json({ success: false, message: "Country data added successfully" });
+      });
+    } else {
+      res.status(401).json({ success: false, message: "Access denied!" });
+    }
+  });
+});
+
+router.get("/delete/:id", jwtAuth.verifyToken, (req, res) => {
+  const id = req.params.id;
+
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
+
+    if (user.isAdmin) {
+      Country.findOneAndDelete({ _id: id }, (err) => {
+        if (err) {
+          return res
+            .status(500)
+            .json({ success: false, message: "server side error" });
+        }
+
+        res
+          .status(200)
+          .json({ success: true, message: "Country deleted successfully" });
+      });
+    } else {
+      res.status(401).json({
+        success: false,
+        message: "Access denied! You are not allowed to delete this data!",
+      });
+    }
+  });
+});
+
+router.post("/update/:id", jwtAuth.verifyToken, (req, res) => {
+  const Id = req.params.id;
+
+  User.findOne({ _id: req.user._id }, (err, user) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
+
+    if (user.isAdmin) {
+      Country.findOneAndUpdate({ _id: Id }, req.body, (err, data) => {
+        if (err) {
+          return res
+            .status(500)
+            .json({ success: false, message: "server side error" });
+        }
+
+        res.status(200).json({ success: true, message: "country updated!" });
+      });
+    } else {
+      res.status(401).json({
+        success: false,
+        message: "Access denied! You are not allowed to change this data!",
+      });
+    }
+  });
+});
 
 module.exports = router;

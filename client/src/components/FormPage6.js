@@ -1,58 +1,72 @@
-import React from 'react';
-import { Link, withRouter } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendData } from "../actions/User";
-import { URL } from '../utils/static';
 
-class FormPage6 extends React.Component{
-
-	handleChange = (e) => {
-		const { name, value } = e.target;
+class FormPage6 extends React.Component {
+  handleChange = (e) => {
+    const { name, value } = e.target;
     this.setState({ [name]: value });
-	};
+  };
 
-	handleSubmit = () => {
-		if(this.state){
-			this.props.dispatch({
-	      type:"ADD_FORM6",
-	      data: this.state
-	    })
-	    sendData();
+  handleSubmit = () => {
+    if (this.state) {
+      this.props.dispatch({
+        type: "ADD_FORM6",
+        data: this.state,
+      });
+      sendData();
       this.props.history.push("/dashboard");
-	    this.setState({});  
-		}else {console.log("state is empty")}
-	}
+      this.setState({});
+    } else {
+      console.log("state is empty");
+    }
+  };
 
-	render(){
-		const questions = this.props.questions ? this.props.questions.Questions : null;
-		const userFormData = this.props.questions  ? this.props.questions.userFormData.countaryAndTrip : null;
+  render() {
+    const questions = this.props.questions
+      ? this.props.questions.Questions
+      : null;
+    const userFormData = this.props.questions
+      ? this.props.questions.userFormData.countryAndTrip
+      : null;
 
-		return(
-			<div className= "form-wrapper">
-				<progress className="progress is-primary" value="100" max="100">100%</progress>
-				{ 
-					questions.data ? 
-						(
-							<div className="field">
-								<label className="label">{ questions.data.qset4.questions}</label>
-								<div className="control">
-									<textarea className="textarea" placeholder="200 characters minimum" name={questions.data.qset4.name[0]} onChange={this.handleChange} >
-									</textarea>
-								</div>
-							</div>
-						)
-					: <p>'no data'</p>
-				}
-				<Link to="/dashboard" className="button is-primary" onClick={this.handleSubmit}>Submit</Link>
-			</div>
-		)
-	}
+    return (
+      <div className="form-wrapper">
+        <progress className="progress is-primary" value="100" max="100">
+          100%
+        </progress>
+        {questions.data ? (
+          <div className="field">
+            <label className="label">{questions.data.qset4.questions}</label>
+            <div className="control">
+              <textarea
+                className="textarea"
+                placeholder="200 characters minimum"
+                name={questions.data.qset4.name[0]}
+                onChange={this.handleChange}
+              ></textarea>
+            </div>
+          </div>
+        ) : (
+          <p>'no data'</p>
+        )}
+        <Link
+          to="/dashboard"
+          className="button is-primary"
+          onClick={this.handleSubmit}
+        >
+          Submit
+        </Link>
+      </div>
+    );
+  }
 }
 
-function mapStateToProps(state){
-	return {
-		questions: state
-	}
+function mapStateToProps(state) {
+  return {
+    questions: state,
+  };
 }
 
-export default connect(mapStateToProps)(FormPage6);																														
+export default connect(mapStateToProps)(FormPage6);

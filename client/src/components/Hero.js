@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -10,8 +10,12 @@ const Hero = () => {
           <hr />
         </div>
         <div className="hero-sub-text">
-          <Link to="/discover" className="btn-standard">Discover</Link>
-          <Link to= "/contribute" className="btn-standard">Contribute</Link>
+          <Link to="/discover" className="btn-standard">
+            Discover
+          </Link>
+          <Link to="/contribute" className="btn-standard">
+            Contribute
+          </Link>
         </div>
         <div className="hero-info">
           <p>

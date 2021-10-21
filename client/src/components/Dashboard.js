@@ -2,14 +2,14 @@ import React from "react";
 import Footer from "./Footer";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import UserProfile from './UserProfile';
-import SourcedForm from './SourcedForm';
-import UserDash from './UserDash';
-import NavBar from './NavBar';
+import SourcedForm from "./SourcedForm";
+import UserDash from "./UserDash";
+import NavBar from "./NavBar";
 
 class Dashboard extends React.Component {
   render() {
-		const user = this.props.loggeduser ? this.props.loggeduser.user :  '';
+    const user = this.props.loggeduser ? this.props.loggeduser.user : "";
+
     return (
       <div>
         <NavBar />
@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
 function mapStateToProps(state) {
   return {
     loggeduser: state.User.user,
-    crowdsourced: state
+    crowdsourced: state,
   };
 }
 
