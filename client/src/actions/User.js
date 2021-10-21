@@ -6,7 +6,7 @@ export function sendData() {
   const data = store.getState().userFormData;
   const userData = Object.assign(
     {},
-    data.countaryAndTrip,
+    data.countryAndTrip,
     data.form1,
     data.form2,
     data.form3,
