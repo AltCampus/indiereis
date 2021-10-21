@@ -1,69 +1,107 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-var jwt = require('jsonwebtoken');
-var userApi = require('./users');
-var Question = require("../models/Question");
-var User = require("../models/User");
-var UserData = require("../models/UserData");
-var jwtAuth = require("../config/jwtAuth");
+const User = require("../models/User");
+const UserData = require("../models/UserData");
+const jwtAuth = require("../config/jwtAuth");
 
-router.get('/', (req,res,next) => {
-	// console.log("inside fetch questions...");
-	UserData.find({}, (err, data) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		res.status(200).json({ success: true, data });
-	})
+router.get("/", (req, res) => {
+  UserData.find({}, (err, data) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
+
+    res.status(200).json({ success: true, data });
+  });
 });
 
-router.get('/:id', (req,res,next) => {
-	// console.log("inside fetch questions...");
-	UserData.findOne({ _id: req.params.id }, (err, data) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		res.status(200).json({ success: true, data });
-	})
+router.get("/:id", (req, res) => {
+  UserData.findOne({ _id: req.params.id }, (err, data) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
+
+    res.status(200).json({ success: true, data });
+  });
 });
 
-router.post('/', jwtAuth.verifyToken, (req,res,next) => {
-	console.log(req.body, "inside userData post...");
-	console.log(req.user, "jwt user data");
-	var data = req.body;
+router.post("/", jwtAuth.verifyToken, (req, res) => {
+  const data = req.body;
 
-	console.log(data, "data....");
-	UserData.create( data, (err, data) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		data.userId = req.user._id;
-		data.save();
-		User.findByIdAndUpdate( req.user._id ,{ $push: { userData: data._id } }, (err, user) => {
-			if(err) return res.status(500).json({ success: false, message: "server side error"});
-			console.log(user, "user updated with his datainfo...");
-			res.status(200).json({ success: true, message: "Userdata saved successfully" });
-		})
-	})
-})
+  UserData.create(data, (err, data) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
 
-router.get('/delete/:id', jwtAuth.verifyToken, (req,res,next) => {
-	console.log("inside delete userData get...");
-	var id = req.params.id;
-	UserData.findOneAndDelete({ _id: id }, ( err, data ) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		console.log(data, data._id, "data deleted ...");
-		
-		User.findOneAndUpdate({ _id: req.user._id },{ $pull: { userData: id } }, (err, user) => {
-			if(err) return res.status(500).json({ success: false, message: "server side error" });
-			console.log(user, "user updated after deleting userData...");
-			res.status(200).json({ success: true , message: "UserData deleted!" });
-		})
-	})
-})
+    data.userId = req.user._id;
+    data.save();
 
-router.post('/update/:id', jwtAuth.verifyToken, (req,res,next) => {
-	console.log("inside update userData...");
-	var Id = req.params.id;
-	UserData.findOneAndUpdate({ _id: Id }, req.body, ( err, data ) => {
-		if(err) return res.status(500).json({ success: false, message: "server side error"});
-		console.log(data, "userdata updated....");
-		res.status(200).json({ success: true, message: "user data updated successfully" });
-	})
-})
+    User.findByIdAndUpdate(
+      req.user._id,
+      { $push: { userData: data._id } },
+      (err, user) => {
+        if (err) {
+          return res
+            .status(500)
+            .json({ success: false, message: "server side error" });
+        }
+
+        console.log(user, "user updated with his data info...");
+
+        res
+          .status(200)
+          .json({ success: true, message: "UserData saved successfully" });
+      }
+    );
+  });
+});
+
+router.get("/delete/:id", jwtAuth.verifyToken, (req, res) => {
+  const id = req.params.id;
+
+  UserData.findOneAndDelete({ _id: id }, (err) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
+
+    User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $pull: { userData: id } },
+      (err, user) => {
+        if (err) {
+          return res
+            .status(500)
+            .json({ success: false, message: "server side error" });
+        }
+
+        console.log(user, "user updated after deleting userData...");
+        res.status(200).json({ success: true, message: "UserData deleted!" });
+      }
+    );
+  });
+});
+
+router.post("/update/:id", jwtAuth.verifyToken, (req, res) => {
+  const Id = req.params.id;
+
+  UserData.findOneAndUpdate({ _id: Id }, req.body, (err) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({ success: false, message: "server side error" });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "user data updated successfully" });
+  });
+});
 
 module.exports = router;

@@ -1,15 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-var userApi = require('./users');
-var questionApi = require('./questions');
-var countryApi = require('./country');
-var publicDataApi = require('./publicData');
-var jwtAuth = require("../config/jwtAuth");
+const userApi = require("./users");
+const questionApi = require("./questions");
+const countryApi = require("./country");
+const publicDataApi = require("./publicData");
 
-router.use('/users', userApi);
-router.use('/questions', questionApi);
-router.use('/country', countryApi);
-router.use('/public-data', publicDataApi);
+router.use("/users", userApi);
+router.use("/questions", questionApi);
+router.use("/country", countryApi);
+router.use("/public-data", publicDataApi);
 
 module.exports = router;
