@@ -1,13 +1,13 @@
 /* eslint-disable */
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require("webpack");
+var path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   // devtool: 'inline-source-map',
   entry: {
-    main: './client/src/index.js',
+    main: "./client/src/index.js",
   },
   module: {
     rules: [
@@ -15,11 +15,15 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/react', {
-                     'plugins': ['@babel/plugin-proposal-class-properties']}]
-          }
+            presets: [
+              "@babel/react",
+              {
+                plugins: ["@babel/plugin-proposal-class-properties"],
+              },
+            ],
+          },
         },
       },
       {
@@ -27,37 +31,36 @@ module.exports = {
         use: [
           { loader: MiniCssExtractPlugin.loader },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
           },
-          { loader: 'sass-loader' }
-        ]
+          { loader: "sass-loader" },
+        ],
       },
       {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
-            options: {}
-          }
-        ]
-      }
-    ]
+            loader: "file-loader",
+            options: {},
+          },
+        ],
+      },
+    ],
   },
   output: {
-    filename: 'bundle.js',
-    path: __dirname + '/dist/bundle/',
-    publicPath: '/static/'
+    filename: "bundle.js",
+    path: __dirname + "/dist/bundle/",
+    publicPath: "/static/",
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('development')
-      }
+      "process.env": {
+        NODE_ENV: JSON.stringify("development"),
+      },
     }),
     new MiniCssExtractPlugin({
       filename: "bundle.css",
     }),
-
-  ]
-}
+  ],
+};
