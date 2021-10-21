@@ -1,35 +1,36 @@
 /* Main CSS */
 :root {
-	--blue: #007bff;
-	--steelblue: #4682b4;
-	--midnightblue: #191970;
-	--ateneoblue: #003a6c;
-	--offwhite:#ACACAC;
-	--indigo: #6610f2;
-	--purple: #6f42c1;
-	--pink: #e83e8c;
-	--red: #dc3545;
-	--indianred: #cd5c5c;
-	--orange: #fd7e14;
-	--yellow: #ffc107;
-	--green: #28a745;
-	--teal: #20c997;
-	--cyan: #17a2b8;
-	--white: #fff;
-	--gray: #6c757d;
-	--gray-dark: #343a40;
-	--teal: #c0ffee;
-	--badass: #bada55;
-	--mistyrose: #ffe4e1;
-	--font-family-default-heading: Helvetica, sans-serif;
-	--font-family-secondary: "Lucida Console", Courier, monospace;
-	--font-family-fallback: "Gill Sans", sans-serif;
-	--font-family-tertiary: source-sans-pro, sans-serif;
-	--font-family-text-body: Garamond "Baskerville Old Face";
+  --blue: #007bff;
+  --steelblue: #4682b4;
+  --midnightblue: #191970;
+  --ateneoblue: #003a6c;
+  --offwhite: #acacac;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --indianred: #cd5c5c;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --teal: #c0ffee;
+  --badass: #bada55;
+  --mistyrose: #ffe4e1;
+  --font-family-default-heading: Helvetica, sans-serif;
+  --font-family-secondary: "Lucida Console", Courier, monospace;
+  --font-family-fallback: "Gill Sans", sans-serif;
+  --font-family-tertiary: source-sans-pro, sans-serif;
+  --font-family-text-body: Garamond "Baskerville Old Face";
 }
+
 body {
-	font-family: var(--font-family-default);
-	line-height: 1.5;
-	font-size: 14px;
-	color: var(--gray-dark);
+  font-family: var(--font-family-default);
+  line-height: 1.5;
+  font-size: 14px;
+  color: var(--gray-dark);
 }
