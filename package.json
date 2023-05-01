@@ -10,7 +10,7 @@
  "author": "Sajan",
  "license": "ISC",
  "dependencies": {
-  "axios": "^0.18.0",
+  "axios": "^0.21.2",
   "babel-loader": "^8.0.6",
   "bcrypt": "^3.0.6",
   "cloudinary": "^1.14.0",
